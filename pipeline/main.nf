@@ -153,6 +153,7 @@ process BAM2PAT {
     tuple val(run), path("${run}.dedup.pat.gz"), path("${run}.withdup.pat.gz")
     script:
     """
+    mkdir -p dd wd   # bam2pat requires an existing output directory
     cat ${blocks} ${offmarker} | cut -f1-3 | sort -k1,1 -k2,2n > regions.bed
     ${wt_setup(wgbs_ref)}
     \$wt bam2pat --genome ${params.wgbs_genome} -L regions.bed -@ ${task.cpus} -F 1796 -o dd ${bam}
