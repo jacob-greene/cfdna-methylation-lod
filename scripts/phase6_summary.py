@@ -12,7 +12,11 @@ Reads results/phase6/{threshold_scores.tsv, eval_scores.tsv.gz, effective_share.
   - matched FPR (descriptive): for Phase 5 and Phase 6 scores alike, the threshold is the
     highest eval f = 0 score of the same k (eval FPR = 0 by construction).
 
-Writes results/phase6/{thresholds,fpr,detection,lod,matched,external}.tsv.
+  - amendment 1: rung "len" (length-matched spike) shares the f = 0 tests and thresholds of
+    rung "real". A (k, f) cell with any unscored test (NaN: spike too small) is dropped, so
+    the LoD is NaN when no scored f reaches 95 %. LoD on effective share is the primary scale.
+
+Writes results/phase6/{thresholds,fpr,detection,lod,matched,external,unscored}.tsv.
 
 Usage: uv run python scripts/phase6_summary.py [results_dir]
 """
@@ -74,6 +78,15 @@ def main() -> None:
     th = pd.read_csv(out / "threshold_scores.tsv", sep="\t")
     ev = pd.read_csv(out / "eval_scores.tsv.gz", sep="\t")
     eff = pd.read_csv(out / "effective_share.tsv", sep="\t")
+    # Rung "len" reuses the f = 0 tests of rung "real"; drop (k, f) cells with unscored tests.
+    null = ev[(ev.kind == "eval") & (ev.f == 0) & (ev.rung == "real")]
+    ev = pd.concat([ev, null.assign(rung="len")], ignore_index=True)
+    bad = ev[ev.kind == "eval"].groupby(["rung", "score", "set", "k", "f"]).value.apply(
+        lambda v: v.isna().any())
+    bad = bad[bad].reset_index()[["rung", "score", "set", "k", "f"]]
+    bad.to_csv(out / "unscored.tsv", sep="\t", index=False)
+    ev = ev.merge(bad.assign(_bad=1), how="left", on=["rung", "score", "set", "k", "f"])
+    ev = ev[ev._bad.isna()].drop(columns="_bad")
 
     thr = [(*key, "bound", p5.prediction_bound_pools(g.value.dropna().to_numpy(), key[-1]),
             g.value.notna().sum()) for key, g in th.groupby(KEY)]
@@ -81,6 +94,7 @@ def main() -> None:
             th[th.score == "FRAG"][["rung", "set", "k"]].drop_duplicates().itertuples(
                 index=False)]
     thr = pd.DataFrame(thr, columns=[*KEY, "rule", "threshold", "n_pools"])
+    thr = pd.concat([thr, thr[thr.rung == "real"].assign(rung="len")], ignore_index=True)
     thr.to_csv(out / "thresholds.tsv", sep="\t", index=False, float_format="%.6g")
 
     e = ev[ev.kind == "eval"].merge(thr, on=KEY)
@@ -89,10 +103,12 @@ def main() -> None:
     fpr, det = detect_table(e, k6)
     lod = lods(det, k6)
     share = {"WZ": "share_calls", "FRAG": "share_frag_n3_selected"}
-    mean_eff = eff.groupby(["set", "k", "f"])[list(share.values())].mean()
+    mean_eff = eff[eff.f > 0].groupby(["rung", "set", "k", "f"])[list(share.values())].mean()
     lod["lod_effective"] = [
-        lod_effective(r.lod, mean_eff.loc[(r.set, r.k)][share[r.score]])
+        lod_effective(r.lod, mean_eff.loc[(r.rung if r.rung != "binom_real" else "real",
+                                           r.set, r.k)][share[r.score]])
         for r in lod.itertuples()]
+    mean_eff.to_csv(out / "effective_share_mean.tsv", sep="\t", float_format="%.4g")
     lod = lod.merge(fpr, on=k6)
     fpr.to_csv(out / "fpr.tsv", sep="\t", index=False, float_format="%.4g")
     det.to_csv(out / "detection.tsv", sep="\t", index=False, float_format="%.4g")
@@ -134,7 +150,7 @@ def main() -> None:
     pd.DataFrame(ext, columns=[*k6, "n_cancer", "cancer_detected", "n_healthy",
                                "healthy_detected", "auc"]).to_csv(
         out / "external.tsv", sep="\t", index=False, float_format="%.4g")
-    print(lod[lod.rung == "real"].to_string(index=False))
+    print(lod[lod.rung.isin(["real", "len"])].to_string(index=False))
 
 
 if __name__ == "__main__":

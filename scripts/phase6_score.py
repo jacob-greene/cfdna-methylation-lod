@@ -9,7 +9,8 @@ scripts/phase5_score.py) and the 10 cancers with the model fitted on all 14 thre
 donors. It refuses to run unless pipeline/PREREGISTERED_PHASE6.md and the Phase 6 code are
 committed and unchanged.
 
-Rungs: "real" (real fragments, duplicates removed) and, for WZ only, "binom_real"
+Rungs: "real" (real fragments, duplicates removed), "len" (length-matched spike,
+amendment 1, scripts/phase6_lenmatch.py) and, for WZ only, "binom_real"
 (methylated calls ~ Binomial(N_b, (1 - f) p0_b + f h_b) at each test's real calls per block,
 h_b = spike block methylation; same weights as "real").
 
@@ -42,7 +43,8 @@ _spec.loader.exec_module(p5s)
 
 SEED, KS, F_GRID, SETS = p5s.SEED, p5s.KS, p5s.F_GRID, p5s.SETS
 PREREG = ["pipeline/PREREGISTERED_PHASE6.md", "src/phase6.py", "scripts/phase6_score.py",
-          "scripts/phase6_summary.py"]
+          "scripts/phase6_summary.py", "scripts/phase6_lenmatch.py",
+          "scripts/phase6_lenmatch.sbatch"]
 
 
 def preregistered_sha() -> str:
@@ -64,6 +66,7 @@ def main() -> None:
     ap.add_argument("--samples", type=Path, default=ROOT / "pipeline/samples/phase5_samples.tsv")
     ap.add_argument("--markers", type=Path, default=ROOT / "pipeline/markers/phase5_markers.tsv")
     ap.add_argument("--spike", default="SRR28401050")
+    ap.add_argument("--spike-len", default="SRR28401050_len")
     ap.add_argument("--out", type=Path, default=ROOT / "results/phase6")
     args = ap.parse_args()
     sha = preregistered_sha() if args.stage == "eval" else ""
@@ -83,7 +86,7 @@ def main() -> None:
     if args.stage == "threshold":
         runs = thr  # no eval donor, cancer or spike record is read in this stage
     else:
-        runs = smp.run.tolist() + [args.spike]
+        runs = smp.run.tolist() + [args.spike, args.spike_len]
     R, counts = {}, {}
     for r in runs:
         R[r], counts[r] = p5s.load_cache(str(data / "records" / f"{r}.dedup.npz"),
@@ -151,15 +154,26 @@ def main() -> None:
         print(f"wrote {len(rows)} threshold rows {time.time() - t0:.0f}s")
         return
 
-    # Eval stage: same mixes as scripts/phase5_score.py (dedup variant).
+    # Eval stage: same mixes as scripts/phase5_score.py (dedup variant). Rung "len" (amendment
+    # 1) mixes the length-matched spike (scripts/phase6_lenmatch.py) with seeds that end in 1
+    # instead of 0; a test whose keep probability would exceed 1 is not scored (NaN).
     sp = args.spike
-    n_sp = p5.n_fragments(R[sp]["off"])
+    spikes = {"real": (sp, 0), "len": (args.spike_len, 1)}
+    n_sp = {rung: p5.n_fragments(R[r]["off"]) for rung, (r, _) in spikes.items()}
     h = {}
     for s in SETS:
         M, N = p6._get(S[sp][s], "M"), p6._get(S[sp][s], "N")
         h[s] = np.where(N > 0, M / np.maximum(N, 1), full[s].p0)
     ev = smp[smp.role == "eval"]
     eff = []
+
+    def effective(k, pid, f, seed, s, rung, Ssp, Sx):
+        m = full[s]
+        ok = np.isfinite(m.p0)
+        Csp, _ = p6.frag_counts(Ssp, m)
+        return (rung, k, pid, f, seed, s,
+                p6._get(Ssp, "N")[ok].sum() / p6._get(Sx, "N")[ok].sum(),
+                p6._get(Ssp, "n3")[m.sel].sum() / p6._get(Sx, "n3")[m.sel].sum(), Csp)
     for k in KS:
         col = f"pool_k{k}"
         for pid in sorted(ev[col].unique()):
@@ -167,19 +181,29 @@ def main() -> None:
             assert len(donors) == k
             Sbg = {s: sum(S[d][s] for d in donors) for s in SETS}
             n_bg = p5.n_fragments_pool([R[d]["off"] for d in donors])
-            for fi, f in enumerate([0.0, *F_GRID]):
+            for fi, f, rung in [(0, 0.0, "real")] + [(fi, f, rung) for fi, f in
+                                                     enumerate(F_GRID, 1) for rung in spikes]:
                 for seed in range(args.seeds if f else 1):
                     if f:
-                        rng = np.random.default_rng([SEED, 1, k, pid, fi, seed, 0])
-                        q = f / (1 - f) * n_bg / n_sp
-                        kept = p5.thin_rows(counts[sp], q, rng)
-                        Ssp = {s: p6.summarise(p5.keep_rows(R[sp][s], kept), nb[s], rho[s])
+                        r, last = spikes[rung]
+                        q = f / (1 - f) * n_bg / n_sp[rung]
+                        if q > 1:
+                            for name, s in [(n, s) for s in SETS for n in ("WZ", "FRAG")]:
+                                rows.append((rung, "eval", k, pid, f, seed, name, s, np.nan))
+                            continue
+                        rng = np.random.default_rng([SEED, 1, k, pid, fi, seed, last])
+                        kept = p5.thin_rows(counts[r], q, rng)
+                        Ssp = {s: p6.summarise(p5.keep_rows(R[r][s], kept), nb[s], rho[s])
                                for s in SETS}
                     else:
                         Ssp = {s: np.zeros_like(Sbg[s]) for s in SETS}
                     Sx = {s: Sbg[s] + Ssp[s] for s in SETS}
                     for name, s, v in scores(Sx, full, k):
-                        rows.append(("real", "eval", k, pid, f, seed, name, s, v))
+                        rows.append((rung, "eval", k, pid, f, seed, name, s, v))
+                    if rung != "real":
+                        for s in SETS:
+                            eff.append(effective(k, pid, f, seed, s, rung, Ssp[s], Sx[s]))
+                        continue
                     rng2 = np.random.default_rng([SEED, 62, k, pid, fi, seed])
                     for s in SETS:
                         m = full[s]
@@ -187,13 +211,7 @@ def main() -> None:
                         pm = np.clip((1 - f) * np.nan_to_num(m.p0) + f * h[s], 0, 1)
                         rows.append(("binom_real", "eval", k, pid, f, seed, "WZ", s,
                                      p6.wz(Sx[s], m, k, M=rng2.binomial(n, pm))))
-                        ok = np.isfinite(m.p0)
-                        Csp, _ = p6.frag_counts(Ssp[s], m)
-                        eff.append((k, pid, f, seed, s,
-                                    p6._get(Ssp[s], "N")[ok].sum()
-                                    / p6._get(Sx[s], "N")[ok].sum(),
-                                    p6._get(Ssp[s], "n3")[m.sel].sum()
-                                    / p6._get(Sx[s], "n3")[m.sel].sum(), Csp))
+                        eff.append(effective(k, pid, f, seed, s, rung, Ssp[s], Sx[s]))
         print(f"eval k={k} done {time.time() - t0:.0f}s", flush=True)
     for c in smp.run[smp.role == "cancer"]:
         for name, s, v in scores(S[c], full, 1):
@@ -201,14 +219,15 @@ def main() -> None:
     cols = ["rung", "kind", "k", "pool", "f", "seed", "score", "set", "value"]
     pd.DataFrame(rows, columns=cols).to_csv(args.out / "eval_scores.tsv.gz", sep="\t",
                                             index=False, float_format="%.6g")
-    pd.DataFrame(eff, columns=["k", "pool", "f", "seed", "set", "share_calls",
+    pd.DataFrame(eff, columns=["rung", "k", "pool", "f", "seed", "set", "share_calls",
                                "share_frag_n3_selected", "spike_tumour_like_selected"]).to_csv(
         args.out / "effective_share.tsv", sep="\t", index=False, float_format="%.6g")
     # Confound check: calls per fragment record, threshold donors vs spike source.
     cf = []
     for s in SETS:
         sel = full[s].sel
-        for who, rr in (("threshold_donors", [R[d][s] for d in thr]), ("spike", [R[sp][s]])):
+        for who, rr in (("threshold_donors", [R[d][s] for d in thr]), ("spike", [R[sp][s]]),
+                        ("spike_len", [R[args.spike_len][s]])):
             r = p5.Records.concat(rr)
             for blk, mask in (("all", np.ones(nb[s], bool)), ("frag_selected", sel)):
                 kk = mask[r.block]

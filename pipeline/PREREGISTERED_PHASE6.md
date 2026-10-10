@@ -116,3 +116,69 @@ Other design-stage observations:
   pass the ≥ 3-call rule more often. The confound check reports this.
 - The effective share is below nominal f (Phase 5: atlas 0.039, tumour 0.018 at f = 0.1).
   LoD is reported on both scales.
+
+## Amendment 1 (2026-10-10): effective share primary, length-matched spike rung
+
+Operator decision on issue 115 (comment 6100586554, a reply to comment 6100316928). This
+amendment is committed before any eval donor, cancer or spike-in test is scored with a
+Phase 6 method. Nothing above is removed; where this section differs, this section applies.
+The GSE186007 plasma arm is pre-registered in a later, separate amendment, before its first
+methylation scoring.
+
+### A1. Effective share is the primary scale of f
+
+| Endpoint | Definition |
+|---|---|
+| Primary | LoD of FRAG on the tumour set, bound rule, rung `real`, k = 1 and k = 2, **on the effective share** (mean share of ≥ 3-call fragments in the FRAG-selected blocks that come from the spike, per k and f). LoD on nominal f is reported next to it |
+| Scale per score | FRAG: `share_frag_n3_selected`. WZ: `share_calls` (spike share of calls in blocks with p0) |
+| Mapping | Nominal-f LoD mapped through the mean effective share per (rung, set, k, f), interpolated on log-log axes (`lod_effective` in `scripts/phase6_summary.py`) |
+| Phase 5 baselines on the same scale | UXM through `share_frag_n3_selected`, LLR_binom through `share_calls`, of the same set and k, rung `real`. The tests are the same, so the ranking of scores is the same on both scales |
+
+### A2. Length-matched spike rung (`len`)
+
+The spike library has longer inserts than SPOT-MAS cfDNA. In-silico trimming of the reads
+cannot add the unsequenced middle of a long fragment, so a trimmed fragment would carry fewer
+calls than a real short fragment. This rung therefore **selects** HCT116 fragments so that
+their insert sizes match the SPOT-MAS distribution. It changes the spike only. No score uses
+insert size or any other technical feature.
+
+| Item | Rule (`scripts/phase6_lenmatch.py`, `scripts/phase6_lenmatch.sbatch`) |
+|---|---|
+| Reference distribution | Insert sizes of the 14 threshold donors (read 1, off-marker blocks, MAPQ ≥ 10, duplicates excluded) |
+| Bins | 25 equal-count bins of the reference; outer edges 0 and 1000 bp |
+| Keep probability | (1/25 ÷ HCT116 share in the bin), divided by its maximum over bins |
+| HCT116 fragments | Read names with a read in a marker or off-marker block, 0 < abs(TLEN) < 1000 bp; others dropped |
+| Random draws | `default_rng([SEED, 70])` over read names in sorted order |
+| Then | Filtered BAM → `bam2pat` (wgbstools 0.3.0, flags 1796, as in `pipeline/main.nf`) → records cache `SRR28401050_len.dedup.npz` |
+| Mixing | Same pools, f grid and 5 seeds as rung `real`; random seeds `[SEED, 1, k, pid, fi, seed, 1]` (rung `real` ends in 0, unchanged) |
+| Dosing | Phase 5 rule with the length-matched spike's own off-marker fragment count |
+| Unscored tests | If the keep probability q = f/(1 − f) × n_bg / n_spike exceeds 1, the test is not scored (NaN). A (k, f) cell with any unscored test is dropped. LoD is NaN when no scored f reaches 95 % |
+| Null tests and thresholds | Shared with rung `real` (the f = 0 tests hold no spike) |
+| Scores | WZ and FRAG, both sets. No `binom_real` for this rung |
+
+Design data of the selection (spike and threshold donors only; no score was computed):
+
+| Source | Fragments | Insert q5 | q25 | Median | q75 | q95 |
+|---|---|---|---|---|---|---|
+| Threshold donors (reference) | 65,519 | 120 | 146 | 159 | 173 | 207 |
+| HCT116, all (in blocks) | 20,402 | 127 | 174 | 213 | 260 | 350 |
+| HCT116, kept | 2,426 | 120 | 145 | 159 | 172 | 204 |
+
+| Count | Value |
+|---|---|
+| Off-marker fragments, HCT116 all / kept | 5,098 / 604 |
+| Off-marker fragments per threshold donor, median (max) | 4,136 (5,393) |
+| Expected unscored cells (q > 1), from threshold-donor counts | f = 10 % at k ≥ 2; f = 3 % at k = 8; possibly f = 3 % at k = 4 |
+
+Caveats stated in advance for this rung:
+
+- Only 2,426 spike fragments remain. At high f the 5 seeds reuse most of them, so the
+  spread over seeds understates the true sampling spread.
+- Selection on length can also select on methylation if fragment length depends on it in the
+  HCT116 library. The confound table reports calls per record for `spike_len` as well.
+- The rung is a sensitivity check of the length confound, not a new primary endpoint.
+
+### A3. Files under the eval guard
+
+`scripts/phase6_lenmatch.py` and `scripts/phase6_lenmatch.sbatch` join the files that
+`scripts/phase6_score.py --stage eval` requires to be committed and unchanged.
