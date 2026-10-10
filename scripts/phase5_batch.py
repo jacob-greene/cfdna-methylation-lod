@@ -8,7 +8,8 @@ regression, spike-source fragments vs threshold-donor fragments, on
   (b) off-marker methylation: per fragment, its methylated share and its number of CpG calls
       in the off-marker blocks (duplicates removed).
 An AUC well above 0.5 is reported as a batch confound. Matched depth: each class contributes
-the same number of fragments, and every threshold donor contributes the same number.
+the same number of fragments, and every threshold donor contributes the same number (at most
+--per-donor; fewer when the spike source has fewer than donors x --per-donor fragments).
 
 Interpretation note for (b): the spike source is a cancer cell line, so off-marker
 methylation can differ for biological reasons as well as for batch reasons.
@@ -73,7 +74,6 @@ def main() -> None:
     rng = np.random.default_rng(SEED)
     smp = pd.read_csv(args.samples, sep="\t")
     donors = smp.run[smp.role == "threshold"].tolist()
-    n_bg = args.per_donor * len(donors)
 
     rows = []
     for name, load, cols in (
@@ -82,20 +82,21 @@ def main() -> None:
         ("off_marker_methylation",
          lambda r: off_meth(data / "records" / f"{r}.dedup.npz"), ["meth_share", "n_calls"]),
     ):
-        bg = []
-        for d in donors:
-            x = load(d)
-            if len(x) < args.per_donor:
-                raise SystemExit(f"{d}: {len(x)} fragments < {args.per_donor}")
-            bg.append(x.iloc[rng.choice(len(x), args.per_donor, replace=False)])
+        # Matched depth: every donor gives per_donor fragments and the spike gives the same
+        # total. The spike source can have fewer fragments than donors x --per-donor, so
+        # per_donor is capped by the smallest source.
+        xs = {d: load(d) for d in donors}
         sp = load(args.spike)
+        per_donor = min(args.per_donor, len(sp) // len(donors), *(len(x) for x in xs.values()))
+        n_bg = per_donor * len(donors)
+        bg = [x.iloc[rng.choice(len(x), per_donor, replace=False)] for x in xs.values()]
         sp = sp.iloc[rng.choice(len(sp), n_bg, replace=False)]
         X = np.concatenate([pd.concat(bg)[cols].to_numpy(float), sp[cols].to_numpy(float)])
         y = np.r_[np.zeros(n_bg, int), np.ones(n_bg, int)]
         a, sd = cv_auc(X, y)
         means = {f"{c}_bg": float(pd.concat(bg)[c].mean()) for c in cols}
         means |= {f"{c}_spike": float(sp[c].mean()) for c in cols}
-        rows.append({"features": name, "n_per_class": n_bg, "cv_auc": a, "fold_auc_sd": sd,
+        rows.append({"features": name, "per_donor": per_donor, "n_per_class": n_bg, "cv_auc": a, "fold_auc_sd": sd,
                      **means})
         print(name, round(a, 4), means, flush=True)
     pd.DataFrame(rows).to_csv(Path("results/phase5/batch_control.tsv"), sep="\t", index=False,
