@@ -215,12 +215,13 @@ def main() -> None:
     def pool_recs(donors, v):
         return {s: p5.Records.concat([R[v][d][s] for d in donors]) for s in SETS + ["off"]}
 
-    def mix(bg, f, rng, v):
+    def mix(bg, donors, f, rng, v):
         """Background pool records plus spike fragments at share f; returns (recs, q)."""
         if f == 0:
             return bg, 0.0
         sp = R[v][args.spike]
-        q = f / (1 - f) * p5.n_fragments(bg["off"]) / p5.n_fragments(sp["off"])
+        n_bg = p5.n_fragments_pool([R[v][d]["off"] for d in donors])
+        q = f / (1 - f) * n_bg / p5.n_fragments(sp["off"])
         kept = p5.thin_rows(counts[(args.spike, v)], q, rng)
         return {s: p5.Records.concat([bg[s], p5.keep_rows(sp[s], kept)])
                 for s in bg}, q
@@ -261,7 +262,7 @@ def main() -> None:
                     for seed in range(args.seeds if f else 1):
                         rng = np.random.default_rng([SEED, 1, k, pid, fi, seed,
                                                      int(v == "withdup")])
-                        recs, q = mix(bg, f, rng, v)
+                        recs, q = mix(bg, donors, f, rng, v)
                         qs.append((v, k, pid, f, seed, q))
                         if v == "dedup":
                             emit(rung, "eval", k, pid, f, seed, sc.all(recs, p0))

@@ -95,6 +95,12 @@ def n_fragments(rec: Records) -> int:
     return int(rec.w[first].sum())
 
 
+def n_fragments_pool(parts: list[Records]) -> int:
+    """Fragments of a donor pool: the sum over donors. Pat row ids repeat across donors, so
+    n_fragments(Records.concat(parts)) would merge different donors' fragments."""
+    return sum(n_fragments(p) for p in parts)
+
+
 def thin_rows(counts: np.ndarray, q: float, rng: np.random.Generator) -> np.ndarray:
     """Fragments kept per pat row when each fragment is kept with probability q."""
     if not 0 <= q <= 1:

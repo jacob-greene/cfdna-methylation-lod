@@ -106,3 +106,14 @@ def test_prediction_bound_pools_uses_preregistered_df():
 def test_auc_matches_definition():
     assert p5.auc([3, 4], [1, 2]) == 1.0
     assert p5.auc([1, 2], [1, 2]) == 0.5
+
+
+def test_pool_fragment_count_sums_donors_with_repeated_row_ids():
+    # Two donors whose pat row ids overlap: the pooled count must not merge them.
+    def rec(rows):
+        n = len(rows)
+        return p5.Records(np.array(rows), np.zeros(n, int), np.ones(n, int),
+                          np.zeros(n, int), np.ones(n, int))
+    a, b = rec([0, 1, 2]), rec([1, 2, 3])
+    assert p5.n_fragments_pool([a, b]) == 6
+    assert p5.n_fragments(p5.Records.concat([a, b])) == 4  # the merge that caused the bug
