@@ -63,6 +63,9 @@ nextflow run /path/to/cfdna-methylation-lod/pipeline/main.nf -profile slurm,cond
 - `--only_runs SRR1,SRR2` restricts the SPOT-MAS runs (tests).
 - `--spike_run false` (or `''`) skips the spike source.
 - Run the Nextflow head process inside a Slurm job; it runs for hours.
+  `scripts/phase5_nextflow.sbatch` does this. Pass `REPO_DIR` and `CFDNA_DATA` with
+  `sbatch --export=ALL,REPO_DIR=...,CFDNA_DATA=...`; a sandboxed shell does not forward
+  them otherwise.
 
 Smoke test (Docker, as in CI):
 

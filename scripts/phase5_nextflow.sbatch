@@ -4,7 +4,7 @@
 #SBATCH --mem=8G
 #SBATCH --time=3-00:00:00
 # Phase 5: the Nextflow head process. It submits every pipeline task as its own Slurm job.
-# Usage: REPO_DIR=<repo> CFDNA_DATA=<data dir> sbatch -p campus-new \
+# Usage: sbatch -p campus-new --export=ALL,REPO_DIR=<repo>,CFDNA_DATA=<data dir> \
 #          -o <log> scripts/phase5_nextflow.sbatch [extra nextflow args, e.g. --only_runs SRR1]
 set -euo pipefail
 : "${REPO_DIR:?}" "${CFDNA_DATA:?}"
