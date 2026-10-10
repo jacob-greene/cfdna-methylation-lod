@@ -227,11 +227,12 @@ process QC_TABLE {
     input:
     path files
     path blocks_cpg
+    path qc_script  // staged, so the script is visible inside a container
     output:
     path "qc_table.tsv"
     script:
     """
-    ${params.wgbs_python} ${projectDir}/bin/phase5_qc.py --blocks ${blocks_cpg} --out qc_table.tsv .
+    ${params.wgbs_python} ${qc_script} --blocks ${blocks_cpg} --out qc_table.tsv .
     """
 }
 
@@ -276,5 +277,5 @@ workflow {
     if (!params.input_bams) {
         qc_in = qc_in.mix(FASTP.out.json, BWAMETH_ALIGN.out.qc.flatten())
     }
-    QC_TABLE(qc_in.collect(), BLOCK_INDEX.out.blocks)
+    QC_TABLE(qc_in.collect(), BLOCK_INDEX.out.blocks, file("${projectDir}/bin/phase5_qc.py"))
 }
