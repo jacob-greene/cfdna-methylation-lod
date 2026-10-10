@@ -44,7 +44,8 @@ def main() -> None:
 
     thr = pd.DataFrame(
         [(*key, p5.prediction_bound_pools(g.value.to_numpy(), int(key[-1])), len(g))
-         for key, g in d[d.kind == "threshold"].groupby(KEY)],
+         # Transfer models keep their stored Phase 3b threshold (below), not a pool bound.
+         for key, g in d[(d.kind == "threshold") & ~d.score.str.startswith("T_")].groupby(KEY)],
         columns=[*KEY, "threshold", "n_pools"])
     tdir = data_dir() / "phase5" / "transfer"
     t_rows = []
@@ -57,6 +58,7 @@ def main() -> None:
     thr = pd.concat([thr, pd.DataFrame(t_rows, columns=[*KEY, "threshold", "n_pools"])])
     thr.to_csv(out / "thresholds.tsv", sep="\t", index=False, float_format="%.6g")
 
+    assert not thr.duplicated(KEY).any(), "a score has more than one threshold"
     ev = d[d.kind != "threshold"].merge(thr, on=KEY, how="left")
     assert ev.threshold.notna().all(), "a score has no threshold"
     ev["detected"] = ev.value > ev.threshold
