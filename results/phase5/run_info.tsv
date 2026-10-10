@@ -13,4 +13,4 @@ mean_calls_per_block_k1	tumour	68.2699
 mean_calls_per_block_k2	tumour	136.54
 mean_calls_per_block_k4	tumour	273.08
 mean_calls_per_block_k8	tumour	546.159
-q_max		0.479267
+q_max		0.817592

@@ -8,7 +8,7 @@ binom_mean	LLR_binom	tumour	2	0.007401	0	8	40
 binom_mean	LLR_binom	tumour	4	0.005477	0	4	20
 binom_mean	LLR_binom	tumour	8	0.008866	0	2	10
 binom_real	LLR_binom	atlas	1	0.008248	0.0625	16	80
-binom_real	LLR_binom	atlas	2	0.006694	0	8	40
+binom_real	LLR_binom	atlas	2	0.007089	0	8	40
 binom_real	LLR_binom	atlas	4	0.00284	0	4	20
 binom_real	LLR_binom	atlas	8	0.009353	0	2	10
 binom_real	LLR_binom	tumour	1	0.006178	0.25	16	80
@@ -33,14 +33,14 @@ real	LLR_binom	tumour	4		0	4	20
 real	LLR_binom	tumour	8		0	2	10
 real	T_LR_L1	atlas	1		0.1875	16	80
 real	T_LR_L1	atlas	2	0.1	0	8	40
-real	T_LR_L1	atlas	4	0.1	0	4	20
-real	T_LR_L1	atlas	8	0.09416	0	2	10
+real	T_LR_L1	atlas	4	0.09045	0	4	20
+real	T_LR_L1	atlas	8	0.09045	0	2	10
 real	T_LR_L1	tumour	1		0.0625	16	80
 real	T_LR_L1	tumour	2		0	8	40
 real	T_LR_L1	tumour	4		0	4	20
 real	T_LR_L1	tumour	8		0	2	10
 real	T_LR_L2	atlas	1	0.01732	0.8125	16	80
-real	T_LR_L2	atlas	2	0.01732	0.625	8	40
+real	T_LR_L2	atlas	2	0.01442	0.625	8	40
 real	T_LR_L2	atlas	4	0.01	0.75	4	20
 real	T_LR_L2	atlas	8	0.001	1	2	10
 real	T_LR_L2	tumour	1		0	16	80
@@ -56,9 +56,9 @@ real	T_XGB	tumour	2		0	8	40
 real	T_XGB	tumour	4		0	4	20
 real	T_XGB	tumour	8		0	2	10
 real	UXM	tumour	1	0.09115	0.125	16	80
-real	UXM	tumour	2	0.07653	0.125	8	40
-real	UXM	tumour	4	0.06694	0	4	20
-real	UXM	tumour	8	0.09045	0	2	10
+real	UXM	tumour	2	0.07401	0.125	8	40
+real	UXM	tumour	4	0.02788	0	4	20
+real	UXM	tumour	8	0.0284	0	2	10
 real_dup	LLR_binom	atlas	1		0.125	16	80
 real_dup	LLR_binom	atlas	2		0	8	40
 real_dup	LLR_binom	atlas	4		0	4	20
