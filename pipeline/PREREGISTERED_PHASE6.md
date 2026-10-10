@@ -182,3 +182,11 @@ Caveats stated in advance for this rung:
 
 `scripts/phase6_lenmatch.py` and `scripts/phase6_lenmatch.sbatch` join the files that
 `scripts/phase6_score.py --stage eval` requires to be committed and unchanged.
+
+### A4. Bug fix before the first eval scores (2026-10-10)
+
+The first eval run (Slurm job 10356043) stopped at its first test with an error and wrote
+no score. In the `binom_real` rung, a block with no p0 and no spike calls got a NaN spike
+methylation h_b, and the binomial draw refused it. Such blocks are excluded from WZ, so h_b
+is now 0 there. No rule changes. A dry run with threshold donors as stand-in backgrounds
+checks the eval code path before the one real eval run.

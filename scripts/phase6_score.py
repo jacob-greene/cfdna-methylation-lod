@@ -163,7 +163,8 @@ def main() -> None:
     h = {}
     for s in SETS:
         M, N = p6._get(S[sp][s], "M"), p6._get(S[sp][s], "N")
-        h[s] = np.where(N > 0, M / np.maximum(N, 1), full[s].p0)
+        # Blocks without p0 and without spike calls get 0, not NaN (they carry no weight).
+        h[s] = np.where(N > 0, M / np.maximum(N, 1), np.nan_to_num(full[s].p0))
     ev = smp[smp.role == "eval"]
     eff = []
 
