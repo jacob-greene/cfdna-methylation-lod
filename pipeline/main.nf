@@ -18,6 +18,8 @@ def wt_setup(ref) {
     """
     mkdir -p wt/references && cp -r ${params.wgbs_home}/src wt/
     ${ref ? "ln -s \$(readlink -f ${ref}) wt/references/${params.wgbs_genome}" : ''}
+    # GenomicRegion() reads references/default before it reads --genome (wgbstools 0.3.0).
+    ln -sfn ${params.wgbs_genome} wt/references/default
     wt="${params.wgbs_python} wt/src/python/wgbs_tools.py"
     """
 }
