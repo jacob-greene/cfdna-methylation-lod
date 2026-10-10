@@ -248,7 +248,8 @@ workflow {
             tuple(r, e.fastq_ftp.tokenize(';'), e.fastq_md5.tokenize(';'))
         })
         reads = FETCH_ENA(spotmas)
-        if (params.spike_run) {
+        // `--spike_run ''` and `--spike_run false` reach here as booleans: skip the spike.
+        if (params.spike_run instanceof CharSequence && params.spike_run) {
             spike = channel.of(tuple(params.spike_run, params.spike_urls.tokenize(';')))
             reads = reads.mix(FETCH_STREAM(spike))
         }
