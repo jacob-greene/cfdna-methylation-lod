@@ -1,0 +1,3 @@
+features	per_donor	n_per_class	cv_auc	fold_auc_sd	tlen_bg	mapq_bg	nm_bg	read_len_bg	tlen_spike	mapq_spike	nm_spike	read_len_spike	meth_share_bg	n_calls_bg	meth_share_spike	n_calls_spike
+technical	410	5740	0.8183	0.007948	160.5	57.05	1.326	84.99	218.1	57.19	0.5441	84.95				
+off_marker_methylation	364	5096	0.5769	0.01203									0.8064	3.13	0.7851	2.512
