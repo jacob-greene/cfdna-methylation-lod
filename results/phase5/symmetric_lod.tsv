@@ -1,0 +1,17 @@
+rung	score	set	k	lod	fpr_max	n_null	n_per_f
+real_p014	LLR_bb	atlas	4		0	4	20
+real_p014	LLR_bb	atlas	8		0	2	10
+real_p014	LLR_bb	tumour	4		0	4	20
+real_p014	LLR_bb	tumour	8		0	2	10
+real_p014	LLR_binom	atlas	4		0	4	20
+real_p014	LLR_binom	atlas	8		0	2	10
+real_p014	LLR_binom	tumour	4		0	4	20
+real_p014	LLR_binom	tumour	8		0	2	10
+real_sym	LLR_bb	atlas	4		0	20	20
+real_sym	LLR_bb	atlas	8		0	10	10
+real_sym	LLR_bb	tumour	4		0	20	20
+real_sym	LLR_bb	tumour	8		0	10	10
+real_sym	LLR_binom	atlas	4	0.1	0	20	20
+real_sym	LLR_binom	atlas	8		0	10	10
+real_sym	LLR_binom	tumour	4		0	20	20
+real_sym	LLR_binom	tumour	8		0	10	10
