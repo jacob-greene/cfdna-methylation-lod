@@ -198,19 +198,23 @@ process WGBS_INIT {
     """
 }
 
-// Marker blocks with their CpG index ranges (wgbstools convert), for QC and scoring.
+// Marker and off-marker blocks with their CpG index ranges (wgbstools convert), for QC and
+// scoring.
 process BLOCK_INDEX {
     label 'wgbstools'
     publishDir "${params.outdir}", mode: 'copy'
     input:
     path blocks
+    path offmarker
     path wgbs_ref
     output:
-    path "blocks_cpg.tsv"
+    path "blocks_cpg.tsv", emit: blocks
+    path "offmarker_cpg.tsv", emit: offmarker
     script:
     """
     ${wt_setup(wgbs_ref)}
     \$wt convert -L ${blocks} --genome ${params.wgbs_genome} --no_anno -p > blocks_cpg.tsv
+    \$wt convert -L ${offmarker} --genome ${params.wgbs_genome} --no_anno -p > offmarker_cpg.tsv
     """
 }
 
@@ -261,12 +265,12 @@ workflow {
         : WGBS_INIT(ref_dir)
     METHYLDACKEL(bams, ref_dir)
     BAM2PAT(bams, blocks, offmarker, wgbs_ref)
-    BLOCK_INDEX(blocks, wgbs_ref)
+    BLOCK_INDEX(blocks, offmarker, wgbs_ref)
     FRAG_FEATURES(bams, offmarker)
     qc_in = METHYLDACKEL.out.map { it[1..3] }.flatten()
         .mix(BAM2PAT.out.map { it[1] })
     if (!params.input_bams) {
         qc_in = qc_in.mix(FASTP.out.json, BWAMETH_ALIGN.out.qc.flatten())
     }
-    QC_TABLE(qc_in.collect(), BLOCK_INDEX.out)
+    QC_TABLE(qc_in.collect(), BLOCK_INDEX.out.blocks)
 }
