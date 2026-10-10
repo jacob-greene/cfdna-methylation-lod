@@ -1,0 +1,662 @@
+  kind  depth       cap     bg     hi1 markers score   rule  lod_grid  lod_interp  rate_at_1e-3  rate_at_1e-2      fpr worst_blank  worst_blank_fpr  specificity_ok
+  cell     10      none person    with     100   LLR pooled       NaN         NaN      0.096944      0.229167 0.095328         HI1         0.944242           False
+  cell     10      none person    with     100   LLR  valid       NaN         NaN      0.075833      0.110833 0.074192         HI1         0.880909           False
+  cell     10      none person    with     100  NNLS pooled       NaN         NaN      0.090278      0.170278 0.093333         HI1         0.820000           False
+  cell     10      none person    with     100  NNLS  valid       NaN         NaN      0.075833      0.125000 0.085556         HI1         0.836667           False
+  cell     10      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.085000 0.083333         HI1         1.000000           False
+  cell     10      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.084444 0.083333         HI1         1.000000           False
+  cell     10      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.084722 0.083056         HI1         0.996667           False
+  cell     10      none person    with     500  NNLS  valid       NaN         NaN      0.082222      0.090833 0.082778         HI1         0.990000           False
+  cell     10      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.105833 0.083333         HI1         1.000000           False
+  cell     10      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.086944 0.083333         HI1         1.000000           False
+  cell     10      none person    with     all  NNLS pooled    0.0300    0.028785      0.068889      0.288333 0.056389         HI1         0.506667           False
+  cell     10      none person    with     all  NNLS  valid    0.0300    0.028995      0.063333      0.266111 0.049444         HI1         0.476667            True
+  cell     10      none person without     100   LLR pooled    0.0300    0.029479      0.104545      0.399697 0.087355    Young M2         0.369697           False
+  cell     10      none person without     100   LLR  valid       NaN         NaN      0.037879      0.224545 0.031983    Young M2         0.179091            True
+  cell     10      none person without     100  NNLS pooled       NaN         NaN      0.070909      0.210606 0.060606    Young M2         0.200000           False
+  cell     10      none person without     100  NNLS  valid       NaN         NaN      0.060000      0.187576 0.053030    Young M2         0.190000           False
+  cell     10      none person without     500   LLR pooled    0.0300    0.028671      0.134545      0.439091 0.119256    Young M2         0.749394           False
+  cell     10      none person without     500   LLR  valid       NaN         NaN      0.036364      0.196364 0.026226    Young M2         0.239091            True
+  cell     10      none person without     500  NNLS pooled       NaN         NaN      0.078485      0.247273 0.078788         HI3         0.326667           False
+  cell     10      none person without     500  NNLS  valid       NaN         NaN      0.044848      0.170303 0.039394         HI3         0.173333            True
+  cell     10      none person without     all   LLR pooled    0.0200    0.019169      0.160909      0.625455 0.121763         HI4         0.482424           False
+  cell     10      none person without     all   LLR  valid    0.0300    0.027078      0.038485      0.333030 0.024766         HI4         0.124848            True
+  cell     10      none person without     all  NNLS pooled    0.0300    0.026326      0.066061      0.402727 0.049394    Young M2         0.176667            True
+  cell     10      none person without     all  NNLS  valid    0.0300    0.027140      0.050909      0.354848 0.036667    Young M2         0.140000            True
+  cell     30      none person    with     100   LLR pooled       NaN         NaN      0.086111      0.189167 0.084672         HI1         1.000000           False
+  cell     30      none person    with     100   LLR  valid       NaN         NaN      0.083611      0.092222 0.082854         HI1         0.994242           False
+  cell     30      none person    with     100  NNLS pooled       NaN         NaN      0.087500      0.149722 0.084444         HI1         0.976667           False
+  cell     30      none person    with     100  NNLS  valid       NaN         NaN      0.084722      0.112778 0.082500         HI1         0.970000           False
+  cell     30      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell     30      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell     30      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell     30      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.084444 0.083333         HI1         1.000000           False
+  cell     30      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.087500 0.083333         HI1         1.000000           False
+  cell     30      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083889 0.083333         HI1         1.000000           False
+  cell     30      none person    with     all  NNLS pooled    0.0300    0.024631      0.082222      0.331111 0.075556         HI1         0.860000           False
+  cell     30      none person    with     all  NNLS  valid    0.0300    0.024233      0.079722      0.342500 0.068889         HI1         0.776667           False
+  cell     30      none person without     100   LLR pooled    0.0200    0.019766      0.135455      0.617576 0.101350    Young M2         0.697879           False
+  cell     30      none person without     100   LLR  valid    0.0300    0.027024      0.031515      0.292424 0.023333    Young M2         0.231818            True
+  cell     30      none person without     100  NNLS pooled       NaN         NaN      0.094545      0.361515 0.070303    Young M2         0.333333           False
+  cell     30      none person without     100  NNLS  valid       NaN         NaN      0.057273      0.249697 0.043636    Young M2         0.270000            True
+  cell     30      none person without     500   LLR pooled    0.0300    0.025008      0.160303      0.530303 0.131350    Young M2         0.956061           False
+  cell     30      none person without     500   LLR  valid       NaN         NaN      0.033636      0.218788 0.023471    Young M2         0.256667            True
+  cell     30      none person without     500  NNLS pooled       NaN         NaN      0.115455      0.321212 0.095152         HI3         0.483333           False
+  cell     30      none person without     500  NNLS  valid       NaN         NaN      0.035152      0.213636 0.023333         HI3         0.146667            True
+  cell     30      none person without     all   LLR pooled    0.0150    0.014472      0.203939      0.793636 0.156474         HI4         0.743333           False
+  cell     30      none person without     all   LLR  valid    0.0300    0.021612      0.029697      0.420909 0.014187         HI4         0.102727            True
+  cell     30      none person without     all  NNLS pooled    0.0200    0.016161      0.084545      0.687576 0.054848    Young M2         0.313333           False
+  cell     30      none person without     all  NNLS  valid    0.0200    0.018075      0.052727      0.582424 0.031212    Young M2         0.200000            True
+  cell    100      none person    with     100   LLR pooled    0.0300    0.028938      0.083333      0.143611 0.083333         HI1         1.000000           False
+  cell    100      none person    with     100   LLR  valid       NaN         NaN      0.083333      0.083889 0.083333         HI1         1.000000           False
+  cell    100      none person    with     100  NNLS pooled       NaN         NaN      0.083333      0.105278 0.083333         HI1         1.000000           False
+  cell    100      none person    with     100  NNLS  valid       NaN         NaN      0.083333      0.101389 0.083333         HI1         1.000000           False
+  cell    100      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    100      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    100      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    100      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.083611 0.083333         HI1         1.000000           False
+  cell    100      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083611 0.083333         HI1         1.000000           False
+  cell    100      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    100      none person    with     all  NNLS pooled    0.0300    0.020306      0.083333      0.319722 0.082778         HI1         0.993333           False
+  cell    100      none person    with     all  NNLS  valid    0.0200    0.019007      0.083056      0.436389 0.082500         HI1         0.983333           False
+  cell    100      none person without     100   LLR pooled    0.0200    0.016382      0.129697      0.789394 0.105399    Young M2         0.971515           False
+  cell    100      none person without     100   LLR  valid    0.0300    0.022353      0.031818      0.346970 0.018981    Young M2         0.208788            True
+  cell    100      none person without     100  NNLS pooled    0.0300    0.022734      0.130000      0.536970 0.102121    Young M2         0.700000           False
+  cell    100      none person without     100  NNLS  valid    0.0300    0.027798      0.064545      0.310606 0.045455    Young M2         0.420000            True
+  cell    100      none person without     500   LLR pooled    0.0300    0.024056      0.147879      0.590909 0.118182    Young M2         1.000000           False
+  cell    100      none person without     500   LLR  valid    0.0300    0.029605      0.031515      0.245455 0.018237    Young M2         0.200606            True
+  cell    100      none person without     500  NNLS pooled       NaN         NaN      0.133939      0.358485 0.104848         HI3         0.676667           False
+  cell    100      none person without     500  NNLS  valid       NaN         NaN      0.020303      0.252121 0.016061         HI3         0.156667            True
+  cell    100      none person without     all   LLR pooled    0.0150    0.013334      0.216364      0.858182 0.187521         HI4         0.981818           False
+  cell    100      none person without     all   LLR  valid    0.0200    0.019289      0.017879      0.459091 0.005647         HI4         0.058788            True
+  cell    100      none person without     all  NNLS pooled    0.0150    0.012718      0.107576      0.884242 0.063939    Young M2         0.456667           False
+  cell    100      none person without     all  NNLS  valid    0.0150    0.014086      0.054545      0.780000 0.026364    Young M2         0.213333            True
+  cell    300      none person    with     100   LLR pooled    0.0300    0.028341      0.083333      0.121667 0.083333         HI1         1.000000           False
+  cell    300      none person    with     100   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     100  NNLS pooled       NaN         NaN      0.083333      0.087222 0.083333         HI1         1.000000           False
+  cell    300      none person    with     100  NNLS  valid       NaN         NaN      0.083333      0.093333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell    300      none person    with     all  NNLS pooled    0.0200    0.019943      0.083333      0.311111 0.083333         HI1         1.000000           False
+  cell    300      none person    with     all  NNLS  valid    0.0200    0.018182      0.083333      0.505556 0.083333         HI1         1.000000           False
+  cell    300      none person without     100   LLR pooled    0.0200    0.016503      0.106364      0.832121 0.093967    Young M2         1.000000           False
+  cell    300      none person without     100   LLR  valid    0.0200    0.019770      0.033939      0.391818 0.017961    Young M2         0.197576            True
+  cell    300      none person without     100  NNLS pooled    0.0200    0.017913      0.121212      0.625455 0.101212    Young M2         0.986667           False
+  cell    300      none person without     100  NNLS  valid    0.0300    0.024555      0.074545      0.333030 0.060303    Young M2         0.656667           False
+  cell    300      none person without     500   LLR pooled    0.0300    0.024003      0.134242      0.635758 0.099945    Young M2         1.000000           False
+  cell    300      none person without     500   LLR  valid    0.0300    0.029194      0.028788      0.263939 0.016860    Young M2         0.185455            True
+  cell    300      none person without     500  NNLS pooled       NaN         NaN      0.139394      0.364545 0.103030         HI3         0.800000           False
+  cell    300      none person without     500  NNLS  valid       NaN         NaN      0.018485      0.258182 0.007273         HI3         0.080000            True
+  cell    300      none person without     all   LLR pooled    0.0150    0.013096      0.213636      0.858485 0.183994         HI4         1.000000           False
+  cell    300      none person without     all   LLR  valid    0.0200    0.018863      0.008788      0.467576 0.001047         HI4         0.011515            True
+  cell    300      none person without     all  NNLS pooled    0.0150    0.010789      0.129091      0.938485 0.081212    Young M2         0.770000           False
+  cell    300      none person without     all  NNLS  valid    0.0150    0.013053      0.059697      0.859394 0.025152    Young M2         0.256667            True
+  cell   1000      none person    with     100   LLR pooled    0.0300    0.027826      0.083333      0.116667 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     100   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     100  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     100  NNLS  valid       NaN         NaN      0.083333      0.087778 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     all  NNLS pooled    0.0200    0.019750      0.083333      0.301389 0.083333         HI1         1.000000           False
+  cell   1000      none person    with     all  NNLS  valid    0.0200    0.017884      0.083333      0.546667 0.083333         HI1         1.000000           False
+  cell   1000      none person without     100   LLR pooled    0.0200    0.016754      0.093030      0.866061 0.090909    Young M2         1.000000           False
+  cell   1000      none person without     100   LLR  valid    0.0200    0.019380      0.038182      0.420606 0.008209    Young M2         0.090303            True
+  cell   1000      none person without     100  NNLS pooled    0.0200    0.016909      0.101818      0.691515 0.093636    Young M2         1.000000           False
+  cell   1000      none person without     100  NNLS  valid    0.0300    0.021681      0.089091      0.355455 0.082121    Young M2         0.903333           False
+  cell   1000      none person without     500   LLR pooled    0.0300    0.024003      0.133030      0.635455 0.092865    Young M2         1.000000           False
+  cell   1000      none person without     500   LLR  valid    0.0300    0.029205      0.031818      0.271515 0.014298    Young M2         0.157273            True
+  cell   1000      none person without     500  NNLS pooled       NaN         NaN      0.136364      0.363939 0.087273         HI3         0.773333           False
+  cell   1000      none person without     500  NNLS  valid       NaN         NaN      0.019394      0.282424 0.005758         HI3         0.063333            True
+  cell   1000      none person without     all   LLR pooled    0.0150    0.012865      0.213333      0.868485 0.181928         HI4         1.000000           False
+  cell   1000      none person without     all   LLR  valid    0.0200    0.018740      0.001212      0.461212 0.000000         HI3         0.000000            True
+  cell   1000      none person without     all  NNLS pooled    0.0150    0.010344      0.121212      0.945455 0.086061    Young M2         0.916667           False
+  cell   1000      none person without     all  NNLS  valid    0.0150    0.012624      0.068485      0.882424 0.013333    Young M2         0.146667            True
+plasma     10      none   mean    with     100   LLR pooled    0.0200    0.019164      0.076667      0.598333 0.061402         HI3         0.090000           False
+plasma     10      none   mean    with     100  NNLS pooled       NaN         NaN      0.067083      0.209583 0.046667         HI4         0.075000            True
+plasma     10      none   mean    with     500   LLR pooled    0.0150    0.010619      0.100417      0.941667 0.060417      Old F1         0.081818           False
+plasma     10      none   mean    with     500  NNLS pooled       NaN         NaN      0.063333      0.289583 0.046250         HI2         0.075000            True
+plasma     10      none   mean    with     all   LLR pooled    0.0100    0.009518      0.105000      0.977083 0.060227      Old M2         0.082273           False
+plasma     10      none   mean    with     all  NNLS pooled    0.0300    0.025081      0.070833      0.414583 0.055000    Young F1         0.095000           False
+plasma     10      none   mean without     100   LLR pooled    0.0200    0.018633      0.084091      0.646818 0.061446         HI2         0.098636           False
+plasma     10      none   mean without     100  NNLS pooled       NaN         NaN      0.070000      0.240000 0.056364      Old M2         0.080000           False
+plasma     10      none   mean without     500   LLR pooled    0.0100    0.009868      0.106818      0.957727 0.043182      Old M2         0.067273            True
+plasma     10      none   mean without     500  NNLS pooled       NaN         NaN      0.061818      0.269091 0.047727    Young M2         0.065000            True
+plasma     10      none   mean without     all   LLR pooled    0.0100    0.009288      0.110455      0.985909 0.045744      Old M2         0.061364            True
+plasma     10      none   mean without     all  NNLS pooled    0.0300    0.024708      0.067727      0.444545 0.042727    Young F2         0.065000            True
+plasma     10      none person    with     100   LLR pooled    0.0300    0.026808      0.115833      0.391250 0.110985         HI1         0.988182           False
+plasma     10      none person    with     100   LLR  valid       NaN         NaN      0.081667      0.125417 0.079545         HI1         0.944545           False
+plasma     10      none person    with     100  NNLS pooled       NaN         NaN      0.074167      0.208333 0.079583         HI1         0.485000           False
+plasma     10      none person    with     100  NNLS  valid       NaN         NaN      0.058750      0.164167 0.060833         HI1         0.500000           False
+plasma     10      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.134583 0.083333         HI1         1.000000           False
+plasma     10      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.087917 0.083333         HI1         1.000000           False
+plasma     10      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.162917 0.081250         HI1         0.845000           False
+plasma     10      none person    with     500  NNLS  valid       NaN         NaN      0.081667      0.146667 0.079167         HI1         0.855000           False
+plasma     10      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma     10      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma     10      none person    with     all  NNLS pooled    0.0300    0.029100      0.079167      0.271250 0.069167         HI1         0.680000           False
+plasma     10      none person    with     all  NNLS  valid    0.0300    0.029333      0.072917      0.251667 0.064167         HI1         0.630000           False
+plasma     10      none person without     100   LLR pooled    0.0200    0.019919      0.168182      0.628636 0.133471         HI4         0.484545           False
+plasma     10      none person without     100   LLR  valid    0.0300    0.027398      0.044545      0.326364 0.028595         HI4         0.134091            True
+plasma     10      none person without     100  NNLS pooled       NaN         NaN      0.086364      0.247727 0.058182         HI3         0.200000           False
+plasma     10      none person without     100  NNLS  valid       NaN         NaN      0.095909      0.267727 0.070455         HI3         0.255000           False
+plasma     10      none person without     500   LLR pooled    0.0200    0.018245      0.216364      0.672273 0.161653         HI4         0.595909           False
+plasma     10      none person without     500   LLR  valid    0.0300    0.026592      0.025000      0.323182 0.009835         HI4         0.045000            True
+plasma     10      none person without     500  NNLS pooled       NaN         NaN      0.070000      0.235909 0.068182         HI3         0.310000           False
+plasma     10      none person without     500  NNLS  valid       NaN         NaN      0.047727      0.192727 0.043182         HI3         0.210000            True
+plasma     10      none person without     all   LLR pooled    0.0300    0.021354      0.187727      0.555455 0.143388    Young M2         0.692727           False
+plasma     10      none person without     all   LLR  valid    0.0300    0.028536      0.010000      0.279091 0.004298    Young M2         0.028182            True
+plasma     10      none person without     all  NNLS pooled    0.0300    0.026793      0.078182      0.386364 0.049091    Young M2         0.215000            True
+plasma     10      none person without     all  NNLS  valid    0.0300    0.027583      0.059545      0.329091 0.035000    Young M2         0.175000            True
+plasma     30      none   mean    with     100   LLR pooled    0.0150    0.011204      0.088750      0.930833 0.045568         HI2         0.058182            True
+plasma     30      none   mean    with     100  NNLS pooled       NaN         NaN      0.058750      0.355833 0.049167      Old M2         0.080000            True
+plasma     30      none   mean    with     500   LLR pooled    0.0100    0.007536      0.140833      1.000000 0.046364         HI1         0.075000            True
+plasma     30      none   mean    with     500  NNLS pooled    0.0200    0.019735      0.076667      0.542917 0.046250      Old M1         0.075000            True
+plasma     30      none   mean    with     all   LLR pooled    0.0100    0.005300      0.142917      1.000000 0.048636         HI1         0.090909            True
+plasma     30      none   mean    with     all  NNLS pooled    0.0150    0.013931      0.081250      0.811667 0.044583         HI3         0.070000            True
+plasma     30      none   mean without     100   LLR pooled    0.0150    0.010259      0.096818      0.946818 0.050537    Young F2         0.071364           False
+plasma     30      none   mean without     100  NNLS pooled       NaN         NaN      0.073182      0.365000 0.050909    Young F2         0.075000           False
+plasma     30      none   mean without     500   LLR pooled    0.0100    0.006856      0.156364      1.000000 0.049504    Young F2         0.084091            True
+plasma     30      none   mean without     500  NNLS pooled    0.0300    0.022611      0.069091      0.521818 0.049091    Young F2         0.070000            True
+plasma     30      none   mean without     all   LLR pooled    0.0050    0.004934      0.167273      1.000000 0.049339    Young F2         0.094091            True
+plasma     30      none   mean without     all  NNLS pooled    0.0150    0.013866      0.082273      0.817727 0.051818      Old M1         0.075000           False
+plasma     30      none person    with     100   LLR pooled    0.0200    0.019707      0.092083      0.405000 0.086818         HI1         1.000000           False
+plasma     30      none person    with     100   LLR  valid       NaN         NaN      0.083333      0.101250 0.083333         HI1         1.000000           False
+plasma     30      none person    with     100  NNLS pooled       NaN         NaN      0.100833      0.308333 0.093333         HI1         0.820000           False
+plasma     30      none person    with     100  NNLS  valid       NaN         NaN      0.062917      0.160833 0.068750         HI1         0.780000           False
+plasma     30      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.097917 0.083333         HI1         1.000000           False
+plasma     30      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma     30      none person    with     500  NNLS pooled       NaN         NaN      0.085833      0.151667 0.085417         HI1         0.995000           False
+plasma     30      none person    with     500  NNLS  valid       NaN         NaN      0.087083      0.142083 0.084167         HI1         0.990000           False
+plasma     30      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma     30      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma     30      none person    with     all  NNLS pooled    0.0300    0.024186      0.082500      0.292500 0.078750         HI1         0.915000           False
+plasma     30      none person    with     all  NNLS  valid    0.0300    0.024163      0.081250      0.303333 0.074167         HI1         0.860000           False
+plasma     30      none person without     100   LLR pooled    0.0150    0.013887      0.227273      0.853182 0.175950         HI4         0.807273           False
+plasma     30      none person without     100   LLR  valid    0.0200    0.019505      0.041364      0.438182 0.023512         HI4         0.214091            True
+plasma     30      none person without     100  NNLS pooled       NaN         NaN      0.091818      0.375909 0.074091         HI3         0.335000           False
+plasma     30      none person without     100  NNLS  valid       NaN         NaN      0.081364      0.340909 0.067727         HI3         0.355000           False
+plasma     30      none person without     500   LLR pooled    0.0200    0.016488      0.284545      0.799091 0.230909         HI4         0.875909           False
+plasma     30      none person without     500   LLR  valid    0.0300    0.024627      0.005909      0.355455 0.001198         HI4         0.013182            True
+plasma     30      none person without     500  NNLS pooled    0.0300    0.028928      0.102273      0.350909 0.069545    Young M2         0.330000           False
+plasma     30      none person without     500  NNLS  valid       NaN         NaN      0.047727      0.210455 0.033182         HI3         0.170000            True
+plasma     30      none person without     all   LLR pooled    0.0300    0.020557      0.247727      0.650909 0.185083    Young M2         0.939545           False
+plasma     30      none person without     all   LLR  valid    0.0300    0.027587      0.000455      0.327727 0.000000    Young F1         0.000000            True
+plasma     30      none person without     all  NNLS pooled    0.0200    0.017321      0.084091      0.644091 0.055000    Young M2         0.320000           False
+plasma     30      none person without     all  NNLS  valid    0.0200    0.018522      0.050455      0.528182 0.026364    Young M2         0.180000            True
+plasma    100      none   mean    with     100   LLR pooled    0.0100    0.006717      0.161667      1.000000 0.058750         HI4         0.120455           False
+plasma    100      none   mean    with     100  NNLS pooled    0.0200    0.019532      0.078750      0.629583 0.052083      Old F2         0.070000           False
+plasma    100      none   mean    with     500   LLR pooled    0.0050    0.003436      0.289167      1.000000 0.051061    Young F1         0.087273           False
+plasma    100      none   mean    with     500  NNLS pooled    0.0150    0.011771      0.107500      0.919167 0.048750         HI4         0.085000            True
+plasma    100      none   mean    with     all   LLR pooled    0.0030    0.002844      0.338750      1.000000 0.054848         HI4         0.080455           False
+plasma    100      none   mean    with     all  NNLS pooled    0.0100    0.008637      0.122500      0.997917 0.050833      Old M2         0.080000           False
+plasma    100      none   mean without     100   LLR pooled    0.0100    0.005612      0.180000      1.000000 0.049174         HI4         0.080455            True
+plasma    100      none   mean without     100  NNLS pooled    0.0200    0.018204      0.080000      0.673182 0.050909      Old F2         0.080000           False
+plasma    100      none   mean without     500   LLR pooled    0.0050    0.003093      0.304091      1.000000 0.045826      Old M2         0.081818            True
+plasma    100      none   mean without     500  NNLS pooled    0.0150    0.012791      0.090455      0.888182 0.052273      Old M2         0.090000           False
+plasma    100      none   mean without     all   LLR pooled    0.0030    0.002772      0.354091      1.000000 0.045496         HI2         0.060909            True
+plasma    100      none   mean without     all  NNLS pooled    0.0100    0.008626      0.117273      0.998182 0.047273         HI3         0.080000            True
+plasma    100      none person    with     100   LLR pooled    0.0200    0.018948      0.083333      0.370833 0.083333         HI1         1.000000           False
+plasma    100      none person    with     100   LLR  valid    0.0300    0.029043      0.083333      0.092083 0.083333         HI1         1.000000           False
+plasma    100      none person    with     100  NNLS pooled    0.0300    0.028425      0.110833      0.396250 0.095000         HI1         0.970000           False
+plasma    100      none person    with     100  NNLS  valid       NaN         NaN      0.080833      0.144167 0.076250         HI1         0.915000           False
+plasma    100      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083750 0.083333         HI1         1.000000           False
+plasma    100      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    100      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.110833 0.083333         HI1         1.000000           False
+plasma    100      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.135000 0.083333         HI1         1.000000           False
+plasma    100      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    100      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    100      none person    with     all  NNLS pooled    0.0200    0.020000      0.083333      0.247083 0.083333         HI1         1.000000           False
+plasma    100      none person    with     all  NNLS  valid    0.0200    0.019085      0.083333      0.376667 0.083333         HI1         1.000000           False
+plasma    100      none person without     100   LLR pooled    0.0150    0.010592      0.273636      0.941818 0.202231         HI4         0.981818           False
+plasma    100      none person without     100   LLR  valid    0.0200    0.016835      0.042273      0.509091 0.016570         HI4         0.182273            True
+plasma    100      none person without     100  NNLS pooled    0.0300    0.022915      0.142273      0.583182 0.108182         HI3         0.640000           False
+plasma    100      none person without     100  NNLS  valid    0.0300    0.026910      0.096818      0.434545 0.072273         HI3         0.565000           False
+plasma    100      none person without     500   LLR pooled    0.0200    0.016391      0.349545      0.871364 0.294091         HI4         0.998182           False
+plasma    100      none person without     500   LLR  valid    0.0300    0.024108      0.000455      0.363636 0.000000      Old M1         0.000000            True
+plasma    100      none person without     500  NNLS pooled    0.0300    0.023677      0.130455      0.426364 0.105000    Young M2         0.590000           False
+plasma    100      none person without     500  NNLS  valid    0.0300    0.027912      0.051364      0.245000 0.029545         HI3         0.160000            True
+plasma    100      none person without     all   LLR pooled    0.0200    0.018249      0.293636      0.733182 0.218058    Young M2         1.000000           False
+plasma    100      none person without     all   LLR  valid    0.0300    0.027070      0.000000      0.346818 0.000000    Young F2         0.000000            True
+plasma    100      none person without     all  NNLS pooled    0.0150    0.013052      0.106364      0.869091 0.073182    Young M2         0.540000           False
+plasma    100      none person without     all  NNLS  valid    0.0150    0.014128      0.050455      0.766364 0.026364    Young M2         0.215000            True
+plasma    300 10ng_r0.1   mean    with     100   LLR pooled    0.0050    0.003257      0.291667      1.000000 0.040379    Young M1         0.060455            True
+plasma    300 10ng_r0.1   mean    with     100  NNLS pooled    0.0150    0.012085      0.095000      0.911667 0.046667      Old F1         0.075000            True
+plasma    300 10ng_r0.1   mean    with     500   LLR pooled    0.0020    0.001900      0.575000      1.000000 0.043371      Old M1         0.056364            True
+plasma    300 10ng_r0.1   mean    with     500  NNLS pooled    0.0100    0.008452      0.142500      0.998333 0.051667      Old M1         0.090000           False
+plasma    300 10ng_r0.1   mean    with     all   LLR pooled    0.0020    0.001810      0.680417      1.000000 0.053977    Young M1         0.074091           False
+plasma    300 10ng_r0.1   mean    with     all  NNLS pooled    0.0050    0.004514      0.218333      1.000000 0.054167    Young F2         0.080000           False
+plasma    300 10ng_r0.1   mean without     100   LLR pooled    0.0030    0.002929      0.324091      1.000000 0.050826         HI3         0.065909           False
+plasma    300 10ng_r0.1   mean without     100  NNLS pooled    0.0100    0.009794      0.101818      0.961364 0.046364    Young M1         0.065000            True
+plasma    300 10ng_r0.1   mean without     500   LLR pooled    0.0020    0.001864      0.619091      1.000000 0.044463      Old F1         0.070455            True
+plasma    300 10ng_r0.1   mean without     500  NNLS pooled    0.0100    0.008491      0.128182      0.999545 0.044545         HI4         0.065000            True
+plasma    300 10ng_r0.1   mean without     all   LLR pooled    0.0020    0.001798      0.701364      1.000000 0.041364         HI2         0.060000            True
+plasma    300 10ng_r0.1   mean without     all  NNLS pooled    0.0050    0.004523      0.204091      1.000000 0.043636         HI3         0.065000            True
+plasma    300 10ng_r0.1 person    with     100   LLR pooled    0.0200    0.017894      0.083333      0.341250 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.1 person    with     100  NNLS pooled    0.0300    0.024134      0.098333      0.493333 0.087500         HI1         1.000000           False
+plasma    300 10ng_r0.1 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.1 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.090417 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.1 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.1 person    with     all  NNLS pooled    0.0200    0.019510      0.083333      0.216250 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.1 person without     100   LLR pooled    0.0100    0.009986      0.307273      0.950455 0.229752         HI4         1.000000           False
+plasma    300 10ng_r0.1 person without     100  NNLS pooled    0.0200    0.015361      0.195000      0.764545 0.141364         HI3         0.860000           False
+plasma    300 10ng_r0.1 person without     500   LLR pooled    0.0200    0.016219      0.358636      0.894091 0.311488         HI4         1.000000           False
+plasma    300 10ng_r0.1 person without     500  NNLS pooled    0.0200    0.019303      0.169091      0.489091 0.142727    Young M2         0.795000           False
+plasma    300 10ng_r0.1 person without     all   LLR pooled    0.0200    0.017689      0.291818      0.761818 0.231116    Young M2         1.000000           False
+plasma    300 10ng_r0.1 person without     all  NNLS pooled    0.0150    0.011311      0.133182      0.928182 0.080455    Young M2         0.750000           False
+plasma    300 10ng_r0.5   mean    with     100   LLR pooled    0.0050    0.003257      0.307500      1.000000 0.049848    Young F2         0.071818            True
+plasma    300 10ng_r0.5   mean    with     100  NNLS pooled    0.0150    0.012201      0.093750      0.906667 0.053750    Young F1         0.075000           False
+plasma    300 10ng_r0.5   mean    with     500   LLR pooled    0.0020    0.001910      0.582500      1.000000 0.046780         HI2         0.070455            True
+plasma    300 10ng_r0.5   mean    with     500  NNLS pooled    0.0100    0.008352      0.128333      0.999583 0.043333         HI1         0.070000            True
+plasma    300 10ng_r0.5   mean    with     all   LLR pooled    0.0020    0.001799      0.695833      1.000000 0.045455      Old M1         0.057727            True
+plasma    300 10ng_r0.5   mean    with     all  NNLS pooled    0.0050    0.004455      0.206667      1.000000 0.049583    Young F2         0.080000            True
+plasma    300 10ng_r0.5   mean without     100   LLR pooled    0.0030    0.002957      0.356818      1.000000 0.053554      Old F1         0.092727           False
+plasma    300 10ng_r0.5   mean without     100  NNLS pooled    0.0150    0.010038      0.104545      0.949545 0.045909      Old F1         0.080000            True
+plasma    300 10ng_r0.5   mean without     500   LLR pooled    0.0020    0.001867      0.627727      1.000000 0.046983    Young F2         0.083182            True
+plasma    300 10ng_r0.5   mean without     500  NNLS pooled    0.0100    0.008477      0.139091      0.996364 0.060455         HI2         0.090000           False
+plasma    300 10ng_r0.5   mean without     all   LLR pooled    0.0020    0.001779      0.724091      1.000000 0.047314      Old M1         0.061818            True
+plasma    300 10ng_r0.5   mean without     all  NNLS pooled    0.0050    0.004527      0.202273      1.000000 0.060000    Young F2         0.080000           False
+plasma    300 10ng_r0.5 person    with     100   LLR pooled    0.0200    0.018038      0.083333      0.340000 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.5 person    with     100  NNLS pooled    0.0300    0.024196      0.095833      0.466250 0.090417         HI1         1.000000           False
+plasma    300 10ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.097083 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019484      0.083333      0.212500 0.083333         HI1         1.000000           False
+plasma    300 10ng_r0.5 person without     100   LLR pooled    0.0100    0.009985      0.306364      0.950455 0.231942         HI4         1.000000           False
+plasma    300 10ng_r0.5 person without     100  NNLS pooled    0.0200    0.015688      0.186364      0.771818 0.156818         HI3         0.855000           False
+plasma    300 10ng_r0.5 person without     500   LLR pooled    0.0200    0.016510      0.359091      0.885000 0.320744         HI4         1.000000           False
+plasma    300 10ng_r0.5 person without     500  NNLS pooled    0.0200    0.019342      0.164545      0.483636 0.149545         HI3         0.825000           False
+plasma    300 10ng_r0.5 person without     all   LLR pooled    0.0200    0.017635      0.290909      0.766364 0.238967    Young M2         1.000000           False
+plasma    300 10ng_r0.5 person without     all  NNLS pooled    0.0150    0.011320      0.130000      0.928182 0.080000    Young M2         0.755000           False
+plasma    300 30ng_r0.5   mean    with     100   LLR pooled    0.0050    0.003144      0.315000      1.000000 0.052614    Young F1         0.089091           False
+plasma    300 30ng_r0.5   mean    with     100  NNLS pooled    0.0150    0.011772      0.102500      0.920833 0.048333    Young M1         0.075000            True
+plasma    300 30ng_r0.5   mean    with     500   LLR pooled    0.0020    0.001885      0.593750      1.000000 0.045227         HI1         0.068636            True
+plasma    300 30ng_r0.5   mean    with     500  NNLS pooled    0.0100    0.008161      0.133333      0.998750 0.048750      Old M1         0.070000            True
+plasma    300 30ng_r0.5   mean    with     all   LLR pooled    0.0020    0.001799      0.702917      1.000000 0.041856    Young F2         0.065909            True
+plasma    300 30ng_r0.5   mean    with     all  NNLS pooled    0.0050    0.004450      0.209583      1.000000 0.049583         HI2         0.075000            True
+plasma    300 30ng_r0.5   mean without     100   LLR pooled    0.0030    0.002949      0.324545      1.000000 0.050455         HI2         0.082727           False
+plasma    300 30ng_r0.5   mean without     100  NNLS pooled    0.0100    0.009973      0.111364      0.951364 0.051364    Young M1         0.070000           False
+plasma    300 30ng_r0.5   mean without     500   LLR pooled    0.0020    0.001872      0.605909      1.000000 0.046074         HI2         0.087727            True
+plasma    300 30ng_r0.5   mean without     500  NNLS pooled    0.0100    0.008614      0.142727      0.997727 0.051818      Old M2         0.085000           False
+plasma    300 30ng_r0.5   mean without     all   LLR pooled    0.0020    0.001776      0.719091      1.000000 0.038595         HI2         0.069091            True
+plasma    300 30ng_r0.5   mean without     all  NNLS pooled    0.0050    0.004460      0.213636      1.000000 0.047273         HI4         0.080000            True
+plasma    300 30ng_r0.5 person    with     100   LLR pooled    0.0200    0.017920      0.083333      0.334167 0.083333         HI1         1.000000           False
+plasma    300 30ng_r0.5 person    with     100  NNLS pooled    0.0300    0.023600      0.095833      0.483750 0.090000         HI1         1.000000           False
+plasma    300 30ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300 30ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.096250 0.083333         HI1         1.000000           False
+plasma    300 30ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300 30ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019594      0.083333      0.218333 0.083333         HI1         1.000000           False
+plasma    300 30ng_r0.5 person without     100   LLR pooled    0.0100    0.009973      0.302273      0.950909 0.230289         HI4         1.000000           False
+plasma    300 30ng_r0.5 person without     100  NNLS pooled    0.0200    0.015773      0.201364      0.777273 0.151818         HI3         0.875000           False
+plasma    300 30ng_r0.5 person without     500   LLR pooled    0.0200    0.016370      0.358182      0.889545 0.306777         HI4         1.000000           False
+plasma    300 30ng_r0.5 person without     500  NNLS pooled    0.0200    0.019259      0.166818      0.476818 0.149091         HI3         0.850000           False
+plasma    300 30ng_r0.5 person without     all   LLR pooled    0.0200    0.017847      0.291364      0.759091 0.237066    Young M2         1.000000           False
+plasma    300 30ng_r0.5 person without     all  NNLS pooled    0.0150    0.011249      0.131364      0.929545 0.078636    Young M2         0.775000           False
+plasma    300      none   mean    with     100   LLR pooled    0.0050    0.003086      0.302500      1.000000 0.054697    Young M1         0.080455           False
+plasma    300      none   mean    with     100  NNLS pooled    0.0150    0.012008      0.106667      0.913333 0.052500         HI2         0.075000           False
+plasma    300      none   mean    with     500   LLR pooled    0.0020    0.001882      0.602083      1.000000 0.051705         HI2         0.083636           False
+plasma    300      none   mean    with     500  NNLS pooled    0.0100    0.008264      0.138333      0.999167 0.045000         HI1         0.085000            True
+plasma    300      none   mean    with     all   LLR pooled    0.0020    0.001794      0.706250      1.000000 0.052197      Old F2         0.078636           False
+plasma    300      none   mean    with     all  NNLS pooled    0.0050    0.004523      0.219167      1.000000 0.045417         HI4         0.070000            True
+plasma    300      none   mean without     100   LLR pooled    0.0030    0.002896      0.330000      1.000000 0.047769      Old M1         0.068182            True
+plasma    300      none   mean without     100  NNLS pooled    0.0100    0.009800      0.115909      0.961364 0.051818         HI3         0.070000           False
+plasma    300      none   mean without     500   LLR pooled    0.0020    0.001863      0.658182      1.000000 0.054793    Young M2         0.078182           False
+plasma    300      none   mean without     500  NNLS pooled    0.0100    0.008494      0.130455      0.998182 0.051364         HI4         0.090000           False
+plasma    300      none   mean without     all   LLR pooled    0.0020    0.001772      0.739091      1.000000 0.055620      Old M2         0.071364           False
+plasma    300      none   mean without     all  NNLS pooled    0.0050    0.004504      0.224091      1.000000 0.050000         HI4         0.075000            True
+plasma    300      none person    with     100   LLR pooled    0.0200    0.017952      0.083333      0.331667 0.083333         HI1         1.000000           False
+plasma    300      none person    with     100   LLR  valid    0.0300    0.028950      0.083333      0.085000 0.083333         HI1         1.000000           False
+plasma    300      none person    with     100  NNLS pooled    0.0300    0.023916      0.097500      0.492083 0.092083         HI1         1.000000           False
+plasma    300      none person    with     100  NNLS  valid       NaN         NaN      0.083333      0.110417 0.083333         HI1         1.000000           False
+plasma    300      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.094583 0.083333         HI1         1.000000           False
+plasma    300      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.134167 0.083333         HI1         1.000000           False
+plasma    300      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma    300      none person    with     all  NNLS pooled    0.0200    0.019674      0.083333      0.206250 0.083333         HI1         1.000000           False
+plasma    300      none person    with     all  NNLS  valid    0.0200    0.018066      0.083333      0.397500 0.083333         HI1         1.000000           False
+plasma    300      none person without     100   LLR pooled    0.0100    0.009959      0.310000      0.951364 0.227149         HI4         1.000000           False
+plasma    300      none person without     100   LLR  valid    0.0200    0.015902      0.039091      0.514091 0.011736         HI4         0.129091            True
+plasma    300      none person without     100  NNLS pooled    0.0200    0.015959      0.183636      0.762727 0.145000         HI3         0.825000           False
+plasma    300      none person without     100  NNLS  valid    0.0300    0.020628      0.098182      0.505909 0.074545         HI3         0.680000           False
+plasma    300      none person without     500   LLR pooled    0.0200    0.016150      0.361364      0.895000 0.313017         HI4         1.000000           False
+plasma    300      none person without     500   LLR  valid    0.0300    0.024003      0.000000      0.363636 0.000000    Young M2         0.000000            True
+plasma    300      none person without     500  NNLS pooled    0.0200    0.019312      0.162273      0.479545 0.144091         HI3         0.795000           False
+plasma    300      none person without     500  NNLS  valid    0.0300    0.026669      0.053636      0.257727 0.026818         HI3         0.195000            True
+plasma    300      none person without     all   LLR pooled    0.0200    0.017689      0.289091      0.762273 0.234339    Young M2         1.000000           False
+plasma    300      none person without     all   LLR  valid    0.0300    0.026978      0.000000      0.347727 0.000000    Young M2         0.000000            True
+plasma    300      none person without     all  NNLS pooled    0.0150    0.011120      0.115909      0.932273 0.068636    Young M2         0.680000           False
+plasma    300      none person without     all  NNLS  valid    0.0150    0.013064      0.054545      0.856818 0.015909    Young M2         0.165000            True
+plasma   1000 10ng_r0.1   mean    with     100   LLR pooled    0.0030    0.002983      0.297917      1.000000 0.050379    Young F1         0.065909           False
+plasma   1000 10ng_r0.1   mean    with     100  NNLS pooled    0.0150    0.011649      0.106667      0.923333 0.056667         HI1         0.090000           False
+plasma   1000 10ng_r0.1   mean    with     500   LLR pooled    0.0020    0.001875      0.603750      1.000000 0.049508      Old M1         0.077727            True
+plasma   1000 10ng_r0.1   mean    with     500  NNLS pooled    0.0100    0.008263      0.129583      1.000000 0.049167      Old M2         0.100000            True
+plasma   1000 10ng_r0.1   mean    with     all   LLR pooled    0.0020    0.001797      0.700833      1.000000 0.048864      Old M1         0.075909            True
+plasma   1000 10ng_r0.1   mean    with     all  NNLS pooled    0.0050    0.004452      0.211250      1.000000 0.047917      Old F1         0.075000            True
+plasma   1000 10ng_r0.1   mean without     100   LLR pooled    0.0030    0.002893      0.309091      1.000000 0.050124         HI2         0.075909           False
+plasma   1000 10ng_r0.1   mean without     100  NNLS pooled    0.0100    0.009793      0.100455      0.961364 0.038636    Young F2         0.050000            True
+plasma   1000 10ng_r0.1   mean without     500   LLR pooled    0.0020    0.001849      0.625909      1.000000 0.047810    Young F1         0.065455            True
+plasma   1000 10ng_r0.1   mean without     500  NNLS pooled    0.0100    0.008452      0.116364      0.999091 0.048182      Old M2         0.070000            True
+plasma   1000 10ng_r0.1   mean without     all   LLR pooled    0.0020    0.001782      0.711364      1.000000 0.046860    Young M2         0.063636            True
+plasma   1000 10ng_r0.1   mean without     all  NNLS pooled    0.0050    0.004466      0.204091      1.000000 0.051818    Young M2         0.085000           False
+plasma   1000 10ng_r0.1 person    with     100   LLR pooled    0.0200    0.017813      0.083333      0.336667 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.1 person    with     100  NNLS pooled    0.0300    0.023677      0.095000      0.485833 0.087083         HI1         1.000000           False
+plasma   1000 10ng_r0.1 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.1 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.092083 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.1 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.1 person    with     all  NNLS pooled    0.0200    0.019526      0.083333      0.217917 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.1 person without     100   LLR pooled    0.0150    0.010143      0.307273      0.948182 0.226488         HI4         1.000000           False
+plasma   1000 10ng_r0.1 person without     100  NNLS pooled    0.0200    0.015831      0.185455      0.763636 0.150000         HI3         0.865000           False
+plasma   1000 10ng_r0.1 person without     500   LLR pooled    0.0200    0.016126      0.359091      0.898182 0.311322         HI4         1.000000           False
+plasma   1000 10ng_r0.1 person without     500  NNLS pooled    0.0200    0.019189      0.161364      0.486818 0.144091    Young M2         0.815000           False
+plasma   1000 10ng_r0.1 person without     all   LLR pooled    0.0200    0.017671      0.288182      0.766364 0.230702    Young M2         1.000000           False
+plasma   1000 10ng_r0.1 person without     all  NNLS pooled    0.0150    0.011120      0.120909      0.932273 0.078636    Young M2         0.725000           False
+plasma   1000 10ng_r0.5   mean    with     100   LLR pooled    0.0020    0.001849      0.641250      1.000000 0.051364      Old M2         0.079091           False
+plasma   1000 10ng_r0.5   mean    with     100  NNLS pooled    0.0100    0.007571      0.152083      0.999167 0.052500    Young M2         0.070000           False
+plasma   1000 10ng_r0.5   mean    with     500   LLR pooled    0.0010    0.000984      0.960000      1.000000 0.052462         HI1         0.087727           False
+plasma   1000 10ng_r0.5   mean    with     500  NNLS pooled    0.0050    0.004164      0.227083      1.000000 0.042500      Old M2         0.060000            True
+plasma   1000 10ng_r0.5   mean    with     all   LLR pooled    0.0010    0.000928      0.990417      1.000000 0.042538         HI1         0.080000            True
+plasma   1000 10ng_r0.5   mean    with     all  NNLS pooled    0.0030    0.002429      0.429167      1.000000 0.044583         HI1         0.070000            True
+plasma   1000 10ng_r0.5   mean without     100   LLR pooled    0.0020    0.001799      0.690000      1.000000 0.047066      Old M2         0.070000            True
+plasma   1000 10ng_r0.5   mean without     100  NNLS pooled    0.0100    0.005755      0.184545      1.000000 0.050000         HI4         0.060000            True
+plasma   1000 10ng_r0.5   mean without     500   LLR pooled    0.0010    0.000955      0.977273      1.000000 0.046157    Young F1         0.071364            True
+plasma   1000 10ng_r0.5   mean without     500  NNLS pooled    0.0050    0.004306      0.240000      1.000000 0.056818         HI4         0.065000           False
+plasma   1000 10ng_r0.5   mean without     all   LLR pooled    0.0010    0.000916      0.990909      1.000000 0.042397    Young F1         0.080000            True
+plasma   1000 10ng_r0.5   mean without     all  NNLS pooled    0.0030    0.002428      0.441364      1.000000 0.050455    Young F1         0.095000           False
+plasma   1000 10ng_r0.5 person    with     100   LLR pooled    0.0200    0.017052      0.083333      0.327500 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.5 person    with     100  NNLS pooled    0.0300    0.022488      0.088333      0.530833 0.086250         HI1         1.000000           False
+plasma   1000 10ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083750 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019436      0.083333      0.198750 0.083333         HI1         1.000000           False
+plasma   1000 10ng_r0.5 person without     100   LLR pooled    0.0100    0.009618      0.324091      0.960000 0.242355         HI4         1.000000           False
+plasma   1000 10ng_r0.5 person without     100  NNLS pooled    0.0150    0.013303      0.242273      0.861364 0.190455         HI3         0.990000           False
+plasma   1000 10ng_r0.5 person without     500   LLR pooled    0.0200    0.016391      0.361818      0.905000 0.321116         HI4         1.000000           False
+plasma   1000 10ng_r0.5 person without     500  NNLS pooled    0.0200    0.018662      0.178636      0.529091 0.166818         HI3         0.965000           False
+plasma   1000 10ng_r0.5 person without     all   LLR pooled    0.0200    0.017582      0.290909      0.770000 0.242893         HI3         1.000000           False
+plasma   1000 10ng_r0.5 person without     all  NNLS pooled    0.0150    0.011249      0.109091      0.929545 0.087727    Young M2         0.965000           False
+plasma   1000 30ng_r0.5   mean    with     100   LLR pooled    0.0020    0.001852      0.648333      1.000000 0.055455      Old F1         0.091364           False
+plasma   1000 30ng_r0.5   mean    with     100  NNLS pooled    0.0100    0.007593      0.148333      1.000000 0.051250         HI1         0.065000           False
+plasma   1000 30ng_r0.5   mean    with     500   LLR pooled    0.0010    0.000973      0.966667      1.000000 0.051326      Old F1         0.083636           False
+plasma   1000 30ng_r0.5   mean    with     500  NNLS pooled    0.0050    0.004166      0.234583      1.000000 0.050833    Young M1         0.075000           False
+plasma   1000 30ng_r0.5   mean    with     all   LLR pooled    0.0010    0.000929      0.987500      1.000000 0.044432    Young M1         0.071818            True
+plasma   1000 30ng_r0.5   mean    with     all  NNLS pooled    0.0030    0.002300      0.433333      1.000000 0.048750         HI3         0.085000            True
+plasma   1000 30ng_r0.5   mean without     100   LLR pooled    0.0020    0.001800      0.696818      1.000000 0.042190      Old F2         0.081364            True
+plasma   1000 30ng_r0.5   mean without     100  NNLS pooled    0.0100    0.005592      0.174091      0.999545 0.052273         HI3         0.110000           False
+plasma   1000 30ng_r0.5   mean without     500   LLR pooled    0.0010    0.000961      0.971818      1.000000 0.045207      Old F2         0.082273            True
+plasma   1000 30ng_r0.5   mean without     500  NNLS pooled    0.0050    0.004272      0.241364      1.000000 0.053636    Young M2         0.070000           False
+plasma   1000 30ng_r0.5   mean without     all   LLR pooled    0.0010    0.000915      0.990455      1.000000 0.046322      Old F2         0.091818            True
+plasma   1000 30ng_r0.5   mean without     all  NNLS pooled    0.0030    0.002358      0.453182      1.000000 0.050909      Old M2         0.080000           False
+plasma   1000 30ng_r0.5 person    with     100   LLR pooled    0.0200    0.016986      0.083333      0.327500 0.083333         HI1         1.000000           False
+plasma   1000 30ng_r0.5 person    with     100  NNLS pooled    0.0300    0.021840      0.090417      0.531250 0.085833         HI1         1.000000           False
+plasma   1000 30ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000 30ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.084583 0.083333         HI1         1.000000           False
+plasma   1000 30ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000 30ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019493      0.083333      0.194167 0.083333         HI1         1.000000           False
+plasma   1000 30ng_r0.5 person without     100   LLR pooled    0.0100    0.009516      0.327273      0.962727 0.245826    Young M2         1.000000           False
+plasma   1000 30ng_r0.5 person without     100  NNLS pooled    0.0150    0.013630      0.242273      0.855909 0.185455         HI3         0.995000           False
+plasma   1000 30ng_r0.5 person without     500   LLR pooled    0.0200    0.016490      0.363636      0.905000 0.326612         HI4         1.000000           False
+plasma   1000 30ng_r0.5 person without     500  NNLS pooled    0.0200    0.018756      0.178182      0.549091 0.165455         HI3         0.975000           False
+plasma   1000 30ng_r0.5 person without     all   LLR pooled    0.0200    0.017407      0.288636      0.773636 0.241240    Young M2         1.000000           False
+plasma   1000 30ng_r0.5 person without     all  NNLS pooled    0.0150    0.011207      0.111364      0.930455 0.089545    Young M2         0.975000           False
+plasma   1000      none   mean    with     100   LLR pooled    0.0020    0.001847      0.655000      1.000000 0.052992         HI3         0.074091           False
+plasma   1000      none   mean    with     100  NNLS pooled    0.0100    0.007461      0.159583      1.000000 0.053750         HI2         0.085000           False
+plasma   1000      none   mean    with     500   LLR pooled    0.0010    0.000983      0.960833      1.000000 0.046591      Old M2         0.067273            True
+plasma   1000      none   mean    with     500  NNLS pooled    0.0050    0.004136      0.245833      1.000000 0.049583         HI3         0.085000            True
+plasma   1000      none   mean    with     all   LLR pooled    0.0010    0.000930      0.988333      1.000000 0.048485         HI3         0.070455            True
+plasma   1000      none   mean    with     all  NNLS pooled    0.0030    0.002388      0.441667      1.000000 0.050417    Young F2         0.075000           False
+plasma   1000      none   mean without     100   LLR pooled    0.0020    0.001815      0.695909      1.000000 0.049463    Young F1         0.071818            True
+plasma   1000      none   mean without     100  NNLS pooled    0.0100    0.005661      0.160909      1.000000 0.047273      Old M1         0.070000            True
+plasma   1000      none   mean without     500   LLR pooled    0.0010    0.000970      0.967727      1.000000 0.052562    Young M2         0.073182           False
+plasma   1000      none   mean without     500  NNLS pooled    0.0050    0.004256      0.224545      1.000000 0.041818      Old F1         0.070000            True
+plasma   1000      none   mean without     all   LLR pooled    0.0010    0.000924      0.988636      1.000000 0.056612    Young M2         0.075000           False
+plasma   1000      none   mean without     all  NNLS pooled    0.0030    0.002358      0.455455      1.000000 0.053636      Old M2         0.080000           False
+plasma   1000      none person    with     100   LLR pooled    0.0200    0.017084      0.083333      0.329583 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     100   LLR  valid    0.0300    0.028925      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     100  NNLS pooled    0.0300    0.022418      0.087917      0.514583 0.084583         HI1         1.000000           False
+plasma   1000      none person    with     100  NNLS  valid    0.0300    0.029722      0.083333      0.090833 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083750 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.138750 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     all  NNLS pooled    0.0200    0.019362      0.083333      0.202500 0.083333         HI1         1.000000           False
+plasma   1000      none person    with     all  NNLS  valid    0.0200    0.017486      0.083333      0.421250 0.083333         HI1         1.000000           False
+plasma   1000      none person without     100   LLR pooled    0.0100    0.009518      0.327727      0.962273 0.236777    Young M2         1.000000           False
+plasma   1000      none person without     100   LLR  valid    0.0200    0.015793      0.052273      0.510000 0.001901         HI4         0.020909            True
+plasma   1000      none person without     100  NNLS pooled    0.0150    0.013294      0.248636      0.866364 0.190000         HI3         0.985000           False
+plasma   1000      none person without     100  NNLS  valid    0.0200    0.018581      0.103636      0.561364 0.084091         HI3         0.885000           False
+plasma   1000      none person without     500   LLR pooled    0.0200    0.016471      0.363182      0.906818 0.322479         HI3         1.000000           False
+plasma   1000      none person without     500   LLR  valid    0.0300    0.024003      0.000000      0.363636 0.000000      Old M2         0.000000            True
+plasma   1000      none person without     500  NNLS pooled    0.0200    0.018704      0.179091      0.543636 0.168636         HI3         0.980000           False
+plasma   1000      none person without     500  NNLS  valid    0.0300    0.025696      0.045000      0.266818 0.013182    Young M2         0.085000            True
+plasma   1000      none person without     all   LLR pooled    0.0200    0.017532      0.285909      0.771818 0.242438    Young M2         1.000000           False
+plasma   1000      none person without     all   LLR  valid    0.0300    0.026835      0.000000      0.360000 0.000000      Old M2         0.000000            True
+plasma   1000      none person without     all  NNLS pooled    0.0150    0.011466      0.109091      0.924545 0.087727    Young M2         0.960000           False
+plasma   1000      none person without     all  NNLS  valid    0.0150    0.012503      0.069091      0.888636 0.015000    Young M2         0.165000            True
+plasma   3000 10ng_r0.1   mean    with     100   LLR pooled    0.0030    0.002995      0.290417      1.000000 0.045417         HI2         0.079091            True
+plasma   3000 10ng_r0.1   mean    with     100  NNLS pooled    0.0150    0.011961      0.097083      0.913750 0.049583      Old F2         0.075000            True
+plasma   3000 10ng_r0.1   mean    with     500   LLR pooled    0.0020    0.001883      0.592917      1.000000 0.050455         HI2         0.082273           False
+plasma   3000 10ng_r0.1   mean    with     500  NNLS pooled    0.0100    0.008315      0.130833      0.999583 0.049167    Young F2         0.065000            True
+plasma   3000 10ng_r0.1   mean    with     all   LLR pooled    0.0020    0.001798      0.686667      1.000000 0.051780         HI1         0.063182           False
+plasma   3000 10ng_r0.1   mean    with     all  NNLS pooled    0.0050    0.004520      0.212083      1.000000 0.047917      Old M2         0.065000            True
+plasma   3000 10ng_r0.1   mean without     100   LLR pooled    0.0030    0.002905      0.329545      1.000000 0.052934      Old M1         0.078182           False
+plasma   3000 10ng_r0.1   mean without     100  NNLS pooled    0.0100    0.009885      0.119091      0.956364 0.049091    Young M2         0.065000            True
+plasma   3000 10ng_r0.1   mean without     500   LLR pooled    0.0020    0.001837      0.650909      1.000000 0.056942      Old F2         0.093182           False
+plasma   3000 10ng_r0.1   mean without     500  NNLS pooled    0.0100    0.008485      0.140909      1.000000 0.055000      Old M2         0.085000           False
+plasma   3000 10ng_r0.1   mean without     all   LLR pooled    0.0020    0.001765      0.735000      1.000000 0.057934      Old M2         0.088182           False
+plasma   3000 10ng_r0.1   mean without     all  NNLS pooled    0.0050    0.004460      0.230455      1.000000 0.057273         HI3         0.080000           False
+plasma   3000 10ng_r0.1 person    with     100   LLR pooled    0.0200    0.017889      0.083333      0.338333 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.1 person    with     100  NNLS pooled    0.0300    0.023532      0.096667      0.464167 0.092917         HI1         1.000000           False
+plasma   3000 10ng_r0.1 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.1 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.092083 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.1 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.1 person    with     all  NNLS pooled    0.0200    0.019629      0.083333      0.225000 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.1 person without     100   LLR pooled    0.0100    0.009930      0.311364      0.952273 0.232645         HI4         1.000000           False
+plasma   3000 10ng_r0.1 person without     100  NNLS pooled    0.0200    0.016137      0.186818      0.758636 0.137273         HI3         0.855000           False
+plasma   3000 10ng_r0.1 person without     500   LLR pooled    0.0200    0.016103      0.358636      0.894545 0.321405    Young M2         1.000000           False
+plasma   3000 10ng_r0.1 person without     500  NNLS pooled    0.0200    0.019355      0.159091      0.479091 0.145455    Young M2         0.830000           False
+plasma   3000 10ng_r0.1 person without     all   LLR pooled    0.0200    0.017806      0.291818      0.766364 0.233554    Young M2         1.000000           False
+plasma   3000 10ng_r0.1 person without     all  NNLS pooled    0.0150    0.011311      0.117727      0.928182 0.083636    Young M2         0.815000           False
+plasma   3000 10ng_r0.5   mean    with     100   LLR pooled    0.0020    0.001655      0.817083      1.000000 0.057500         HI1         0.086818           False
+plasma   3000 10ng_r0.5   mean    with     100  NNLS pooled    0.0050    0.004967      0.170417      1.000000 0.050000         HI2         0.075000            True
+plasma   3000 10ng_r0.5   mean    with     500   LLR pooled    0.0010    0.000906      0.995000      1.000000 0.056591         HI1         0.087727           False
+plasma   3000 10ng_r0.5   mean    with     500  NNLS pooled    0.0030    0.002967      0.304583      1.000000 0.052083         HI2         0.095000           False
+plasma   3000 10ng_r0.5   mean    with     all   LLR pooled    0.0010    0.000855      0.998333      1.000000 0.053523      Old M2         0.085455           False
+plasma   3000 10ng_r0.5   mean    with     all  NNLS pooled    0.0020    0.001892      0.592500      1.000000 0.052917      Old F2         0.085000           False
+plasma   3000 10ng_r0.5   mean without     100   LLR pooled    0.0020    0.001607      0.841364      1.000000 0.047397    Young M2         0.065909            True
+plasma   3000 10ng_r0.5   mean without     100  NNLS pooled    0.0050    0.004668      0.226818      1.000000 0.049545      Old M2         0.095000            True
+plasma   3000 10ng_r0.5   mean without     500   LLR pooled    0.0010    0.000889      0.997273      1.000000 0.046157    Young F1         0.077727            True
+plasma   3000 10ng_r0.5   mean without     500  NNLS pooled    0.0050    0.003130      0.300455      1.000000 0.057273         HI4         0.090000           False
+plasma   3000 10ng_r0.5   mean without     all   LLR pooled    0.0010    0.000831      1.000000      1.000000 0.046570    Young M1         0.071818            True
+plasma   3000 10ng_r0.5   mean without     all  NNLS pooled    0.0020    0.001888      0.590000      1.000000 0.053182         HI4         0.085000           False
+plasma   3000 10ng_r0.5 person    with     100   LLR pooled    0.0200    0.017038      0.083333      0.324583 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.5 person    with     100  NNLS pooled    0.0300    0.021546      0.086250      0.542917 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019400      0.083333      0.194583 0.083333         HI1         1.000000           False
+plasma   3000 10ng_r0.5 person without     100   LLR pooled    0.0100    0.009309      0.331818      0.968182 0.246818         HI4         1.000000           False
+plasma   3000 10ng_r0.5 person without     100  NNLS pooled    0.0150    0.013104      0.259545      0.872727 0.199091         HI3         1.000000           False
+plasma   3000 10ng_r0.5 person without     500   LLR pooled    0.0200    0.016585      0.363636      0.906364 0.319298         HI4         1.000000           False
+plasma   3000 10ng_r0.5 person without     500  NNLS pooled    0.0200    0.018658      0.180909      0.560000 0.172273         HI3         0.980000           False
+plasma   3000 10ng_r0.5 person without     all   LLR pooled    0.0200    0.017565      0.284545      0.774091 0.244380         HI3         1.000000           False
+plasma   3000 10ng_r0.5 person without     all  NNLS pooled    0.0150    0.011625      0.109545      0.920455 0.090455    Young M2         0.990000           False
+plasma   3000 30ng_r0.5   mean    with     100   LLR pooled    0.0010    0.000969      0.969583      1.000000 0.046326      Old F2         0.074091            True
+plasma   3000 30ng_r0.5   mean    with     100  NNLS pooled    0.0050    0.003890      0.274167      1.000000 0.049583         HI2         0.065000            True
+plasma   3000 30ng_r0.5   mean    with     500   LLR pooled    0.0010    0.000673      1.000000      1.000000 0.041212      Old F2         0.075909            True
+plasma   3000 30ng_r0.5   mean    with     500  NNLS pooled    0.0030    0.002239      0.468333      1.000000 0.049167    Young M2         0.070000            True
+plasma   3000 30ng_r0.5   mean    with     all   LLR pooled    0.0005    0.000492      1.000000      1.000000 0.043788      Old F2         0.084545            True
+plasma   3000 30ng_r0.5   mean    with     all  NNLS pooled    0.0020    0.001601      0.845000      1.000000 0.047083         HI3         0.070000            True
+plasma   3000 30ng_r0.5   mean without     100   LLR pooled    0.0010    0.000950      0.978636      1.000000 0.045826    Young M2         0.072727            True
+plasma   3000 30ng_r0.5   mean without     100  NNLS pooled    0.0030    0.002978      0.320909      1.000000 0.045455    Young M1         0.075000            True
+plasma   3000 30ng_r0.5   mean without     500   LLR pooled    0.0010    0.000630      1.000000      1.000000 0.060702    Young F1         0.096364           False
+plasma   3000 30ng_r0.5   mean without     500  NNLS pooled    0.0030    0.002212      0.468182      1.000000 0.047727      Old F2         0.065000            True
+plasma   3000 30ng_r0.5   mean without     all   LLR pooled    0.0005    0.000487      1.000000      1.000000 0.049669    Young F1         0.084091            True
+plasma   3000 30ng_r0.5   mean without     all  NNLS pooled    0.0020    0.001616      0.837273      1.000000 0.047727         HI4         0.090000            True
+plasma   3000 30ng_r0.5 person    with     100   LLR pooled    0.0200    0.016829      0.083333      0.327500 0.083333         HI1         1.000000           False
+plasma   3000 30ng_r0.5 person    with     100  NNLS pooled    0.0300    0.021962      0.084167      0.569583 0.083333         HI1         1.000000           False
+plasma   3000 30ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 30ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 30ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000 30ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019218      0.083333      0.194583 0.083333         HI1         1.000000           False
+plasma   3000 30ng_r0.5 person without     100   LLR pooled    0.0100    0.008945      0.329545      0.979091 0.252314         HI4         1.000000           False
+plasma   3000 30ng_r0.5 person without     100  NNLS pooled    0.0150    0.012799      0.265000      0.880000 0.224091         HI3         1.000000           False
+plasma   3000 30ng_r0.5 person without     500   LLR pooled    0.0200    0.016490      0.363636      0.908636 0.318430    Young M2         1.000000           False
+plasma   3000 30ng_r0.5 person without     500  NNLS pooled    0.0200    0.018584      0.181818      0.590455 0.179091         HI3         1.000000           False
+plasma   3000 30ng_r0.5 person without     all   LLR pooled    0.0200    0.017307      0.278636      0.778636 0.245289    Young M2         1.000000           False
+plasma   3000 30ng_r0.5 person without     all  NNLS pooled    0.0150    0.011692      0.100455      0.918636 0.090909    Young M2         1.000000           False
+plasma   3000      none   mean    with     100   LLR pooled    0.0010    0.000974      0.965833      1.000000 0.054735      Old F2         0.097273           False
+plasma   3000      none   mean    with     100  NNLS pooled    0.0050    0.004054      0.263333      1.000000 0.045417         HI4         0.060000            True
+plasma   3000      none   mean    with     500   LLR pooled    0.0010    0.000653      1.000000      1.000000 0.051515         HI2         0.075455           False
+plasma   3000      none   mean    with     500  NNLS pooled    0.0030    0.002256      0.464583      1.000000 0.047083         HI3         0.080000            True
+plasma   3000      none   mean    with     all   LLR pooled    0.0005    0.000491      1.000000      1.000000 0.045947      Old F2         0.076818            True
+plasma   3000      none   mean    with     all  NNLS pooled    0.0020    0.001595      0.847500      1.000000 0.050833         HI2         0.085000           False
+plasma   3000      none   mean without     100   LLR pooled    0.0010    0.000946      0.981818      1.000000 0.055620         HI3         0.078182           False
+plasma   3000      none   mean without     100  NNLS pooled    0.0050    0.003119      0.310909      1.000000 0.054545         HI3         0.085000           False
+plasma   3000      none   mean without     500   LLR pooled    0.0010    0.000604      1.000000      1.000000 0.054876      Old F1         0.075909           False
+plasma   3000      none   mean without     500  NNLS pooled    0.0030    0.002246      0.458636      1.000000 0.065909      Old M1         0.095000           False
+plasma   3000      none   mean without     all   LLR pooled    0.0005    0.000478      1.000000      1.000000 0.052355      Old M2         0.072727           False
+plasma   3000      none   mean without     all  NNLS pooled    0.0020    0.001631      0.830000      1.000000 0.045909      Old M2         0.060000            True
+plasma   3000      none person    with     100   LLR pooled    0.0200    0.016844      0.083333      0.325833 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     100   LLR  valid    0.0300    0.028890      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     100  NNLS pooled    0.0300    0.022378      0.084167      0.567083 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     100  NNLS  valid    0.0300    0.029840      0.083333      0.085833 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.127500 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     all  NNLS pooled    0.0200    0.019176      0.083333      0.195833 0.083333         HI1         1.000000           False
+plasma   3000      none person    with     all  NNLS  valid    0.0200    0.016914      0.083333      0.423333 0.083333         HI1         1.000000           False
+plasma   3000      none person without     100   LLR pooled    0.0100    0.008938      0.330909      0.978636 0.255950         HI4         1.000000           False
+plasma   3000      none person without     100   LLR  valid    0.0200    0.015954      0.055000      0.506818 0.000661         HI4         0.007273            True
+plasma   3000      none person without     100  NNLS pooled    0.0150    0.012699      0.267727      0.879545 0.217273         HI3         1.000000           False
+plasma   3000      none person without     100  NNLS  valid    0.0200    0.017850      0.101364      0.595909 0.090909         HI3         0.990000           False
+plasma   3000      none person without     500   LLR pooled    0.0200    0.016510      0.363636      0.909091 0.318347         HI3         1.000000           False
+plasma   3000      none person without     500   LLR  valid    0.0300    0.024003      0.000000      0.363636 0.000000      Old M1         0.000000            True
+plasma   3000      none person without     500  NNLS pooled    0.0200    0.018575      0.181818      0.588636 0.179091         HI3         1.000000           False
+plasma   3000      none person without     500  NNLS  valid    0.0300    0.025320      0.038636      0.272727 0.003182    Young M2         0.025000            True
+plasma   3000      none person without     all   LLR pooled    0.0200    0.017422      0.275000      0.779091 0.245289    Young M2         1.000000           False
+plasma   3000      none person without     all   LLR  valid    0.0300    0.026835      0.000000      0.363636 0.000000         HI3         0.000000            True
+plasma   3000      none person without     all  NNLS pooled    0.0150    0.011692      0.099091      0.918636 0.090909    Young M2         1.000000           False
+plasma   3000      none person without     all  NNLS  valid    0.0150    0.012054      0.078636      0.907273 0.005455    Young M2         0.060000            True
+plasma  10000 10ng_r0.1   mean    with     100   LLR pooled    0.0050    0.003278      0.308750      1.000000 0.051780         HI4         0.084091           False
+plasma  10000 10ng_r0.1   mean    with     100  NNLS pooled    0.0150    0.011960      0.105000      0.915417 0.055000         HI4         0.080000           False
+plasma  10000 10ng_r0.1   mean    with     500   LLR pooled    0.0020    0.001885      0.585833      1.000000 0.047235    Young M2         0.075455            True
+plasma  10000 10ng_r0.1   mean    with     500  NNLS pooled    0.0100    0.008157      0.138750      0.999583 0.054583      Old M1         0.075000           False
+plasma  10000 10ng_r0.1   mean    with     all   LLR pooled    0.0020    0.001798      0.699583      1.000000 0.046553    Young F2         0.084545            True
+plasma  10000 10ng_r0.1   mean    with     all  NNLS pooled    0.0050    0.004447      0.214583      1.000000 0.052917    Young M2         0.080000           False
+plasma  10000 10ng_r0.1   mean without     100   LLR pooled    0.0030    0.002911      0.318636      1.000000 0.044339         HI3         0.056818            True
+plasma  10000 10ng_r0.1   mean without     100  NNLS pooled    0.0100    0.010000      0.103636      0.950000 0.039545         HI4         0.060000            True
+plasma  10000 10ng_r0.1   mean without     500   LLR pooled    0.0020    0.001850      0.642273      1.000000 0.049132    Young M2         0.072727            True
+plasma  10000 10ng_r0.1   mean without     500  NNLS pooled    0.0100    0.008459      0.130000      0.998182 0.053636      Old F2         0.070000           False
+plasma  10000 10ng_r0.1   mean without     all   LLR pooled    0.0020    0.001770      0.733182      1.000000 0.043017         HI4         0.055909            True
+plasma  10000 10ng_r0.1   mean without     all  NNLS pooled    0.0050    0.004502      0.225909      1.000000 0.040000      Old F1         0.060000            True
+plasma  10000 10ng_r0.1 person    with     100   LLR pooled    0.0200    0.017910      0.083333      0.329583 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.1 person    with     100  NNLS pooled    0.0300    0.023760      0.092083      0.473750 0.092500         HI1         1.000000           False
+plasma  10000 10ng_r0.1 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.1 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.096250 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.1 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.1 person    with     all  NNLS pooled    0.0200    0.019668      0.083333      0.217083 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.1 person without     100   LLR pooled    0.0150    0.010178      0.305000      0.947727 0.226198         HI4         1.000000           False
+plasma  10000 10ng_r0.1 person without     100  NNLS pooled    0.0200    0.015393      0.185909      0.760000 0.156364         HI3         0.845000           False
+plasma  10000 10ng_r0.1 person without     500   LLR pooled    0.0200    0.016566      0.359545      0.895000 0.318595         HI4         1.000000           False
+plasma  10000 10ng_r0.1 person without     500  NNLS pooled    0.0200    0.019322      0.161818      0.483182 0.143636         HI3         0.810000           False
+plasma  10000 10ng_r0.1 person without     all   LLR pooled    0.0200    0.017708      0.292273      0.769091 0.229711    Young M2         1.000000           False
+plasma  10000 10ng_r0.1 person without     all  NNLS pooled    0.0150    0.011228      0.127273      0.930000 0.080000    Young M2         0.785000           False
+plasma  10000 10ng_r0.5   mean    with     100   LLR pooled    0.0020    0.001674      0.807917      1.000000 0.052992         HI4         0.080000           False
+plasma  10000 10ng_r0.5   mean    with     100  NNLS pooled    0.0050    0.004922      0.177917      1.000000 0.053750    Young M1         0.085000           False
+plasma  10000 10ng_r0.5   mean    with     500   LLR pooled    0.0010    0.000907      0.992083      1.000000 0.055379      Old F2         0.089091           False
+plasma  10000 10ng_r0.5   mean    with     500  NNLS pooled    0.0030    0.002987      0.294583      1.000000 0.049167         HI3         0.085000            True
+plasma  10000 10ng_r0.5   mean    with     all   LLR pooled    0.0010    0.000856      0.998750      1.000000 0.049697      Old F2         0.085455            True
+plasma  10000 10ng_r0.5   mean    with     all  NNLS pooled    0.0020    0.001893      0.581667      1.000000 0.054167         HI3         0.070000           False
+plasma  10000 10ng_r0.5   mean without     100   LLR pooled    0.0020    0.001620      0.836364      1.000000 0.056736    Young F2         0.082727           False
+plasma  10000 10ng_r0.5   mean without     100  NNLS pooled    0.0050    0.004666      0.211818      1.000000 0.049091      Old M1         0.080000            True
+plasma  10000 10ng_r0.5   mean without     500   LLR pooled    0.0010    0.000893      0.996818      1.000000 0.052603      Old M1         0.078636           False
+plasma  10000 10ng_r0.5   mean without     500  NNLS pooled    0.0050    0.003366      0.293182      1.000000 0.040455         HI2         0.065000            True
+plasma  10000 10ng_r0.5   mean without     all   LLR pooled    0.0010    0.000840      1.000000      1.000000 0.051983      Old F1         0.083182           False
+plasma  10000 10ng_r0.5   mean without     all  NNLS pooled    0.0020    0.001905      0.590000      1.000000 0.042273         HI2         0.060000            True
+plasma  10000 10ng_r0.5 person    with     100   LLR pooled    0.0200    0.016892      0.083333      0.327083 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.5 person    with     100  NNLS pooled    0.0300    0.022105      0.088333      0.543333 0.084167         HI1         1.000000           False
+plasma  10000 10ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019439      0.083333      0.190833 0.083333         HI1         1.000000           False
+plasma  10000 10ng_r0.5 person without     100   LLR pooled    0.0100    0.009152      0.330000      0.973182 0.245950         HI4         1.000000           False
+plasma  10000 10ng_r0.5 person without     100  NNLS pooled    0.0150    0.013030      0.254545      0.872273 0.200455         HI3         1.000000           False
+plasma  10000 10ng_r0.5 person without     500   LLR pooled    0.0200    0.016639      0.363636      0.906818 0.322603         HI4         1.000000           False
+plasma  10000 10ng_r0.5 person without     500  NNLS pooled    0.0200    0.018627      0.180455      0.565000 0.171364         HI3         0.985000           False
+plasma  10000 10ng_r0.5 person without     all   LLR pooled    0.0200    0.017582      0.281818      0.774091 0.245289         HI3         1.000000           False
+plasma  10000 10ng_r0.5 person without     all  NNLS pooled    0.0150    0.011692      0.104545      0.918636 0.090000    Young M2         0.980000           False
+plasma  10000 30ng_r0.5   mean    with     100   LLR pooled    0.0010    0.000894      0.998750      1.000000 0.046780    Young M2         0.071364            True
+plasma  10000 30ng_r0.5   mean    with     100  NNLS pooled    0.0030    0.002920      0.365417      1.000000 0.055833    Young F1         0.090000           False
+plasma  10000 30ng_r0.5   mean    with     500   LLR pooled    0.0005    0.000473      1.000000      1.000000 0.048485    Young M2         0.096364            True
+plasma  10000 30ng_r0.5   mean    with     500  NNLS pooled    0.0020    0.001877      0.620833      1.000000 0.051250      Old F2         0.085000           False
+plasma  10000 30ng_r0.5   mean    with     all   LLR pooled    0.0005    0.000441      1.000000      1.000000 0.047348    Young M2         0.083182            True
+plasma  10000 30ng_r0.5   mean    with     all  NNLS pooled    0.0020    0.001090      0.942917      1.000000 0.045833         HI1         0.095000            True
+plasma  10000 30ng_r0.5   mean without     100   LLR pooled    0.0010    0.000870      0.998636      1.000000 0.056942    Young M1         0.070909           False
+plasma  10000 30ng_r0.5   mean without     100  NNLS pooled    0.0030    0.002626      0.410909      1.000000 0.062273         HI3         0.085000           False
+plasma  10000 30ng_r0.5   mean without     500   LLR pooled    0.0005    0.000463      1.000000      1.000000 0.055579      Old F1         0.084545           False
+plasma  10000 30ng_r0.5   mean without     500  NNLS pooled    0.0020    0.001883      0.609545      1.000000 0.059091    Young F1         0.085000           False
+plasma  10000 30ng_r0.5   mean without     all   LLR pooled    0.0005    0.000433      1.000000      1.000000 0.056116         HI3         0.075909           False
+plasma  10000 30ng_r0.5   mean without     all  NNLS pooled    0.0010    0.000999      0.950455      1.000000 0.052273         HI3         0.080000           False
+plasma  10000 30ng_r0.5 person    with     100   LLR pooled    0.0200    0.016844      0.083333      0.327083 0.083333         HI1         1.000000           False
+plasma  10000 30ng_r0.5 person    with     100  NNLS pooled    0.0300    0.021448      0.084167      0.577083 0.083333         HI1         1.000000           False
+plasma  10000 30ng_r0.5 person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 30ng_r0.5 person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 30ng_r0.5 person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000 30ng_r0.5 person    with     all  NNLS pooled    0.0200    0.019163      0.083333      0.188333 0.083333         HI1         1.000000           False
+plasma  10000 30ng_r0.5 person without     100   LLR pooled    0.0100    0.008706      0.329091      0.984091 0.259256    Young M2         1.000000           False
+plasma  10000 30ng_r0.5 person without     100  NNLS pooled    0.0150    0.012786      0.270455      0.877273 0.223182         HI3         1.000000           False
+plasma  10000 30ng_r0.5 person without     500   LLR pooled    0.0200    0.016709      0.363636      0.909091 0.318967         HI4         1.000000           False
+plasma  10000 30ng_r0.5 person without     500  NNLS pooled    0.0200    0.018584      0.181818      0.588636 0.179545         HI3         1.000000           False
+plasma  10000 30ng_r0.5 person without     all   LLR pooled    0.0200    0.017293      0.275455      0.781364 0.245331         HI3         1.000000           False
+plasma  10000 30ng_r0.5 person without     all  NNLS pooled    0.0150    0.011891      0.095000      0.912727 0.090909    Young M2         1.000000           False
+plasma  10000      none   mean    with     100   LLR pooled    0.0005    0.000499      1.000000      1.000000 0.055530      Old M1         0.081364           False
+plasma  10000      none   mean    with     100  NNLS pooled    0.0020    0.001954      0.576250      1.000000 0.050417    Young F2         0.080000           False
+plasma  10000      none   mean    with     500   LLR pooled    0.0005    0.000306      1.000000      1.000000 0.050758      Old M1         0.068636           False
+plasma  10000      none   mean    with     500  NNLS pooled    0.0020    0.001498      0.880000      1.000000 0.058750    Young F1         0.090000           False
+plasma  10000      none   mean    with     all   LLR pooled    0.0003    0.000284      1.000000      1.000000 0.053864      Old F2         0.070455           False
+plasma  10000      none   mean    with     all  NNLS pooled    0.0010    0.000870      0.998333      1.000000 0.055000      Old M2         0.090000           False
+plasma  10000      none   mean without     100   LLR pooled    0.0005    0.000493      1.000000      1.000000 0.052810      Old F2         0.077273           False
+plasma  10000      none   mean without     100  NNLS pooled    0.0020    0.001836      0.678636      1.000000 0.051818    Young M2         0.100000           False
+plasma  10000      none   mean without     500   LLR pooled    0.0003    0.000294      1.000000      1.000000 0.043595         HI2         0.060909            True
+plasma  10000      none   mean without     500  NNLS pooled    0.0020    0.001559      0.860909      1.000000 0.053182      Old F1         0.080000           False
+plasma  10000      none   mean without     all   LLR pooled    0.0003    0.000280      1.000000      1.000000 0.047025      Old F1         0.066364            True
+plasma  10000      none   mean without     all  NNLS pooled    0.0010    0.000851      0.999091      1.000000 0.047727         HI3         0.075000            True
+plasma  10000      none person    with     100   LLR pooled    0.0200    0.016829      0.083333      0.330417 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     100   LLR  valid    0.0300    0.028872      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     100  NNLS pooled    0.0300    0.022134      0.083333      0.585417 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     100  NNLS  valid    0.0300    0.029571      0.083333      0.083750 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     500   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     500   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     500  NNLS pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     500  NNLS  valid       NaN         NaN      0.083333      0.125833 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     all   LLR pooled       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     all   LLR  valid       NaN         NaN      0.083333      0.083333 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     all  NNLS pooled    0.0200    0.018997      0.083333      0.172500 0.083333         HI1         1.000000           False
+plasma  10000      none person    with     all  NNLS  valid    0.0200    0.016829      0.083333      0.416667 0.083333         HI1         1.000000           False
+plasma  10000      none person without     100   LLR pooled    0.0100    0.008579      0.331818      0.988182 0.267273         HI4         1.000000           False
+plasma  10000      none person without     100   LLR  valid    0.0200    0.016451      0.065000      0.500000 0.000000         HI3         0.000000            True
+plasma  10000      none person without     100  NNLS pooled    0.0150    0.012852      0.272727      0.869545 0.243636         HI3         1.000000           False
+plasma  10000      none person without     100  NNLS  valid    0.0200    0.017365      0.095909      0.617727 0.090909         HI3         1.000000           False
+plasma  10000      none person without     500   LLR pooled    0.0200    0.016657      0.363636      0.909091 0.318430         HI4         1.000000           False
+plasma  10000      none person without     500   LLR  valid    0.0300    0.024003      0.000000      0.363636 0.000000         HI2         0.000000            True
+plasma  10000      none person without     500  NNLS pooled    0.0200    0.018594      0.181818      0.596818 0.181818    Young M2         1.000000           False
+plasma  10000      none person without     500  NNLS  valid    0.0300    0.024691      0.028182      0.272727 0.000000    Young M1         0.000000            True
+plasma  10000      none person without     all   LLR pooled    0.0200    0.017142      0.273636      0.776364 0.244050    Young M2         1.000000           False
+plasma  10000      none person without     all   LLR  valid    0.0300    0.026835      0.000000      0.363636 0.000000         HI2         0.000000            True
+plasma  10000      none person without     all  NNLS pooled    0.0150    0.011988      0.090909      0.909545 0.090909    Young M2         1.000000           False
+plasma  10000      none person without     all  NNLS  valid    0.0150    0.012002      0.089545      0.909091 0.000455    Young M2         0.005000            True
+wrote figures/phase3_depth_lod.png

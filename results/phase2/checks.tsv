@@ -1,0 +1,8 @@
+check	value
+atlas colon column = mean of GSM3455852/63/64, max abs diff	9.50e-05
+atlas neuron column = mean of GSM3455773 (450K)/834/835, max abs diff	5.00e-05
+colon SD added by one noise draw (12 blanks x 6 draws)	0.170 points
+per-array technical colon SD from the 3 sepsis duplicates, sqrt(mean(d^2)/2)	0.168 points
+c(pl806), mean colon fraction of the two pl806 arrays	0.6760
+leave-one-blank-out f_needed_opt1: median / 0.95 rank / max	1.56 / 2.17 / 2.19 %
+leave-one-blank-out f_needed_opt2: median / 0.95 rank / max	1.54 / 2.14 / 2.16 %

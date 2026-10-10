@@ -1,0 +1,9 @@
+primary tumour files 312, with CPE 308
+kept tumours (CPE >= 0.6, one per case) 276; CPE median 0.789, range 0.604-0.992
+solid-tissue normals (one per case) 38
+CpGs non-missing in all needed GEO arrays 403023; and in the full-atlas blood columns 372677
+candidate CpGs (also non-missing in >= 90% of kept tumours) 332857; tumour NA share 0.0022
+atlas CpGs in candidate set 5258 of 6105
+median |TCGA normal mean - Moss colon mean|: atlas CpGs 0.0280; all candidates 0.0350; signed median (atlas) +0.0094
+median |Moss replicate - mean of other two| (atlas CpGs): 0.0150, 0.0108, 0.0101
+offset <= 0.05: no normalization

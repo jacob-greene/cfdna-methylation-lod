@@ -1,0 +1,9 @@
+set	x	n	r	p	slope	intercept
+all 8	p_nominal	8	0.9397	0.0005228	1.247	0.01269
+all 8	expected	8	0.9377	0.0005764	1.874	-0.01315
+without mix_7	p_nominal	7	0.9582	0.0006698	1.232	0.01654
+without mix_7	expected	7	0.9569	0.0007239	1.852	-0.008962
+5 mixes only	p_nominal	5	0.8542	0.06538	1.318	0.008048
+5 mixes only	expected	5	0.8487	0.06904	1.973	-0.0188
+5 mixes only, without mix_7	p_nominal	4	0.7987	0.2013	0.961	0.03549
+5 mixes only, without mix_7	expected	4	0.7936	0.2064	1.431	0.01643

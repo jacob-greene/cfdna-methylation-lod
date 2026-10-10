@@ -1,0 +1,80 @@
+atlas (6105, 25); EPIC arrays 90
+                                                     blank_set   n                          units      mean        sd       min       max       lob  lob_ci_lo  lob_ci_hi  lob_parametric
+0                                                all 12 blanks  12                         arrays  0.012078  0.005667  0.005127  0.026677  0.025578   0.013712   0.026677        0.021401
+1                          all 12 blanks, pool pairs collapsed   8  pool-pair means + individuals  0.013320  0.005940  0.007373  0.026677  0.026677   0.013712   0.026677        0.023092
+2                        default-split LoB set (8 pools + HI1)   9                         arrays  0.011494  0.006528  0.005127  0.026677  0.026677   0.010108   0.026677        0.022232
+3  default-split LoB set (8 pools + HI1), pool pairs collapsed   5  pool-pair means + individuals  0.013012  0.007836  0.007373  0.026677  0.026677   0.011290   0.026677        0.025903
+4                              reverse-split LoB set (HI2-HI4)   3                         arrays  0.013833  0.000237  0.013681  0.014106  0.014106   0.013681   0.014106        0.014223
+                   option         f   n  mean_added  min_added  max_added  recovery
+0     1: colon-cell spike  0.001000  36    0.000985   0.000914   0.001063  0.984771
+1     1: colon-cell spike  0.003000  36    0.002954   0.002741   0.003189  0.984723
+2     1: colon-cell spike  0.010000  36    0.009846   0.009137   0.010628  0.984554
+3     1: colon-cell spike  0.015000  36    0.014767   0.013706   0.015940  0.984433
+4     1: colon-cell spike  0.020000  36    0.019686   0.018274   0.021250  0.984315
+5     1: colon-cell spike  0.030000  36    0.029521   0.027408   0.031866  0.984046
+6     1: colon-cell spike  0.100000  36    0.098218   0.091312   0.106007  0.982182
+7   2: pl806 plasma spike  0.001000  24    0.001007   0.000964   0.001050  1.006668
+8   2: pl806 plasma spike  0.003000  24    0.003019   0.002892   0.003149  1.006341
+9   2: pl806 plasma spike  0.010000  24    0.010034   0.009608   0.010496  1.003442
+10  2: pl806 plasma spike  0.015000  24    0.015018   0.014399   0.015745  1.001196
+11  2: pl806 plasma spike  0.020000  24    0.019986   0.019192   0.020985  0.999315
+12  2: pl806 plasma spike  0.020281  24    0.020265   0.019461   0.021270  0.999215
+13  2: pl806 plasma spike  0.030000  24    0.029879   0.028678   0.031348  0.995968
+14  2: pl806 plasma spike  0.100000  24    0.098320   0.095231   0.101346  0.983201
+                  option    split           noise  lob_blanks  eval_backgrounds  spike_replicates  replicates_per_level  lob_colon  lob_range_over_spikes  sd_low_pooled       c_p  lod_param_colon  cal_intercept  cal_slope  lod_param_f  lod_empirical_f  fpr_at_f0
+0    1: colon-cell spike  default            none           9                 3                 3                     9   0.026395               0.007072       0.002046  1.657953         0.029788       0.013497   0.979441     0.016633            0.020   0.000000
+1    1: colon-cell spike  reverse            none           3                 9                 3                    27   0.014021               0.004437       0.006406  1.648964         0.024584       0.011642   0.982916     0.013168            0.010   0.222222
+2    1: colon-cell spike  default  re-measurement           9                 3                 3                    63   0.025987               0.007242       0.002676  1.646660         0.030394       0.012947   0.972879     0.017933            0.020   0.000000
+3    1: colon-cell spike  reverse  re-measurement           3                 9                 3                   189   0.016589               0.005680       0.006423  1.645547         0.027159       0.011237   0.975953     0.016314            0.015   0.132275
+4  2: pl806 plasma spike  default            none           9                 3                 2                     6   0.025778               0.000503       0.000478  1.665823         0.026574       0.014132   0.975596     0.012754            0.015   0.000000
+5  2: pl806 plasma spike  reverse            none           3                 9                 2                    18   0.014114               0.000137       0.006213  1.651070         0.024371       0.011460   0.984058     0.013120            0.010   0.222222
+6  2: pl806 plasma spike  default  re-measurement           9                 3                 2                    42   0.025686               0.000666       0.001657  1.647511         0.028416       0.013526   0.974736     0.015276            0.020   0.000000
+7  2: pl806 plasma spike  reverse  re-measurement           3                 9                 2                   126   0.016589               0.000481       0.006128  1.645823         0.026675       0.011006   0.980716     0.015977            0.015   0.126984
+          gsm  title background  nominal_p  expected_colon  observed_colon  lob_default  detected  lod_anchor  margin_points detected_under_noise
+0  GSM3455837  mix_5        HI2       0.10        0.080297        0.131587     0.026677      True        True      10.490955                  7/7
+1  GSM3455838  mix_6        HI2       0.05        0.047202        0.065132     0.026677      True        True       3.845514                  7/7
+2  GSM3455839  mix_7        HI2       0.03        0.033963        0.026998     0.026677      True       False       0.032132                  3/7
+3  GSM3455845  mix_1        HI3       0.05        0.046798        0.108141     0.026677      True        True       8.146426                  7/7
+4  GSM3455847  mix_3        HI4       0.05        0.046827        0.077340     0.026677      True        True       5.066316                  7/7
+           gsm     label  n_lob_blanks     colon  lob_without  f_needed_opt1  f_needed_opt2  false_positive
+0   GSM3455776  Young M1            10  0.006899     0.026677       0.020097       0.019790           False
+1   GSM3455777  Young M2            10  0.015681     0.026677       0.011173       0.011002           False
+2   GSM3455778  Young F1            10  0.005127     0.026677       0.021897       0.021562           False
+3   GSM3455779  Young F2            10  0.009618     0.026677       0.017333       0.017069           False
+4   GSM3455780    Old M1            10  0.012530     0.026677       0.014375       0.014155           False
+5   GSM3455781    Old M2            10  0.010108     0.026677       0.016836       0.016579           False
+6   GSM3455782    Old F1            10  0.010063     0.026677       0.016882       0.016624           False
+7   GSM3455783    Old F2            10  0.006739     0.026677       0.020260       0.019950           False
+8   GSM3455807       HI1            11  0.026677     0.015603       0.000000       0.000000            True
+9   GSM3455840       HI2            11  0.014106     0.026127       0.012215       0.012028           False
+10  GSM3455846       HI3            11  0.013681     0.026127       0.012647       0.012454           False
+11  GSM3455848       HI4            11  0.013712     0.026127       0.012615       0.012423           False
+    spike     f   n  d_colon_mean  d_colon_min  d_colon_max  d_neuron_mean  d_neuron_min  d_neuron_max
+0   colon  0.02  36      1.968630     1.827352     2.125001      -0.050512     -0.122181      0.004335
+1   colon  0.05  36      4.917420     4.567340     5.307936      -0.127356     -0.305097      0.010834
+2  neuron  0.02  36     -0.023253    -0.067982     0.026802       1.404526      1.169481      1.835968
+3  neuron  0.05  36     -0.064534    -0.176083     0.066629       3.492748      2.910173      4.578796
+                       dropped  mean_blank_colon  delta_mean_points  delta_lob_points[all 12 blanks]  delta_lob_points[default-split LoB set (8 pools + HI1)]  delta_lob_points[reverse-split LoB set (HI2-HI4)]
+5             Neutrophils_EPIC          0.007029          -0.504990                        -0.601274                                            -6.140052e-01                                          -0.504673
+14  Vascular_endothelial_cells          0.014199           0.212026                         0.234015                                             2.318313e-01                                           0.411218
+9                  Hepatocytes          0.013584           0.150586                         0.140797                                             1.304182e-01                                           0.246288
+1                 B-cells_EPIC          0.013395           0.131662                         0.222880                                             2.302103e-01                                           0.260044
+3                NK-cells_EPIC          0.011428          -0.065079                        -0.036796                                            -3.393882e-02                                          -0.057866
+6      Erythrocyte_progenitors          0.012653           0.057417                         0.096301                                             1.010777e-01                                           0.067241
+10                  Lung_cells          0.012428           0.034975                         0.000000                                            -3.469447e-16                                           0.026062
+12     Pancreatic_acinar_cells          0.012396           0.031716                         0.128901                                             1.385668e-01                                           0.034662
+                  cell_type  spearman_rho_vs_colon         p  mean_blank_fraction
+10    Pancreatic_beta_cells              -0.855634  0.000386             0.003718
+5          Neutrophils_EPIC               0.762238  0.003950             0.355960
+6   Erythrocyte_progenitors              -0.678322  0.015317             0.266772
+1              B-cells_EPIC               0.671329  0.016831             0.040744
+3             NK-cells_EPIC              -0.629371  0.028320             0.067950
+0            Monocytes_EPIC              -0.615385  0.033170             0.091897
+atlas colon column = mean of GSM3455852/63/64, max abs diff: 9.50e-05
+atlas neuron column = mean of GSM3455773 (450K)/834/835, max abs diff: 5.00e-05
+colon SD added by one noise draw (12 blanks x 6 draws): 0.170 points
+per-array technical colon SD from the 3 sepsis duplicates, sqrt(mean(d^2)/2): 0.168 points
+c(pl806), mean colon fraction of the two pl806 arrays: 0.6760
+leave-one-blank-out f_needed_opt1: median / 0.95 rank / max: 1.56 / 2.17 / 2.19 %
+leave-one-blank-out f_needed_opt2: median / 0.95 rank / max: 1.54 / 2.14 / 2.16 %
+figure -> figures/phase2_lob_lod.png

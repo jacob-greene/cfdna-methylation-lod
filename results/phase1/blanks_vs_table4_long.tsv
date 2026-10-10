@@ -1,0 +1,265 @@
+	blank	cell_type	paper	ours	diff
+0	Young M1	Monocytes EPIC	0.0812	0.084831	0.0036309
+1	Young M1	Lymphocytes	0.143	0.12991	-0.013089
+2	Young M1	Granulocytes	0.306	0.30251	-0.0034922
+3	Young M1	Erythrocyte progenitors	0.316	0.32149	0.0054924
+4	Young M1	Adipocytes	0	0	0
+5	Young M1	Neurons	0.0244	0.024773	0.00037348
+6	Young M1	Hepatocytes	0.018	0.018402	0.0004016
+7	Young M1	Lung	0	0.0018025	0.0018025
+8	Young M1	Pancreatic beta cells	0	0.0038494	0.0038494
+9	Young M1	Pancreatic acinar cells	0	0	0
+10	Young M1	Pancreatic duct cells	0	0	0
+11	Young M1	Vascular endothelial cells	0.0956	0.099189	0.0035886
+12	Young M1	Colon epithelial cells	0.0073	0.0068989	-0.00040109
+13	Young M1	Left atrium	0	0	0
+14	Young M1	Bladder	0	0	0
+15	Young M1	Breast	0	0	0
+16	Young M1	Head and neck larynx	0.00855	0.0063429	-0.0022071
+17	Young M1	Kidney	0	0	0
+18	Young M1	Prostate	0	0	0
+19	Young M1	Thyroid	0	0	0
+20	Young M1	Upper GI	0	0	0
+21	Young M1	Uterus cervix	0	0	0
+22	Young M2	Monocytes EPIC	0.0744	0.08056	0.0061605
+23	Young M2	Lymphocytes	0.147	0.12693	-0.020074
+24	Young M2	Granulocytes	0.34	0.3388	-0.0012048
+25	Young M2	Erythrocyte progenitors	0.277	0.28215	0.0051463
+26	Young M2	Adipocytes	0	0	0
+27	Young M2	Neurons	0.0346	0.03847	0.0038703
+28	Young M2	Hepatocytes	0.0155	0.01871	0.0032104
+29	Young M2	Lung	0	0	0
+30	Young M2	Pancreatic beta cells	0	0	0
+31	Young M2	Pancreatic acinar cells	0.00675	0.0024103	-0.0043397
+32	Young M2	Pancreatic duct cells	0	0	0
+33	Young M2	Vascular endothelial cells	0.091	0.0963	0.0052996
+34	Young M2	Colon epithelial cells	0.0129	0.015681	0.0027815
+35	Young M2	Left atrium	0	0	0
+36	Young M2	Bladder	0.000417	0	-0.000417
+37	Young M2	Breast	0	0	0
+38	Young M2	Head and neck larynx	0	0	0
+39	Young M2	Kidney	0	0	0
+40	Young M2	Prostate	0	0	0
+41	Young M2	Thyroid	0	0	0
+42	Young M2	Upper GI	0	0	0
+43	Young M2	Uterus cervix	0	0	0
+44	Young F1	Monocytes EPIC	0.101	0.099845	-0.0011554
+45	Young F1	Lymphocytes	0.153	0.15091	-0.0020882
+46	Young F1	Granulocytes	0.338	0.33512	-0.0028795
+47	Young F1	Erythrocyte progenitors	0.273	0.27351	0.00051045
+48	Young F1	Adipocytes	0	0	0
+49	Young F1	Neurons	0.0233	0.023259	-4.0874e-05
+50	Young F1	Hepatocytes	0.00928	0.010617	0.0013368
+51	Young F1	Lung	0.00292	0.0056549	0.0027349
+52	Young F1	Pancreatic beta cells	0.000271	0.0055747	0.0053037
+53	Young F1	Pancreatic acinar cells	0.00428	0	-0.00428
+54	Young F1	Pancreatic duct cells	0	0	0
+55	Young F1	Vascular endothelial cells	0.0717	0.07429	0.0025902
+56	Young F1	Colon epithelial cells	0.00522	0.0051273	-9.2732e-05
+57	Young F1	Left atrium	0.00803	0.0051351	-0.0028949
+58	Young F1	Bladder	0.00997	0.0085987	-0.0013713
+59	Young F1	Breast	0	0	0
+60	Young F1	Head and neck larynx	0	0	0
+61	Young F1	Kidney	0	0.0023559	0.0023559
+62	Young F1	Prostate	0	0	0
+63	Young F1	Thyroid	0	0	0
+64	Young F1	Upper GI	0	0	0
+65	Young F1	Uterus cervix	0	0	0
+66	Young F2	Monocytes EPIC	0.114	0.1182	0.0041951
+67	Young F2	Lymphocytes	0.134	0.12985	-0.0041538
+68	Young F2	Granulocytes	0.274	0.27044	-0.0035583
+69	Young F2	Erythrocyte progenitors	0.321	0.32247	0.0014658
+70	Young F2	Adipocytes	0	0	0
+71	Young F2	Neurons	0.0301	0.029975	-0.00012478
+72	Young F2	Hepatocytes	0.0135	0.014166	0.0006657
+73	Young F2	Lung	0	0	0
+74	Young F2	Pancreatic beta cells	0.0021	0.0082374	0.0061374
+75	Young F2	Pancreatic acinar cells	0.00401	0.0033504	-0.00065961
+76	Young F2	Pancreatic duct cells	0	0	0
+77	Young F2	Vascular endothelial cells	0.0848	0.093065	0.0082649
+78	Young F2	Colon epithelial cells	0.00999	0.0096184	-0.00037155
+79	Young F2	Left atrium	0.00658	0	-0.00658
+80	Young F2	Bladder	0.000477	0	-0.000477
+81	Young F2	Breast	0	0	0
+82	Young F2	Head and neck larynx	0.00468	0.00063921	-0.0040408
+83	Young F2	Kidney	0	0	0
+84	Young F2	Prostate	0	0	0
+85	Young F2	Thyroid	0	0	0
+86	Young F2	Upper GI	0	0	0
+87	Young F2	Uterus cervix	0	0	0
+88	Old M1	Monocytes EPIC	0.119	0.11879	-0.00020963
+89	Old M1	Lymphocytes	0.0953	0.093571	-0.0017289
+90	Old M1	Granulocytes	0.367	0.36364	-0.0033577
+91	Old M1	Erythrocyte progenitors	0.259	0.25817	-0.00082937
+92	Old M1	Adipocytes	0	0	0
+93	Old M1	Neurons	0.0169	0.017234	0.00033372
+94	Old M1	Hepatocytes	0.00778	0.0096373	0.0018573
+95	Old M1	Lung	0.00634	0.0090211	0.0026811
+96	Old M1	Pancreatic beta cells	0	0.0036366	0.0036366
+97	Old M1	Pancreatic acinar cells	0.0108	0.0062977	-0.0045023
+98	Old M1	Pancreatic duct cells	0	0	0
+99	Old M1	Vascular endothelial cells	0.081	0.090657	0.0096566
+100	Old M1	Colon epithelial cells	0.0118	0.01253	0.00073008
+101	Old M1	Left atrium	0.00212	0	-0.00212
+102	Old M1	Bladder	0.00849	0.0090092	0.00051922
+103	Old M1	Breast	0.00887	0.00049168	-0.0083783
+104	Old M1	Head and neck larynx	0.0056	0.0073116	0.0017116
+105	Old M1	Kidney	0	0	0
+106	Old M1	Prostate	0	0	0
+107	Old M1	Thyroid	0	0	0
+108	Old M1	Upper GI	0	0	0
+109	Old M1	Uterus cervix	0	0	0
+110	Old M2	Monocytes EPIC	0.12	0.12252	0.002516
+111	Old M2	Lymphocytes	0.1	0.096504	-0.0034961
+112	Old M2	Granulocytes	0.326	0.32222	-0.0037776
+113	Old M2	Erythrocyte progenitors	0.281	0.28595	0.0049519
+114	Old M2	Adipocytes	0	0	0
+115	Old M2	Neurons	0.0187	0.018138	-0.00056208
+116	Old M2	Hepatocytes	0.0137	0.014054	0.0003539
+117	Old M2	Lung	0.00514	0.0069836	0.0018436
+118	Old M2	Pancreatic beta cells	0	0.004465	0.004465
+119	Old M2	Pancreatic acinar cells	0.0112	0.0068648	-0.0043352
+120	Old M2	Pancreatic duct cells	0	0	0
+121	Old M2	Vascular endothelial cells	0.0912	0.098795	0.0075945
+122	Old M2	Colon epithelial cells	0.00909	0.010108	0.0010177
+123	Old M2	Left atrium	0.00824	0.0016676	-0.0065724
+124	Old M2	Bladder	0.00955	0.0073114	-0.0022386
+125	Old M2	Breast	0	0	0
+126	Old M2	Head and neck larynx	0.00538	0.0015191	-0.0038609
+127	Old M2	Kidney	0	0.0029003	0.0029003
+128	Old M2	Prostate	0	0	0
+129	Old M2	Thyroid	0	0	0
+130	Old M2	Upper GI	0	0	0
+131	Old M2	Uterus cervix	0	0	0
+132	Old F1	Monocytes EPIC	0.102	0.10008	-0.0019245
+133	Old F1	Lymphocytes	0.106	0.1016	-0.0044012
+134	Old F1	Granulocytes	0.349	0.34656	-0.0024406
+135	Old F1	Erythrocyte progenitors	0.292	0.29159	-0.00040603
+136	Old F1	Adipocytes	0	0	0
+137	Old F1	Neurons	0.0198	0.021075	0.001275
+138	Old F1	Hepatocytes	0.0161	0.017905	0.0018047
+139	Old F1	Lung	0	0	0
+140	Old F1	Pancreatic beta cells	0.00127	0.0086121	0.0073421
+141	Old F1	Pancreatic acinar cells	0.0109	0.0035336	-0.0073664
+142	Old F1	Pancreatic duct cells	0	0	0
+143	Old F1	Vascular endothelial cells	0.0758	0.084807	0.0090067
+144	Old F1	Colon epithelial cells	0.00875	0.010063	0.001313
+145	Old F1	Left atrium	0	0	0
+146	Old F1	Bladder	0.0059	0.0071171	0.0012171
+147	Old F1	Breast	0.00795	0.0017511	-0.0061989
+148	Old F1	Head and neck larynx	0.00498	0.0053089	0.00032894
+149	Old F1	Kidney	0	0	0
+150	Old F1	Prostate	0	0	0
+151	Old F1	Thyroid	0	0	0
+152	Old F1	Upper GI	0	0	0
+153	Old F1	Uterus cervix	0	0	0
+154	Old F2	Monocytes EPIC	0.132	0.13194	-5.5501e-05
+155	Old F2	Lymphocytes	0.0863	0.081326	-0.0049741
+156	Old F2	Granulocytes	0.262	0.26246	0.00046041
+157	Old F2	Erythrocyte progenitors	0.353	0.36048	0.0074824
+158	Old F2	Adipocytes	0	0	0
+159	Old F2	Neurons	0.00776	0.0066814	-0.0010786
+160	Old F2	Hepatocytes	0.0054	0.0059129	0.0005129
+161	Old F2	Lung	0.0134	0.015997	0.0025972
+162	Old F2	Pancreatic beta cells	0.00942	0.010245	0.00082483
+163	Old F2	Pancreatic acinar cells	0	0	0
+164	Old F2	Pancreatic duct cells	0	0	0
+165	Old F2	Vascular endothelial cells	0.0929	0.099368	0.006468
+166	Old F2	Colon epithelial cells	0.00721	0.0067387	-0.00047127
+167	Old F2	Left atrium	0.0118	0.0010839	-0.010716
+168	Old F2	Bladder	0.00323	0.0022562	-0.00097384
+169	Old F2	Breast	0	0	0
+170	Old F2	Head and neck larynx	0.011	0.0072932	-0.0037068
+171	Old F2	Kidney	0.00496	0.0082103	0.0032503
+172	Old F2	Prostate	0	0	0
+173	Old F2	Thyroid	0	0	0
+174	Old F2	Upper GI	0	0	0
+175	Old F2	Uterus cervix	0	0	0
+176	HI1	Monocytes EPIC	0.0427	0.049604	0.0069035
+177	HI1	Lymphocytes	0.203	0.18189	-0.021109
+178	HI1	Granulocytes	0.462	0.45485	-0.0071538
+179	HI1	Erythrocyte progenitors	0.141	0.14904	0.0080444
+180	HI1	Adipocytes	0	0	0
+181	HI1	Neurons	0.0346	0.038744	0.0041443
+182	HI1	Hepatocytes	0.0046	0.01034	0.0057401
+183	HI1	Lung	0	0	0
+184	HI1	Pancreatic beta cells	0	0	0
+185	HI1	Pancreatic acinar cells	0.0127	0.0088054	-0.0038946
+186	HI1	Pancreatic duct cells	0	0	0
+187	HI1	Vascular endothelial cells	0.0641	0.080047	0.015947
+188	HI1	Colon epithelial cells	0.0246	0.026677	0.0020771
+189	HI1	Left atrium	0	0	0
+190	HI1	Bladder	0	0	0
+191	HI1	Breast	0.0112	0	-0.0112
+192	HI1	Head and neck larynx	0	0	0
+193	HI1	Kidney	0	0	0
+194	HI1	Prostate	0	0	0
+195	HI1	Thyroid	0	0	0
+196	HI1	Upper GI	0	0	0
+197	HI1	Uterus cervix	0	0	0
+198	HI2	Monocytes EPIC	0.0855	0.087013	0.0015133
+199	HI2	Lymphocytes	0.211	0.19583	-0.015166
+200	HI2	Granulocytes	0.442	0.44057	-0.0014331
+201	HI2	Erythrocyte progenitors	0.165	0.16724	0.0022434
+202	HI2	Adipocytes	0	0	0
+203	HI2	Neurons	0.0167	0.019601	0.0029007
+204	HI2	Hepatocytes	0.00811	0.010047	0.0019372
+205	HI2	Lung	0	0.0023374	0.0023374
+206	HI2	Pancreatic beta cells	0	0	0
+207	HI2	Pancreatic acinar cells	0.00313	0.0005637	-0.0025663
+208	HI2	Pancreatic duct cells	0	0	0
+209	HI2	Vascular endothelial cells	0.0497	0.060125	0.010425
+210	HI2	Colon epithelial cells	0.0123	0.014106	0.001806
+211	HI2	Left atrium	0	0	0
+212	HI2	Bladder	0.00149	0.0023972	0.00090717
+213	HI2	Breast	0.00532	0.00016501	-0.005155
+214	HI2	Head and neck larynx	0	0	0
+215	HI2	Kidney	0	0	0
+216	HI2	Prostate	0	0	0
+217	HI2	Thyroid	0	0	0
+218	HI2	Upper GI	0	0	0
+219	HI2	Uterus cervix	0	0	0
+220	HI3	Monocytes EPIC	0.0756	0.074936	-0.00066374
+221	HI3	Lymphocytes	0.111	0.10144	-0.0095565
+222	HI3	Granulocytes	0.353	0.35283	-0.00016956
+223	HI3	Erythrocyte progenitors	0.309	0.3105	0.0015047
+224	HI3	Adipocytes	0	0	0
+225	HI3	Neurons	0.0305	0.030452	-4.7504e-05
+226	HI3	Hepatocytes	0.0166	0.021597	0.0049967
+227	HI3	Lung	0	0	0
+228	HI3	Pancreatic beta cells	0	0	0
+229	HI3	Pancreatic acinar cells	0.00254	2.5825e-06	-0.0025374
+230	HI3	Pancreatic duct cells	0	0	0
+231	HI3	Vascular endothelial cells	0.0894	0.094553	0.0051527
+232	HI3	Colon epithelial cells	0.0122	0.013681	0.0014806
+233	HI3	Left atrium	0	0	0
+234	HI3	Bladder	0	0	0
+235	HI3	Breast	0	0	0
+236	HI3	Head and neck larynx	0	0	0
+237	HI3	Kidney	0	0	0
+238	HI3	Prostate	0	0	0
+239	HI3	Thyroid	0	0	0
+240	HI3	Upper GI	0	0	0
+241	HI3	Uterus cervix	0	0	0
+242	HI4	Monocytes EPIC	0.0326	0.034449	0.0018487
+243	HI4	Lymphocytes	0.178	0.17151	-0.0064942
+244	HI4	Granulocytes	0.486	0.48153	-0.0044745
+245	HI4	Erythrocyte progenitors	0.181	0.17866	-0.0023364
+246	HI4	Adipocytes	0	0	0
+247	HI4	Neurons	0.0235	0.025452	0.0019523
+248	HI4	Hepatocytes	0.0168	0.021223	0.0044231
+249	HI4	Lung	0	0	0
+250	HI4	Pancreatic beta cells	0	0	0
+251	HI4	Pancreatic acinar cells	0.00628	0.004305	-0.001975
+252	HI4	Pancreatic duct cells	0	0	0
+253	HI4	Vascular endothelial cells	0.0604	0.069164	0.0087641
+254	HI4	Colon epithelial cells	0.0131	0.013712	0.00061193
+255	HI4	Left atrium	0	0	0
+256	HI4	Bladder	0	0	0
+257	HI4	Breast	0.00199	0	-0.00199
+258	HI4	Head and neck larynx	0	0	0
+259	HI4	Kidney	0	0	0
+260	HI4	Prostate	0	0	0
+261	HI4	Thyroid	0	0	0
+262	HI4	Upper GI	0	0	0
+263	HI4	Uterus cervix	0	0	0
