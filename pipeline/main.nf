@@ -41,6 +41,7 @@ def clean_fastq(run, fastqs, status) {
         if (!ok) { f = ['fail', 'published_bam_incomplete'] }
     }
     fastqs.each { q ->
+        if (!q.exists()) { return }   // deleted on an earlier run (-resume replays BAM_CHECK)
         def action = ok ? (q.delete() ? 'deleted' : 'delete_failed') : 'kept'
         if (!ok) { log.warn "FASTQ kept for ${run} (${f[1]}): ${q}" }
         log_tsv.append("${run}\t${q}\t${pub}\t${f.join(' ')}\t${action}\n")
@@ -324,8 +325,13 @@ workflow {
         bams = BWAMETH_ALIGN.out.bam
         if (!params.keep_fastq) {
             BAM_CHECK(BWAMETH_ALIGN.out.bam)
+            // Local --input_fastq files may be the only copy: they are deleted only with
+            // --delete_input_fastq. Downloaded FASTQ and trimmed FASTQ are always deleted.
+            def raw_too = !params.input_fastq || params.delete_input_fastq
             reads.join(FASTP.out.reads).join(BAM_CHECK.out)
-                .subscribe { run, r1, r2, t1, t2, status -> clean_fastq(run, [r1, r2, t1, t2], status) }
+                .subscribe { run, r1, r2, t1, t2, status ->
+                    clean_fastq(run, (raw_too ? [r1, r2] : []) + [t1, t2], status)
+                }
         }
         if (reused != null) { bams = bams.mix(reused) }
     }

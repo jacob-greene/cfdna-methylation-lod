@@ -72,7 +72,8 @@ nextflow run /path/to/cfdna-methylation-lod/pipeline/main.nf -profile slurm,cond
   from that BAM. A rerun therefore does not fetch and align the runs whose FASTQ are gone.
   Their downstream tasks rerun once, because the BAM path differs from the cached one.
 - `--input_fastq 'dir/*_{1,2}.fastq.gz'` runs local paired FASTQ instead of ENA downloads.
-  These input files are deleted too, unless `--keep_fastq` is set.
+  These input files may be the only copy, so the pipeline keeps them and deletes only the
+  trimmed FASTQ. `--delete_input_fastq` deletes them too.
 - Run the Nextflow head process inside a Slurm job; it runs for hours.
   `scripts/phase5_nextflow.sbatch` does this. Pass `REPO_DIR` and `CFDNA_DATA` with
   `sbatch --export=ALL,REPO_DIR=...,CFDNA_DATA=...`; a sandboxed shell does not forward
