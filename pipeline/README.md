@@ -38,6 +38,7 @@ spike source (HCT116 WGBS). The processing rules are fixed in `PREREGISTERED.md`
 | `docker` | The same containers through Docker (used by the CI smoke test) |
 | `awsbatch` | AWS Batch executor; written for portability, not run in this project |
 | `test` | Smoke test on a small bundled BAM (`tests/data/`) |
+| `test_fastq` | FASTQ-deletion test: FASTQ made from the bundled BAM, aligned, then deleted (run by `tests/fastq_cleanup_test.sh`) |
 
 The HPC run used `slurm,conda`. Apptainer cannot start containers inside the agent sandbox
 on this cluster, also not in Slurm jobs (no setuid starter, no mount propagation). The
@@ -62,6 +63,16 @@ nextflow run /path/to/cfdna-methylation-lod/pipeline/main.nf -profile slurm,cond
 
 - `--only_runs SRR1,SRR2` restricts the SPOT-MAS runs (tests).
 - `--spike_run false` (or `''`) skips the spike source.
+- FASTQ deletion is the default. After a run's BAM passes `BAM_CHECK` (`samtools quickcheck`
+  and more than 0 mapped reads in `samtools idxstats`), and the published copy in
+  `<outdir>/bam` has the same size, the pipeline deletes the run's raw FASTQ (`fastq_dir`) and
+  its trimmed FASTQ (the `FASTP` work directory). A failed check keeps the files and logs a
+  warning. Every decision goes to `<outdir>/fastq_cleanup.tsv`. `--keep_fastq` keeps all FASTQ.
+- `--reuse_bams` (default true): a run whose BAM and index are already in `<outdir>/bam` starts
+  from that BAM. A rerun therefore does not fetch and align the runs whose FASTQ are gone.
+  Their downstream tasks rerun once, because the BAM path differs from the cached one.
+- `--input_fastq 'dir/*_{1,2}.fastq.gz'` runs local paired FASTQ instead of ENA downloads.
+  These input files are deleted too, unless `--keep_fastq` is set.
 - Run the Nextflow head process inside a Slurm job; it runs for hours.
   `scripts/phase5_nextflow.sbatch` does this. Pass `REPO_DIR` and `CFDNA_DATA` with
   `sbatch --export=ALL,REPO_DIR=...,CFDNA_DATA=...`; a sandboxed shell does not forward
@@ -72,6 +83,7 @@ Smoke test (Docker, as in CI):
 ```bash
 docker build -t cfdna-wgbstools:0.3.0 pipeline/containers/wgbstools
 nextflow run pipeline/main.nf -profile test,docker
+pipeline/tests/fastq_cleanup_test.sh docker   # needs samtools on PATH (or SAMTOOLS=...)
 ```
 
 ## After the pipeline

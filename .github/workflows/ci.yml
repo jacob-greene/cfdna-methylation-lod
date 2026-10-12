@@ -40,3 +40,5 @@ jobs:
           test -s results_test/qc_table.tsv
           test -s results_test/pat/HCT116_test.dedup.pat.gz
           test "$(wc -l < results_test/blocks_cpg.tsv)" -eq 9
+      - name: FASTQ deletion test
+        run: sudo apt-get install -y samtools && pipeline/tests/fastq_cleanup_test.sh docker

@@ -1,6 +1,7 @@
 #!/usr/bin/env nextflow
 // Phase 5 read-level pipeline: FASTQ -> trimmed reads -> bwa-meth (hg38) -> duplicate-marked BAM
 // -> MethylDackel per-CpG counts + M-bias -> wgbstools fragment patterns -> per-sample QC table.
+// A run's raw and trimmed FASTQ are deleted once its BAM passes BAM_CHECK (--keep_fastq keeps them).
 // Every source (SPOT-MAS runs and the HCT116 spike source) goes through the same steps.
 // Processing rules are fixed in pipeline/PREREGISTERED.md.
 nextflow.enable.dsl = 2
@@ -22,6 +23,28 @@ def wt_setup(ref) {
     ln -sfn ${params.wgbs_genome} wt/references/default
     wt="${params.wgbs_python} wt/src/python/wgbs_tools.py"
     """
+}
+
+// Delete a run's raw and trimmed FASTQ after BAM_CHECK passed and the published BAM copy is
+// complete (same size as the checked BAM). Anything else keeps the files. Every decision is
+// appended to <outdir>/fastq_cleanup.tsv.
+def clean_fastq(run, fastqs, status) {
+    def log_tsv = file("${params.outdir}/fastq_cleanup.tsv")
+    def f = status.trim().tokenize(' ')
+    def pub = file("${params.outdir}/bam/${run}.md.bam")
+    def ok = f[0] == 'pass'
+    if (ok) {
+        // publishDir copies run asynchronously; wait up to 10 min for the copy to finish.
+        def tries = 0
+        while (!(pub.exists() && pub.size() == (f[2] as long)) && tries++ < 60) { sleep(10000) }
+        ok = pub.exists() && pub.size() == (f[2] as long)
+        if (!ok) { f = ['fail', 'published_bam_incomplete'] }
+    }
+    fastqs.each { q ->
+        def action = ok ? (q.delete() ? 'deleted' : 'delete_failed') : 'kept'
+        if (!ok) { log.warn "FASTQ kept for ${run} (${f[1]}): ${q}" }
+        log_tsv.append("${run}\t${q}\t${pub}\t${f.join(' ')}\t${action}\n")
+    }
 }
 
 process FETCH_ENA {
@@ -115,6 +138,23 @@ process BWAMETH_ALIGN {
       | samtools markdup -@ 4 -s -f ${run}.markdup.txt - ${run}.md.bam
     samtools index -@ 4 ${run}.md.bam
     samtools stats -@ 4 ${run}.md.bam > ${run}.stats.txt
+    """
+}
+
+// Gate for FASTQ deletion: the BAM must pass samtools quickcheck and have mapped reads.
+// Prints "pass <mapped reads> <BAM bytes>" or "fail <reason>"; a failed check keeps the FASTQ.
+process BAM_CHECK {
+    tag "$run"
+    label 'samtools'
+    input:
+    tuple val(run), path(bam), path(bai)
+    output:
+    tuple val(run), stdout
+    script:
+    """
+    if ! samtools quickcheck ${bam}; then echo "fail quickcheck"; exit 0; fi
+    mapped=\$(samtools idxstats ${bam} | awk '{s+=\$3} END{print s+0}')
+    if [ "\$mapped" -gt 0 ]; then echo "pass \$mapped \$(stat -L -c %s ${bam})"; else echo "fail no_mapped_reads"; fi
     """
 }
 
@@ -239,23 +279,42 @@ process QC_TABLE {
 workflow {
     ref_dir = file(params.ref_dir, checkIfExists: true)
     bams = null
+    reused = null
+    reused_qc = null
     if (params.input_bams) {
         // Smoke-test entry: start from aligned, duplicate-marked BAMs.
         bams = channel.fromPath(params.input_bams)
             .map { b -> tuple(b.simpleName, b, file("${b}.bai")) }
     } else {
-        ena = ena_rows()
-        runs = file(params.samples).splitCsv(header: true, sep: '\t').collect { it.run }
-        if (params.only_runs) { runs = runs.findAll { it in params.only_runs.tokenize(',') } }
-        spotmas = channel.fromList(runs.collect { r ->
-            e = ena[r] ?: error("run $r missing from ${params.ena_report}")
-            tuple(r, e.fastq_ftp.tokenize(';'), e.fastq_md5.tokenize(';'))
-        })
-        reads = FETCH_ENA(spotmas)
-        // `--spike_run ''` and `--spike_run false` reach here as booleans: skip the spike.
-        if (params.spike_run instanceof CharSequence && params.spike_run) {
-            spike = channel.of(tuple(params.spike_run, params.spike_urls.tokenize(';')))
-            reads = reads.mix(FETCH_STREAM(spike))
+        if (params.input_fastq) {
+            // Local paired FASTQ ('dir/*_{1,2}.fastq.gz'); the test_fastq profile uses this.
+            reads = channel.fromFilePairs(params.input_fastq, checkIfExists: true)
+                .map { run, fq -> tuple(run, fq[0], fq[1]) }
+        } else {
+            ena = ena_rows()
+            runs = file(params.samples).splitCsv(header: true, sep: '\t').collect { it.run }
+            if (params.only_runs) { runs = runs.findAll { it in params.only_runs.tokenize(',') } }
+            // `--spike_run ''` and `--spike_run false` reach here as booleans: skip the spike.
+            def spike_run = (params.spike_run instanceof CharSequence && params.spike_run) ? params.spike_run : null
+            // A run whose BAM is already published (its FASTQ may be deleted) starts from that BAM.
+            def published = { r -> file("${params.outdir}/bam/${r}.md.bam").exists() && file("${params.outdir}/bam/${r}.md.bam.bai").exists() }
+            done = params.reuse_bams ? (runs + (spike_run ? [spike_run] : [])).findAll(published) : []
+            if (done) { log.info "Starting ${done.size()} runs from their published BAMs: ${done.join(',')}" }
+            spotmas = channel.fromList((runs - done).collect { r ->
+                e = ena[r] ?: error("run $r missing from ${params.ena_report}")
+                tuple(r, e.fastq_ftp.tokenize(';'), e.fastq_md5.tokenize(';'))
+            })
+            reads = FETCH_ENA(spotmas)
+            if (spike_run && !(spike_run in done)) {
+                reads = reads.mix(FETCH_STREAM(channel.of(tuple(spike_run, params.spike_urls.tokenize(';')))))
+            }
+            reused = channel.fromList(done.collect { r ->
+                tuple(r, file("${params.outdir}/bam/${r}.md.bam"), file("${params.outdir}/bam/${r}.md.bam.bai"))
+            })
+            reused_qc = channel.fromList(done.collect { r ->
+                [file("${params.outdir}/fastp/${r}.fastp.json"), file("${params.outdir}/bam/${r}.markdup.txt"),
+                 file("${params.outdir}/bam/${r}.stats.txt")]
+            }).flatten().filter { it.exists() }
         }
         c2t = file("${params.ref_dir}/${params.fasta_name}.bwameth.c2t.sa")
         index_ready = c2t.exists() ? channel.value(ref_dir)
@@ -263,6 +322,12 @@ workflow {
         FASTP(reads)
         BWAMETH_ALIGN(FASTP.out.reads, index_ready)
         bams = BWAMETH_ALIGN.out.bam
+        if (!params.keep_fastq) {
+            BAM_CHECK(BWAMETH_ALIGN.out.bam)
+            reads.join(FASTP.out.reads).join(BAM_CHECK.out)
+                .subscribe { run, r1, r2, t1, t2, status -> clean_fastq(run, [r1, r2, t1, t2], status) }
+        }
+        if (reused != null) { bams = bams.mix(reused) }
     }
     blocks = file(params.blocks, checkIfExists: true)
     offmarker = file(params.offmarker, checkIfExists: true)
@@ -276,6 +341,7 @@ workflow {
         .mix(BAM2PAT.out.map { it[1] })
     if (!params.input_bams) {
         qc_in = qc_in.mix(FASTP.out.json, BWAMETH_ALIGN.out.qc.flatten())
+        if (reused_qc != null) { qc_in = qc_in.mix(reused_qc) }
     }
     QC_TABLE(qc_in.collect(), BLOCK_INDEX.out.blocks, file("${projectDir}/bin/phase5_qc.py"))
 }
