@@ -188,6 +188,9 @@ process METHYLDACKEL {
 process BAM2PAT {
     tag "$run"
     label 'wgbstools'
+    // bam2pat's temp-dir cleanup can hit "Directory not empty" on NFS (.nfs files); retry.
+    errorStrategy { task.attempt <= 2 ? 'retry' : 'terminate' }
+    maxRetries 2
     publishDir "${params.outdir}/pat", mode: 'copy'
     input:
     tuple val(run), path(bam), path(bai)
