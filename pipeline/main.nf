@@ -64,7 +64,8 @@ process FETCH_ENA {
     """
 }
 
-// Spike source: the first N read pairs of each mate, streamed (the full run is about 23 GB).
+// Spike source and --stream_runs: the first N read pairs of each mate, streamed (a full run
+// can be much larger than N pairs).
 process FETCH_STREAM {
     tag "$run"
     label 'fetch'
@@ -123,7 +124,8 @@ process BWAMETH_INDEX {
 process BWAMETH_ALIGN {
     tag "$run"
     label 'bwameth'
-    publishDir "${params.outdir}/bam", mode: 'copy', pattern: '*.{bam,bai,txt}'
+    // 'link' (a hard link) avoids a second BAM copy when the work dir is deleted after the run.
+    publishDir "${params.outdir}/bam", mode: params.bam_publish_mode, pattern: '*.{bam,bai,txt}'
     input:
     tuple val(run), path(r1), path(r2)
     path ref_dir
@@ -293,7 +295,10 @@ workflow {
                 .map { run, fq -> tuple(run, fq[0], fq[1]) }
         } else {
             ena = ena_rows()
-            runs = file(params.samples).splitCsv(header: true, sep: '\t').collect { it.run }
+            // --stream_runs: runs from the ENA report, the first spike_pairs read pairs each,
+            // in place of the sample sheet.
+            stream = params.stream_runs ? params.stream_runs.tokenize(',') : []
+            runs = stream ?: file(params.samples).splitCsv(header: true, sep: '\t').collect { it.run }
             if (params.only_runs) { runs = runs.findAll { it in params.only_runs.tokenize(',') } }
             // `--spike_run ''` and `--spike_run false` reach here as booleans: skip the spike.
             def spike_run = (params.spike_run instanceof CharSequence && params.spike_run) ? params.spike_run : null
@@ -301,14 +306,14 @@ workflow {
             def published = { r -> file("${params.outdir}/bam/${r}.md.bam").exists() && file("${params.outdir}/bam/${r}.md.bam.bai").exists() }
             done = params.reuse_bams ? (runs + (spike_run ? [spike_run] : [])).findAll(published) : []
             if (done) { log.info "Starting ${done.size()} runs from their published BAMs: ${done.join(',')}" }
-            spotmas = channel.fromList((runs - done).collect { r ->
-                e = ena[r] ?: error("run $r missing from ${params.ena_report}")
+            todo = (runs - done).collect { r -> tuple(r, ena[r] ?: error("run $r missing from ${params.ena_report}")) }
+            streamed = stream ? todo.collect { r, e -> tuple(r, e.fastq_ftp.tokenize(';')) } : []
+            if (spike_run && !(spike_run in done)) { streamed << tuple(spike_run, params.spike_urls.tokenize(';')) }
+            spotmas = channel.fromList(stream ? [] : todo.collect { r, e ->
                 tuple(r, e.fastq_ftp.tokenize(';'), e.fastq_md5.tokenize(';'))
             })
             reads = FETCH_ENA(spotmas)
-            if (spike_run && !(spike_run in done)) {
-                reads = reads.mix(FETCH_STREAM(channel.of(tuple(spike_run, params.spike_urls.tokenize(';')))))
-            }
+            if (streamed) { reads = reads.mix(FETCH_STREAM(channel.fromList(streamed))) }
             reused = channel.fromList(done.collect { r ->
                 tuple(r, file("${params.outdir}/bam/${r}.md.bam"), file("${params.outdir}/bam/${r}.md.bam.bai"))
             })
