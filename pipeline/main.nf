@@ -69,6 +69,9 @@ process FETCH_ENA {
 process FETCH_STREAM {
     tag "$run"
     label 'fetch'
+    // A broken stream fails the line-count check below; fetch again.
+    errorStrategy { task.attempt <= 2 ? 'retry' : 'terminate' }
+    maxRetries 2
     storeDir params.fastq_dir
     input:
     tuple val(run), val(urls)
