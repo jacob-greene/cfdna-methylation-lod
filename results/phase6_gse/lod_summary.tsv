@@ -1,0 +1,49 @@
+group	score	set	k	rule	n_runs	n_lod_finite	lod_median	n_runs_tf	n_lod_tumour_finite	lod_tumour_min	lod_tumour_median	lod_tumour_max	lod_effective_tumour_median
+CRC	FRAG	atlas	1	bound	8	0		3	0				
+CRC	FRAG	atlas	1	model	8	0		3	0				
+CRC	FRAG	atlas	2	bound	8	1	0.1	3	1	0.0409	0.0409	0.0409	0.02052
+CRC	FRAG	atlas	2	model	8	0		3	0				
+CRC	FRAG	atlas	4	bound	8	1	0.09416	3	1	0.03851	0.03851	0.03851	0.01884
+CRC	FRAG	atlas	4	model	8	2	0.09708	3	2	0.03851	0.0492	0.05988	0.02343
+CRC	FRAG	atlas	8	bound	8	0		3	0				
+CRC	FRAG	atlas	8	model	8	2	0.09384	3	2	0.03825	0.04732	0.05638	0.02243
+CRC	FRAG	tumour	1	bound	8	0		3	0				
+CRC	FRAG	tumour	1	model	8	1	0.09329	3	1	0.03816	0.03816	0.03816	0.01788
+CRC	FRAG	tumour	2	bound	8	1	0.09688	3	1	0.03962	0.03962	0.03962	0.01814
+CRC	FRAG	tumour	2	model	8	1	0.08679	3	1	0.0355	0.0355	0.0355	0.01614
+CRC	FRAG	tumour	4	bound	8	1	0.09386	3	1	0.03839	0.03839	0.03839	0.01749
+CRC	FRAG	tumour	4	model	8	1	0.02757	3	1	0.01128	0.01128	0.01128	0.00489
+CRC	FRAG	tumour	8	bound	8	0		3	0				
+CRC	FRAG	tumour	8	model	8	2	0.04904	3	2	0.003851	0.02847	0.05309	0.01177
+CRC	WZ	atlas	1	bound	8	0		3	0				
+CRC	WZ	atlas	2	bound	8	1	0.09275	3	1	0.03794	0.03794	0.03794	0.0185
+CRC	WZ	atlas	4	bound	8	1	0.09416	3	1	0.03851	0.03851	0.03851	0.01853
+CRC	WZ	atlas	8	bound	8	0		3	0				
+CRC	WZ	tumour	1	bound	8	0		3	0				
+CRC	WZ	tumour	2	bound	8	1	0.09296	3	1	0.03802	0.03802	0.03802	0.01456
+CRC	WZ	tumour	4	bound	8	1	0.09386	3	1	0.03839	0.03839	0.03839	0.01447
+CRC	WZ	tumour	8	bound	8	0		3	0				
+HEA	FRAG	atlas	1	bound	4	0		4	0				
+HEA	FRAG	atlas	1	model	4	0		4	0				
+HEA	FRAG	atlas	2	bound	4	0		4	0				
+HEA	FRAG	atlas	2	model	4	0		4	0				
+HEA	FRAG	atlas	4	bound	4	0		4	0				
+HEA	FRAG	atlas	4	model	4	0		4	0				
+HEA	FRAG	atlas	8	bound	4	0		4	0				
+HEA	FRAG	atlas	8	model	4	0		4	0				
+HEA	FRAG	tumour	1	bound	4	0		4	0				
+HEA	FRAG	tumour	1	model	4	0		4	0				
+HEA	FRAG	tumour	2	bound	4	0		4	0				
+HEA	FRAG	tumour	2	model	4	0		4	0				
+HEA	FRAG	tumour	4	bound	4	0		4	0				
+HEA	FRAG	tumour	4	model	4	0		4	0				
+HEA	FRAG	tumour	8	bound	4	0		4	0				
+HEA	FRAG	tumour	8	model	4	0		4	0				
+HEA	WZ	atlas	1	bound	4	0		4	0				
+HEA	WZ	atlas	2	bound	4	0		4	0				
+HEA	WZ	atlas	4	bound	4	0		4	0				
+HEA	WZ	atlas	8	bound	4	0		4	0				
+HEA	WZ	tumour	1	bound	4	0		4	0				
+HEA	WZ	tumour	2	bound	4	0		4	0				
+HEA	WZ	tumour	4	bound	4	0		4	0				
+HEA	WZ	tumour	8	bound	4	0		4	0				

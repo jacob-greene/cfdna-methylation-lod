@@ -1,0 +1,13 @@
+set	source	blocks	mean_calls_per_record	share_records_ge3_calls
+atlas	threshold_donors	all	8.126	0.8153
+atlas	threshold_donors	frag_selected	10.79	0.8971
+atlas	CRC	all	5.357	0.7147
+atlas	CRC	frag_selected	7.192	0.8164
+atlas	HEA	all	5.065	0.6856
+atlas	HEA	frag_selected	6.8	0.7955
+tumour	threshold_donors	all	11.82	0.9183
+tumour	threshold_donors	frag_selected	11.86	0.9182
+tumour	CRC	all	8.326	0.8667
+tumour	CRC	frag_selected	8.338	0.8679
+tumour	HEA	all	7.983	0.8413
+tumour	HEA	frag_selected	8.023	0.8423
