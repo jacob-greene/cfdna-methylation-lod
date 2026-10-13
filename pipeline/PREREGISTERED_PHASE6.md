@@ -190,3 +190,126 @@ no score. In the `binom_real` rung, a block with no p0 and no spike calls got a 
 methylation h_b, and the binomial draw refused it. Such blocks are excluded from WZ, so h_b
 is now 0 there. No rule changes. A dry run with threshold donors as stand-in backgrounds
 checks the eval code path before the one real eval run.
+
+
+## Amendment 2 (2026-10-12): GSE186007 plasma arm
+
+Operator rulings on issue 115: comment 6100586554 (add the plasma arm) and comment
+6134643377 (disk budget raised; raw FASTQ is never kept after a successful alignment). This
+amendment is committed before any GSE186007 run is scored with a methylation score. Up to this
+commit, the GSE186007 data were used only for alignment QC (`phase6_gse/qc_table.tsv`) and
+for the tumour fraction (B2), which uses read depth only. Nothing above is removed.
+
+### Terms added
+
+| Term | Meaning |
+|---|---|
+| LABS | The library protocol of GSE186007 (linear-amplification bisulfite sequencing of plasma cfDNA; doi:10.1186/s13059-024-03262-2). A different protocol from SPOT-MAS |
+| CRC run, HEA run | A GSE186007 plasma run from a colorectal cancer patient or a healthy person |
+| TF | Tumour fraction: the share of a run's cfDNA that comes from the tumour, estimated from copy number (B2) |
+| f_tumour | f × TF: the share of fragments in a test that come from tumour DNA |
+| Healthy-LABS control | The same mixing with an HEA run as the spike. It measures how much of the detection comes from the protocol and not from tumour DNA |
+
+### B1. Data (fixed from metadata before any download)
+
+| Item | Rule |
+|---|---|
+| Runs | The first 8 CRC and the first 4 HEA paired-end NovaSeq runs by run accession in `cfdna-methylation-lod-data/sra/gse186007_runs.tsv`: CRC SRR24725513–SRR24725520, HEA SRR24725563–SRR24725566 |
+| Reads | The first 20 M read pairs of each run, streamed from ENA (`--stream_runs`) |
+| Processing | `pipeline/main.nf` with the Phase 5 parameters unchanged (the fastp clips and the 85 bp cap included), outdir `cfdna-methylation-lod-data/phase6_gse` |
+| FASTQ | Downloaded and trimmed FASTQ deleted after the BAM check passes; Nextflow work files deleted after each batch |
+
+### B2. Tumour fraction (`scripts/phase6_tf.py`)
+
+Read depth only; no methylation call is used. The method is a simplified ichorCNA
+(Adalsteinsson et al. 2017, PMID 29109393). The full rules are in the script docstring:
+
+| Step | Rule |
+|---|---|
+| Reads | Read 1, primary, mapped with mapped mate, not duplicate, MAPQ ≥ 30, chr1–22; reads that start in a marker block are skipped |
+| Bins | 1 Mb; kept if N share < 0.1 and the median HEA count > 0 |
+| GC correction | Count share divided by the run's median over 20 equal-count GC bins |
+| Panel of normals | Median of the 4 HEA runs; an HEA run uses the other 3 |
+| Arms | Split at the centromere midpoint (cytoBand acen); acrocentric p arms dropped; ≥ 10 bins |
+| Altered arm | abs(r_a / SE_a) > 4, with SE_a inflated by c, the SD of the HEA arm z-scores (leave-one-out) |
+| TF | Median over altered arms of 2 (2^r − 1) (gains) or 2 (1 − 2^r) (losses), capped at 1. TF = 0 when no arm is altered |
+| Interval | 500 bootstrap resamples of bins within arms, `default_rng([SEED, 80])` |
+
+### B3. Mixing design
+
+| Item | Rule (`scripts/phase6_gse_score.py`) |
+|---|---|
+| Spike | Each of the 12 GSE186007 runs alone, duplicates removed (`dedup` pat) |
+| Backgrounds, f grid, seeds | The eval pools, f grid and 5 seeds of rung `real` |
+| Dosing | Phase 5 rule with the spike run's own off-marker fragment count. A test with keep probability q > 1 is not scored, as in rung `len` |
+| Random seeds | `default_rng([SEED, 2, k, pool, fi, seed, i])`, i = index of the run in `phase6_gse/runs.tsv` |
+| f = 0 tests | Recomputed; they must equal the rung `real` f = 0 scores of `results/phase6` (the summary checks this) |
+| Tumour scale | f_tumour = f × TF of the spike run |
+| Direct scores (descriptive) | Each GSE186007 run scored alone at k = 1 |
+
+### B4. Scores and thresholds
+
+Unchanged: WZ and FRAG on both sets, with the model fitted on the 14 threshold donors. The
+thresholds are the rung `real` thresholds in `results/phase6/thresholds.tsv` (bound rule
+primary, model rule for FRAG secondary).
+
+### B5. Endpoints (`scripts/phase6_gse_summary.py`)
+
+| Endpoint | Definition |
+|---|---|
+| Primary | FRAG, tumour set, bound rule, k = 1 and k = 2: the median over CRC runs with TF > 0 of LoD_tumour = LoD (nominal f of that run) × TF. Reported with its range and the number of runs with a finite LoD |
+| Healthy-LABS control (reported next to every CRC result) | The detection rate over all HEA spike tests per (score, set, k, rule, f). If it exceeds 0.2 at a (k, f), CRC detection there is flagged "protocol" and is not attributed to tumour DNA. With no protocol effect, the rate is near the FPR |
+| Secondary | WZ and the atlas set; LoD on nominal f per run; LoD on the tumour effective share (the run's effective share at the LoD × TF); pooled CRC and HEA detection rates per f; direct scores (CRC vs HEA, k = 1) |
+| Comparison to HCT116 (descriptive) | LoD_tumour and the tumour effective share next to the HCT116 FRAG tumour LoD (2.15 % and 2.01 % effective share at k = 1 and 2) |
+| CRC runs with TF = 0 | LoD on nominal f only; their TF upper bound is reported |
+
+### B6. Caveats stated in advance
+
+- TF comes from 20 M read pairs and a panel of only 4 normals. Its interval is wide, and a
+  run with a small TF may show no altered arm.
+- The single-copy model gives a biased TF for arms with more than one copy changed or with
+  subclonal changes. The median over arms limits this.
+- An LABS spike also carries the patient's non-tumour cfDNA and the LABS protocol signature.
+  The healthy-LABS control measures this part.
+- At high f the 5 seeds reuse most spike fragments, so the spread over seeds understates the
+  sampling spread.
+- 8 CRC runs, with no stage or TF in the GEO metadata.
+
+### B7. Files under the guard
+
+`scripts/phase6_gse_score.py` refuses to run unless this file, `src/phase6.py`,
+`scripts/phase6_score.py`, `scripts/phase6_summary.py`, `scripts/phase6_tf.py`,
+`scripts/phase6_gse_score.py` and `scripts/phase6_gse_summary.py` are committed and unchanged.
+
+### B8. Tumour fraction and QC, fixed before scoring
+
+The TF table below was computed with the B2 rules before any GSE186007 run was scored
+(`phase6_gse/tf/tf.tsv`; 2,711 bins, 39 arms, inflation c = 1.742). TF depends on read depth
+only. It is now fixed for the endpoints in B5.
+
+| Run | Group | TF | Altered arms | 95 % interval | Upper bound if no arm altered |
+|---|---|---|---|---|---|
+| SRR24725513 | CRC | 0 | 0 | 0–0.120 | 0.065 |
+| SRR24725514 | CRC | 0 | 0 | 0–0.103 | 0.055 |
+| SRR24725515 | CRC | 0 | 0 | 0–0.048 | 0.062 |
+| SRR24725516 | CRC | 0 | 0 | 0–0.060 | 0.059 |
+| SRR24725517 | CRC | 0.599 | 18 | 0.566–0.617 | – |
+| SRR24725518 | CRC | 0 | 0 | 0–0.072 | 0.052 |
+| SRR24725519 | CRC | 0.409 | 22 | 0.369–0.427 | – |
+| SRR24725520 | CRC | 0.099 | 1 (19q gain) | 0–0.135 | – |
+| SRR24725563 | HEA | 0 | 0 | 0–0 | 0.058 |
+| SRR24725564 | HEA | 0 | 0 | 0–0 | 0.060 |
+| SRR24725565 | HEA | 0 | 0 | 0–0 | 0.060 |
+| SRR24725566 | HEA | 0 | 0 | 0–0.123 | 0.095 |
+
+So the primary endpoint (B5, CRC runs with TF > 0) uses 3 runs: SRR24725517, SRR24725519
+and SRR24725520. The TF of SRR24725520 rests on one arm, and its interval includes 0.
+
+Processing record (no rule change):
+
+| Item | Record |
+|---|---|
+| Alignment QC | `phase6_gse/qc_table_all12.tsv`, one pipeline pass over all 12 runs. All runs: 20 M pairs, mapped share ≥ 0.979, CHH conversion ≥ 0.985 |
+| M-bias | R1 CpG methylation is higher at positions 1–4 and 82–85 (about 78–85 %) than mid-read (about 74 %). The R1 range is 16–27 %, against about 8 % in Phase 5. R2 is flat. The Phase 5 clips stay unchanged (B1) |
+| Pipeline failures | Two transient failures, both rerun: a bam2pat temp-dir cleanup error on NFS (Errno 39), and a broken ENA stream for SRR24725565 caught by the line-count check. `BAM2PAT` and `FETCH_STREAM` now retry twice. A rerun starts each run from its published BAM; no run was fetched twice after alignment |
+| FASTQ | 48 FASTQ files (12 runs × 4) deleted after the BAM check (`phase6_gse/fastq_cleanup.tsv`) |
