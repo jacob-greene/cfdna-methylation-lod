@@ -48,8 +48,7 @@ lower bound.
 is flat from 100 reads per CpG up, and real reads lose more than tenfold against an ideal
 binomial model with the same calls (9.2 % against 0.45 %). To improve the LoD, model gains must
 come from more healthy donors to set thresholds. This data can be used to derive a score that
-models co-methylation within fragments and variation between people, and markers matched to
-the patient's tumour.
+models co-methylation within fragments and variation between people and discover markers that are consistent across tumor types.
 
 ### The data, how they were selected, and how they could be better
 
