@@ -1,0 +1,7 @@
+rung	score	set	k	rule	n_cancer	cancer_detected	n_healthy	healthy_detected	auc
+real	FRAG	atlas	1	bound	10	1	16	0	0.45
+real	FRAG	atlas	1	model	10	0	16	0	0.45
+real	FRAG	tumour	1	bound	10	1	16	0	0.3563
+real	FRAG	tumour	1	model	10	1	16	1	0.3563
+real	WZ	atlas	1	bound	10	0	16	2	0.4062
+real	WZ	tumour	1	bound	10	1	16	2	0.4437
