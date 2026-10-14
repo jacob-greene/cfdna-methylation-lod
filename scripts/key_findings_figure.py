@@ -137,7 +137,7 @@ def ladder(ax):
         ok = r.fpr <= FPR_MAX
         ax.scatter([r.lod_marker], [y + (0.17 if r.k == 1 else -0.17)], s=16, zorder=3,
                    marker="D", edgecolor=PAIRED[5] if ok else INVALID,
-                   facecolor="white")
+                   facecolor=PAIRED[5] if ok else "white")
     labels.append((y, "HCT116 spike"))
     pat = lod[(lod.arm == "patient") & lod.spike.isin(PATIENTS)]
     tf = pd.read_csv(RES / "phase6_gse/tf.tsv", sep="\t").set_index("run").tf

@@ -14,7 +14,7 @@ All values come from the tables under `results/`.
 | f | Spike fraction: the share of DNA (array phases) or of fragments (read phases) that comes from the spike |
 | Effective share | The share of fragments at the marker blocks that comes from the spike. It is lower than f, because the spike covers the markers less well |
 | TF | Tumour fraction: the share of a patient's cfDNA that comes from the tumour, estimated from copy-number changes |
-| LoD_tumour | LoD × TF: the LoD on the scale of tumour DNA, for a patient-plasma spike |
+| LoD_tumour | LoD × TF: the nominal-f LoD on the scale of tumour DNA, for a patient-plasma spike (the pre-registered primary patient endpoint). The README axis, tumour DNA at the markers, instead uses the effective share × TF, which is lower |
 | LoB, limit of blank | The 95th percentile of a score over blanks (CLSI EP17-A2) |
 | LoD, limit of detection | The lowest f detected in at least 95 % of tests, interpolated on log f |
 | FPR | False-positive rate: the share of spike-free tests scored above the threshold. The target is 5 % or less |

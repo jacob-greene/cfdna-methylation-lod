@@ -30,7 +30,7 @@ backgrounds. Array data and simulated reads give the idealised reference.
 real reads. Bottom: idealised references. Bars: 95 % donor-bootstrap interval of the grid
 points around the LoD; an arrow means the interval reaches above the grid top. Arrows alone:
 censored LoDs, drawn from the grid top mapped to the markers. Diamonds: the WZ and UXM scores
-(HCT116). Open or grey: false-positive rate above 5 %. In the simulation row, 7 more cells
+(HCT116), on the same FRAG effective-share mapping. Open or grey: false-positive rate above 5 %. In the simulation row, 7 more cells
 fail the FPR target and are left out. Grey band: 0.01–0.1 %, the level that minimal residual
 disease (MRD) monitoring needs. (b) Share of tests detected at k = 1, tumour marker set, with
 95 % donor-bootstrap bands. Left of the axis break: the FPR at f = 0 with its 95 % interval.
@@ -56,7 +56,10 @@ Dashed line: the count at the LoD. Scripts: `scripts/bootstrap_lod.py`,
 | Simulated reads, 100 or more reads per CpG | Colon-cancer plasma or colon cells | 1.2–3.0 %; 3 of 41 cells not reached by the 3 % top of the simulation grid | within the 5 % target (7 more cells fail it and are left out) |
 | Arrays, best trained classifier | TCGA colorectal tumours | 0.9–1.7 % (7 random seeds) | 0 of 11 people (28 %) |
 
-The spike-free tests of the patient arm are the same tests as for HCT116, with the same
+For patient plasma, this scale is the pre-registered tumour effective share (effective
+share × TF). The pre-registered primary patient endpoint, LoD_tumour = nominal-f LoD × TF,
+is in [`docs/RESULTS.md`](docs/RESULTS.md) (patient B, k = 2: 3.96 %). The spike-free tests
+of the patient arm are the same tests as for HCT116, with the same
 thresholds. In arrays and simulated reads, f is the tumour DNA share of every CpG, so it needs
 no mapping.
 
