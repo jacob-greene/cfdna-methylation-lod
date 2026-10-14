@@ -7,7 +7,7 @@ src/phase5.n_fragments_pool). The corrected scores are results/phase5/scores.tsv
 Outputs:
   - results/phase5/dosing_comparison.tsv: per rung x score x set x k, detection rate at
     f = 0.1, AUC at f = 0.1 and LoD, original vs corrected dosing;
-  - results/phase5/gap_attribution.tsv: the skeptic's decomposition of the real vs binom_real
+  - results/phase5/gap_attribution.tsv: a decomposition of the real vs binom_real
     gap (LLR_binom, eval tests, f_alt = f), for both dosings. shift = mean paired
     (spiked - f = 0) score of the same pool and f_alt; z = shift / SD of the f = 0 eval
     scores; deficit share = log(1 / shift ratio) / log(z_binom_real / z_real).

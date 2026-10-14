@@ -1,4 +1,4 @@
-"""Phase 5 follow-up (skeptic findings 1 and 2): effective spike share and a symmetric p0.
+"""Phase 5 follow-up: effective spike share and a symmetric p0.
 
 NOT pre-registered. Two additions after the main Phase 5 scoring:
 

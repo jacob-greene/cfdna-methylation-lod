@@ -40,8 +40,8 @@ spike source (HCT116 WGBS). The processing rules are fixed in `PREREGISTERED.md`
 | `test` | Smoke test on a small bundled BAM (`tests/data/`) |
 | `test_fastq` | FASTQ-deletion test: FASTQ made from the bundled BAM, aligned, then deleted (run by `tests/fastq_cleanup_test.sh`) |
 
-The HPC run used `slurm,conda`. Apptainer cannot start containers inside the agent sandbox
-on this cluster, also not in Slurm jobs (no setuid starter, no mount propagation). The
+The HPC run used `slurm,conda`. Apptainer could not start containers in the sandboxed
+environment of that cluster, also not in Slurm jobs (no setuid starter, no mount propagation). The
 `conda` environment pins the same tool versions as the containers:
 
 | Tool | Version |

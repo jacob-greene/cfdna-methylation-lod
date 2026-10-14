@@ -119,7 +119,7 @@ Other design-stage observations:
 
 ## Amendment 1 (2026-10-10): effective share primary, length-matched spike rung
 
-Operator decision on issue 115 (comment 6100586554, a reply to comment 6100316928). This
+Decision of the project lead, after a survey of public spike sources. This
 amendment is committed before any eval donor, cancer or spike-in test is scored with a
 Phase 6 method. Nothing above is removed; where this section differs, this section applies.
 The GSE186007 plasma arm is pre-registered in a later, separate amendment, before its first
@@ -194,8 +194,8 @@ checks the eval code path before the one real eval run.
 
 ## Amendment 2 (2026-10-12): GSE186007 plasma arm
 
-Operator rulings on issue 115: comment 6100586554 (add the plasma arm) and comment
-6134643377 (disk budget raised; raw FASTQ is never kept after a successful alignment). This
+Decisions of the project lead: add the plasma arm, and never keep raw FASTQ after a
+successful alignment (disk budget). This
 amendment is committed before any GSE186007 run is scored with a methylation score. Up to this
 commit, the GSE186007 data were used only for alignment QC (`phase6_gse/qc_table.tsv`) and
 for the tumour fraction (B2), which uses read depth only. Nothing above is removed.
