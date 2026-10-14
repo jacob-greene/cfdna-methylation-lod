@@ -6,8 +6,16 @@ leave-one-out. Prints the f at which a shift p0 + f * delta moves the unnormalis
 
 Usage: uv run python scripts/phase6_design_check.py
 """
-import sys; sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1]))
-import numpy as np, pandas as pd, importlib.util, warnings; warnings.filterwarnings('ignore')
+import importlib.util
+import sys
+import warnings
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+warnings.filterwarnings('ignore')
 spec=importlib.util.spec_from_file_location("s6","scripts/phase6_score.py"); s6=importlib.util.module_from_spec(spec); spec.loader.exec_module(s6)
 p5s,p6=s6.p5s,s6.p6
 data=p5s.data_dir()/"phase5"
@@ -23,7 +31,7 @@ for s in ['atlas','tumour']:
         sc=[];sig=[]
         for i in range(14):
             m=p6.fit(S[:i]+S[i+1:],T)
-            M,N,G=[p6._get(S[i],f) for f in 'M N G'.split()]
+            M,N,G=[p6._get(S[i],f) for f in ['M', 'N', 'G']]
             ok=(N>0)&np.isfinite(m.p0); q=np.clip(m.p0,.01,.99)
             if name=='binom': v=q*(1-q)/np.maximum(N,1)
             elif name=='comethyl': v=q*(1-q)*G/np.maximum(N,1)**2

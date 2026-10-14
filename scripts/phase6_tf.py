@@ -39,7 +39,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-import importlib.util  # noqa: E402
+import importlib.util
 
 _spec = importlib.util.spec_from_file_location("phase5_score", ROOT / "scripts/phase5_score.py")
 p5s = importlib.util.module_from_spec(_spec)
@@ -115,7 +115,7 @@ def _tf(r, se):
     z = r / se
     alt = np.abs(z) > Z_ALT
     if not alt.any():
-        return 0.0, int(0)
+        return 0.0, 0
     t = np.where(r > 0, 2 * (2 ** r - 1), 2 * (1 - 2 ** r))[alt]
     return float(min(np.median(t), 1.0)), int(alt.sum())
 

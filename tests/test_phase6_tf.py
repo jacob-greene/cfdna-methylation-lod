@@ -35,7 +35,7 @@ def _genome(tf_true, seed=0, n_hea=4):
 
 def test_tf_recovers_single_copy_changes():
     df, runs, cen = _genome(0.2)
-    t, arms, info = tfm.estimate(df, runs, cen, seed=[1, 2])
+    t, _arms, info = tfm.estimate(df, runs, cen, seed=[1, 2])
     crc = t[t.run == "C0"].iloc[0]
     assert abs(crc.tf - 0.2) < 0.04
     assert crc.n_altered_arms == 4

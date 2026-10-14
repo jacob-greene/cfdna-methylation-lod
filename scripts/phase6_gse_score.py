@@ -51,7 +51,7 @@ PREREG = ["pipeline/PREREGISTERED_PHASE6.md", "src/phase6.py", "scripts/phase6_s
 
 def preregistered_sha() -> str:
     git = lambda *a: subprocess.run(["git", "-C", str(ROOT), *a], capture_output=True,
-                                    text=True)
+                                    text=True, check=False)
     for f in PREREG:
         if git("ls-files", "--error-unmatch", f).returncode:
             sys.exit(f"refusing: {f} is not committed")
