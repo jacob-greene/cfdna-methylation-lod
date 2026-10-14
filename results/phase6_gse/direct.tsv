@@ -1,0 +1,7 @@
+score	set	rule	crc_detected	n_crc	hea_detected	n_hea	auc_crc_vs_hea
+FRAG	atlas	bound	8	8	4	4	0.7188
+FRAG	atlas	model	8	8	4	4	0.7188
+FRAG	tumour	bound	2	8	0	4	0.875
+FRAG	tumour	model	5	8	0	4	0.875
+WZ	atlas	bound	8	8	4	4	0.6562
+WZ	tumour	bound	4	8	0	4	0.9062

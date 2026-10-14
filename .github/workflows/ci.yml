@@ -18,5 +18,27 @@ jobs:
         run: uv run ruff check .
       - name: Pytest
         run: uv run pytest -q
-  # Nextflow smoke test (nextflow run -profile test on a tiny bundled BAM) is deferred to
-  # Phase 5, when pipeline/ gets its read-level workflow.
+  # Phase 5 pipeline smoke test: HCT116 reads on a 1 Mb slice of hg38 chr21 (pipeline/tests/data).
+  nextflow-smoke:
+    runs-on: ubuntu-latest
+    env:
+      NXF_VER: 24.10.2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install Nextflow
+        run: curl -fsSL https://get.nextflow.io | bash && sudo mv nextflow /usr/local/bin/
+      - name: Build the wgbstools image
+        run: docker build -t cfdna-wgbstools:0.3.0 pipeline/containers/wgbstools
+      - name: Run the test profile
+        run: nextflow run pipeline/main.nf -profile test,docker
+      - name: Check outputs
+        run: |
+          test -s results_test/qc_table.tsv
+          test -s results_test/pat/HCT116_test.dedup.pat.gz
+          test "$(wc -l < results_test/blocks_cpg.tsv)" -eq 9
+      - name: FASTQ deletion test
+        run: sudo apt-get install -y samtools && pipeline/tests/fastq_cleanup_test.sh docker

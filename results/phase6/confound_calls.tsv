@@ -1,0 +1,13 @@
+set	source	blocks	mean_calls_per_record	share_records_ge3_calls
+atlas	threshold_donors	all	8.126	0.8153
+atlas	threshold_donors	frag_selected	10.79	0.8971
+atlas	spike	all	5.471	0.6788
+atlas	spike	frag_selected	7.214	0.7536
+atlas	spike_len	all	5.45	0.6884
+atlas	spike_len	frag_selected	6.917	0.7222
+tumour	threshold_donors	all	11.82	0.9183
+tumour	threshold_donors	frag_selected	11.86	0.9182
+tumour	spike	all	8.535	0.8227
+tumour	spike	frag_selected	8.584	0.825
+tumour	spike_len	all	8.013	0.8421
+tumour	spike_len	frag_selected	7.865	0.8378

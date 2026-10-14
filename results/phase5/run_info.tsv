@@ -1,0 +1,16 @@
+item	set	value
+p0_blocks_covered	atlas	0.999718
+rho	atlas	0.173575
+spike_blocks_covered	atlas	0.897183
+mean_calls_per_block_k1	atlas	31.1226
+mean_calls_per_block_k2	atlas	62.2451
+mean_calls_per_block_k4	atlas	124.49
+mean_calls_per_block_k8	atlas	248.981
+p0_blocks_covered	tumour	1
+rho	tumour	0.0821275
+spike_blocks_covered	tumour	0.776536
+mean_calls_per_block_k1	tumour	68.2699
+mean_calls_per_block_k2	tumour	136.54
+mean_calls_per_block_k4	tumour	273.08
+mean_calls_per_block_k8	tumour	546.159
+q_max		0.817592

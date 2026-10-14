@@ -1,0 +1,57 @@
+rung	score	set	k	rule	lod	lod_effective	fpr	fp	n	fpr_lo95	fpr_hi95
+binom_real	WZ	atlas	1	bound	0.006178	0.002243	0.125	2	16	0.01551	0.3835
+binom_real	WZ	atlas	2	bound	0.005477	0.001981	0.25	2	8	0.03185	0.6509
+binom_real	WZ	atlas	4	bound	0.005477	0.00204	0	0	4	0	0.6024
+binom_real	WZ	atlas	8	bound	0.009416	0.003425	0	0	2	0	0.8419
+binom_real	WZ	tumour	1	bound	0.008679	0.001544	0.125	2	16	0.01551	0.3835
+binom_real	WZ	tumour	2	bound	0.007089	0.001068	0	0	8	0	0.3694
+binom_real	WZ	tumour	4	bound	0.007401	0.001319	0	0	4	0	0.6024
+binom_real	WZ	tumour	8	bound	0.008866	0.001573	0	0	2	0	0.8419
+len	FRAG	atlas	1	bound			0	0	16	0	0.2059
+len	FRAG	atlas	1	model			0	0	16	0	0.2059
+len	FRAG	atlas	2	bound			0	0	8	0	0.3694
+len	FRAG	atlas	2	model			0	0	8	0	0.3694
+len	FRAG	atlas	4	bound			0	0	4	0	0.6024
+len	FRAG	atlas	4	model			0	0	4	0	0.6024
+len	FRAG	atlas	8	bound			0	0	2	0	0.8419
+len	FRAG	atlas	8	model			0	0	2	0	0.8419
+len	FRAG	tumour	1	bound			0	0	16	0	0.2059
+len	FRAG	tumour	1	model			0.0625	1	16	0.001581	0.3023
+len	FRAG	tumour	2	bound			0	0	8	0	0.3694
+len	FRAG	tumour	2	model	0.03	0.006781	0.125	1	8	0.00316	0.5265
+len	FRAG	tumour	4	bound			0	0	4	0	0.6024
+len	FRAG	tumour	4	model	0.02498	0.00554	0	0	4	0	0.6024
+len	FRAG	tumour	8	bound			0	0	2	0	0.8419
+len	FRAG	tumour	8	model	0.009275	0.002089	0	0	2	0	0.8419
+len	WZ	atlas	1	bound			0.125	2	16	0.01551	0.3835
+len	WZ	atlas	2	bound			0	0	8	0	0.3694
+len	WZ	atlas	4	bound			0	0	4	0	0.6024
+len	WZ	atlas	8	bound			0	0	2	0	0.8419
+len	WZ	tumour	1	bound			0.125	2	16	0.01551	0.3835
+len	WZ	tumour	2	bound			0	0	8	0	0.3694
+len	WZ	tumour	4	bound			0	0	4	0	0.6024
+len	WZ	tumour	8	bound			0	0	2	0	0.8419
+real	FRAG	atlas	1	bound	0.09808	0.02807	0	0	16	0	0.2059
+real	FRAG	atlas	1	model			0	0	16	0	0.2059
+real	FRAG	atlas	2	bound	0.09115	0.02618	0	0	8	0	0.3694
+real	FRAG	atlas	2	model	0.09275	0.02666	0	0	8	0	0.3694
+real	FRAG	atlas	4	bound	0.09416	0.02643	0	0	4	0	0.6024
+real	FRAG	atlas	4	model	0.09045	0.02536	0	0	4	0	0.6024
+real	FRAG	atlas	8	bound			0	0	2	0	0.8419
+real	FRAG	atlas	8	model	0.08603	0.02402	0	0	2	0	0.8419
+real	FRAG	tumour	1	bound	0.09775	0.02152	0	0	16	0	0.2059
+real	FRAG	tumour	1	model	0.0907	0.01992	0.0625	1	16	0.001581	0.3023
+real	FRAG	tumour	2	bound	0.09176	0.02006	0	0	8	0	0.3694
+real	FRAG	tumour	2	model	0.06694	0.01432	0.125	1	8	0.00316	0.5265
+real	FRAG	tumour	4	bound	0.09115	0.01977	0	0	4	0	0.6024
+real	FRAG	tumour	4	model	0.02498	0.005021	0	0	4	0	0.6024
+real	FRAG	tumour	8	bound			0	0	2	0	0.8419
+real	FRAG	tumour	8	model	0.009176	0.001986	0	0	2	0	0.8419
+real	WZ	atlas	1	bound	0.09703	0.03812	0.125	2	16	0.01551	0.3835
+real	WZ	atlas	2	bound	0.0842	0.03264	0	0	8	0	0.3694
+real	WZ	atlas	4	bound	0.09416	0.03644	0	0	4	0	0.6024
+real	WZ	atlas	8	bound			0	0	2	0	0.8419
+real	WZ	tumour	1	bound			0.125	2	16	0.01551	0.3835
+real	WZ	tumour	2	bound	0.09176	0.01598	0	0	8	0	0.3694
+real	WZ	tumour	4	bound	0.09275	0.01625	0	0	4	0	0.6024
+real	WZ	tumour	8	bound	0.09416	0.01606	0	0	2	0	0.8419
