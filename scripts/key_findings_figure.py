@@ -37,6 +37,7 @@ plt.rcParams["font.sans-serif"] = ["Helvetica", "Arial", "Liberation Sans", "Dej
 PAIRED = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
           "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a"]
 F_TOP = 0.1          # top of the tested f grid in the read phases
+SIM_TOP = 0.03       # top of the f grid in the depth simulation (Phase 3)
 FPR_MAX = 0.05       # FPR target
 KS = (1, 2)
 PATIENT = "SRR24725519"
@@ -66,7 +67,7 @@ def ladder_rows() -> list[tuple[str, str, pd.DataFrame]]:
         ("Arrays,\ntrained classifiers", PAIRED[3],
          pd.DataFrame({"lod": p3b.lod_interp, "valid": True}).dropna()),
         ("Simulated reads,\n100+ reads per CpG", PAIRED[1],
-         pd.DataFrame({"lod": p3.lod_interp, "valid": True}).dropna()),
+         pd.DataFrame({"lod": p3.lod_interp, "valid": True})),
         ("Real reads,\nideal binomial model", PAIRED[7],
          pd.DataFrame({"lod": binom.lod, "valid": binom.fpr_max <= FPR_MAX}).dropna()),
         ("Real reads,\nHCT116 spike", PAIRED[5], hct),
@@ -78,16 +79,28 @@ def ladder(ax):
     n = len(rows) + 1
     ax.axvspan(1e-4, 1e-3, color="0.92", zorder=0)
     ax.text(3.2e-4, n - 0.35, "MRD\nneeds", ha="center", va="top", fontsize=7, color="0.35")
-    ax.axvline(F_TOP, color="0.5", lw=0.8, ls="--", zorder=1)
-    ax.text(F_TOP * 1.06, n - 0.35, "top of\nf grid", ha="left", va="top", fontsize=7,
-            color="0.35")
+    # The 10 % grid top applies to the real-read rows only (rows 0-2 from the bottom).
+    ax.vlines(F_TOP, -0.6, 2.4, color="0.5", lw=0.8, ls="--", zorder=1)
+    ax.text(F_TOP * 1.06, 2.45, "top of f grid,\nreal reads", ha="left", va="bottom",
+            fontsize=7, color="0.35")
     labels = []
     for label, _, d in rows:
         print(f"{label.replace(chr(10), ' ')}: LoD {d.lod.min():.4f}-{d.lod.max():.4f} "
-              f"({int(d.valid.sum())} of {len(d)} with FPR <= {FPR_MAX})")
+              f"({int(d.lod.notna().sum())} finite, {int(d.lod.isna().sum())} censored; "
+              f"{int(d.valid.sum())} of {len(d)} with FPR <= {FPR_MAX})")
     for i, (label, col, d) in enumerate(rows):
         y = n - 1 - i
         labels.append((y, label))
+        # Simulation cells not detected at 95 % by the top of their grid (3 %): censored.
+        cens = d[d.lod.isna()]
+        for j in range(len(cens)):
+            yy = y - 0.3 - 0.07 * j
+            ax.annotate("", xy=(SIM_TOP * 1.9, yy), xytext=(SIM_TOP, yy),
+                        arrowprops={"arrowstyle": "->", "color": col, "lw": 1.2})
+        if len(cens):
+            ax.text(SIM_TOP / 1.08, y - 0.37, f"{len(cens)} censored at 3 %", ha="right",
+                    va="center", fontsize=7, color=col)
+        d = d.dropna()
         jit = [(j % 5 - 2) * 0.06 for j in range(len(d))]
         ok = d.valid.to_numpy()
         ys = [y + j for j in jit]

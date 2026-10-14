@@ -21,8 +21,10 @@ backgrounds. Array data and simulated reads give the idealised reference.
 
 **Figure 1.** (a) LoD at each step, from idealised to real data. Each dot is one score,
 marker set or donor-pool size (k). Open dots: FPR above 5 %. Purple bar: the one patient
-run whose LoD lies between the grid points 3 % and 10 %. Arrows: runs not detected at the
-top of the tested range (f = 10 %), so their LoD is only known to lie above it. Grey band:
+run whose LoD lies between the grid points 3 % and 10 %. Arrows: censored LoDs, not reached
+at the top of the tested f grid, so each is only known to lie above it. The grid top is 3 %
+for the simulation (blue arrows) and 10 % for real reads (purple arrows, dashed line). In the
+simulation row, 7 more cells fail the FPR target and are left out. Grey band:
 0.01–0.1 %, the level that minimal residual disease (MRD) monitoring needs. f is the share
 of DNA (arrays, simulation) or of fragments (real reads). (b) Share of tests detected
 against f, k = 2 donors per background, tumour marker set. Dotted line: 95 %.
@@ -31,11 +33,11 @@ Script: `scripts/key_findings_figure.py`.
 | Data | Spike | LoD (f at 95 % detection) | Spike-free tests above threshold |
 |---|---|---|---|
 | Arrays, best trained classifier | TCGA colorectal tumours | 0.9–1.7 % (7 random seeds) | 0 of 11 people |
-| Simulated reads, 100 or more reads per CpG | Colon-cancer plasma or colon cells | 1.2–3.0 % | within the 5 % target |
+| Simulated reads, 100 or more reads per CpG | Colon-cancer plasma or colon cells | 1.2–3.0 %; 3 of 41 cells not reached by the 3 % top of the simulation grid | within the 5 % target (7 more cells fail it and are left out) |
 | Real reads, ideal binomial model, k = 2 | HCT116 | 0.45 % | 0 of 8 |
 | Real reads, FRAG score, k = 1 and 2 | HCT116 | 9.8 % and 9.2 % (effective share 2.15 % and 2.01 %) | 0 of 16 and 0 of 8 |
-| Real reads, FRAG score, k = 1 | Plasma of 3 patients with measurable tumour DNA | above 10 % for all 3 runs; tumour-DNA scale at least 4.09 % | – |
-| Real reads, FRAG score, k = 2 | The same 3 patients | 1 run between 3 % and 10 %, 2 above 10 %; tumour-DNA scale at least 1.2 % (3.96 % if interpolated) | – |
+| Real reads, FRAG score, k = 1 | Plasma of 3 patients with measurable tumour DNA | above 10 % for all 3 runs; median tumour-DNA scale at least 4.09 % | – |
+| Real reads, FRAG score, k = 2 | The same 3 patients | 1 run between 3 % and 10 %, 2 above 10 %; median tumour-DNA scale at least 1.2 % (3.96 % if interpolated) | – |
 
 The test detects a few per cent of tumour DNA, not the 0.01–0.1 % that MRD monitoring
 needs. On real reads, every finite LoD lies between the grid points 3 % and 10 %, so its

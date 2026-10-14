@@ -73,7 +73,7 @@ colon fraction. All 8 points match the published figure within 0.15 percentage p
 |---|---|
 | 1, reproduce Fig. 7d | Match within 0.15 percentage points; r = 0.940 (paper: 0.92) |
 | 2, array LoB and LoD | 95 % detection needs about 2.0–2.3 % colon DNA (about 3.0–3.4 % pl806 plasma) |
-| 3, depth simulation | The LoD stays at 1.2–3.0 % from D = 100 reads per CpG up (`results/phase3/lod.tsv`: valid rule, HI1 excluded, both spikes) |
+| 3, depth simulation | The LoD stays at 1.2–3.0 % from D = 100 reads per CpG up; 3 of 41 cells are not reached by the 3 % top of the simulation grid, and 7 more cells fail the FPR target (`results/phase3/lod.tsv`: valid rule, HI1 excluded, both spikes) |
 
 ![LoD against sequencing depth, by score and marker count](../figures/phase3_depth_lod.png)
 
