@@ -56,19 +56,22 @@ def hct116():
     p5 = p5[p5.set == "tumour"]
     p6 = p6[(p6.set == "tumour") & (p6["rule"] == "bound")]
     lines = [
-        ("FRAG (Phase 6)", p6[(p6.rung == "real") & (p6.score == "FRAG")], PAIRED[5], "-"),
-        ("UXM (Phase 5)", p5[(p5.rung == "real") & (p5.score == "UXM")], PAIRED[1], "-"),
-        ("WZ (Phase 6)", p6[(p6.rung == "real") & (p6.score == "WZ")], PAIRED[3], "-"),
+        ("WZ (Phase 6)", p6[(p6.rung == "real") & (p6.score == "WZ")], PAIRED[3], "-", "s", 7),
+        ("FRAG (Phase 6)", p6[(p6.rung == "real") & (p6.score == "FRAG")], PAIRED[5], "-",
+         "o", 4),
+        ("UXM (Phase 5)", p5[(p5.rung == "real") & (p5.score == "UXM")], PAIRED[1], "-", "o",
+         4),
         ("LLR_binom (Phase 5)", p5[(p5.rung == "real") & (p5.score == "LLR_binom")],
-         PAIRED[7], "-"),
+         PAIRED[7], "-", "o", 4),
         ("LLR_binom, ideal binomial reads", p5[(p5.rung == "binom_real")
-                                               & (p5.score == "LLR_binom")], PAIRED[7], "--"),
+                                               & (p5.score == "LLR_binom")], PAIRED[7], "--",
+         "o", 4),
     ]
     fig, axes = plt.subplots(1, 2, figsize=(8, 3.4), sharey=True)
     for ax, k in zip(axes, KS, strict=True):
-        for label, d, col, ls in lines:
+        for label, d, col, ls, mk, ms in lines:
             d = d[d.k == k].sort_values("f")
-            ax.plot(d.f, d.rate, ls, color=col, marker="o", ms=4, lw=1.5, label=label)
+            ax.plot(d.f, d.rate, ls, color=col, marker=mk, ms=ms, lw=1.5, label=label)
         _axes_style(ax, k)
     axes[0].set_ylabel("Share of tests detected")
     axes[1].legend(frameon=False, fontsize=8, loc="center left", bbox_to_anchor=(1.0, 0.5))

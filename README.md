@@ -16,8 +16,8 @@ donors and cancer patients.
 | Does a better score close the gap? | No. The new FRAG score reaches the same LoD as the simple UXM fragment score, at a lower false-positive rate. A second new score, WZ, does no better. |
 | Does real patient plasma behave like the cell line? | It is harder to detect. For one of three patient runs with measurable tumour DNA, 95 % detection is reached within the tested range (at k = 2 donors per background). On the tumour-DNA scale, the median LoD is at least 4 % at k = 1. |
 
-The short version: with a 500-CpG colorectal marker panel and 14–17 million read pairs
-per sample (medians), this kind of test detects a few per cent of tumour DNA, not the 0.01–0.1 % that
+The short version: with a 500-CpG colorectal marker panel and about 15 million read pairs
+per healthy donor (median; range 8–26 million, `pipeline/samples/phase5_samples.tsv`), this kind of test detects a few per cent of tumour DNA, not the 0.01–0.1 % that
 minimal residual disease (MRD) monitoring needs. Between-person variation in healthy
 methylation and fragment-level effects are the limits, not sequencing depth.
 
@@ -229,7 +229,8 @@ Figure 4. Share of tests detected against spike fraction f, tumour marker set, k
 donors per background. Solid lines: real reads. Dashed line: the same tests with reads
 redrawn as ideal binomial calls (LLR_binom only). Dotted line: 95 %. UXM, WZ and LLR_binom
 exceed the 5 % FPR target at k = 1 (2 of 16 spike-free tests), and UXM at k = 2 (1 of 8).
-Their curves therefore start above 0.
+Their curves therefore start above 0. The ideal-binomial rung also exceeds it at k = 1
+(4 of 16). At k = 2, the WZ (squares) and FRAG curves coincide.
 
 | Score | k | LoD, nominal f | LoD, effective share | Eval FPR |
 |---|---|---|---|---|
@@ -286,11 +287,12 @@ Primary endpoint: FRAG, tumour set, the 3 CRC runs with TF above 0
 | k | Runs with a finite LoD | SRR24725519 LoD (f) | Median LoD_tumour over the 3 runs | HCT116 effective share at LoD |
 |---|---|---|---|---|
 | 1 | 0 of 3 | above 10 % (censored) | at least 4.09 % (all 3 censored) | 2.15 % |
-| 2 | 1 of 3 | between 3 % and 10 % | at least 3.96 % (2 of 3 censored) | 2.01 % |
+| 2 | 1 of 3 | between 3 % and 10 % | at least 1.2 % (2 of 3 censored; 3.96 % with the interpolated LoD) | 2.01 % |
 
 - At k = 2, SRR24725519 jumps from 1 of 40 tests detected at f = 3 % to 39 of 40 at f = 10 %
   (95 % interval 0.87–1.00). The LoD can lie anywhere between those grid points. The value
-  interpolated on log f is 9.7 %, which gives the LoD_tumour of 3.96 % above. Its effective
+  interpolated on log f is 9.7 % (LoD_tumour 3.96 %). Only the grid bracket is
+  certain, so the median over the 3 runs is bounded below by 0.03 × TF 0.409 = 1.2 %. Its effective
   share at the LoD is at most 1.88 %. So the patient run and HCT116 cannot be told apart.
 - SRR24725517 has the highest TF but is rarely detected. Its reads cover the tumour blocks
   as well as SRR24725519, so depth is not the cause. Its tumour may not share the methylation

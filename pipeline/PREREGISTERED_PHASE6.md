@@ -119,6 +119,9 @@ Other design-stage observations:
 
 ## Amendment 1 (2026-10-10): effective share primary, length-matched spike rung
 
+_Edited 2026-10-13: the provenance sentences of Amendments 1 and 2 were reworded for a
+public reader. No rule changed. The version in force at scoring is commit `066688f`._
+
 Decision of the project lead, after a survey of public spike sources. This
 amendment is committed before any eval donor, cancer or spike-in test is scored with a
 Phase 6 method. Nothing above is removed; where this section differs, this section applies.
