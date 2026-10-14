@@ -1,0 +1,61 @@
+arm	spike	rung	score	rule	k	n_pools	lod	lod_lo95	lod_hi95	grid_lo95	grid_hi95	share_censored	tf	lod_marker	lod_marker_lo95	lod_marker_hi95	grid_marker_lo95	grid_marker_hi95	fpr	fp	fpr_lo95	fpr_hi95
+hct116	HCT116	binom_real	LLR_binom	bound	1	16	0.006178	0.003	0.007533	0.001	0.01	0	1	0.001344	0.0006703	0.001627	0.0001032	0.002138	0.25	4	0.07266	0.5238
+hct116	HCT116	binom_real	LLR_binom	bound	2	8	0.004481	0.002866	0.006694	0.001	0.01	0	1	0.0008862	0.0005759	0.001294	0.0001732	0.001891	0	0	0	0.3694
+hct116	HCT116	real	FRAG	bound	1	16	0.09775	0.0894		0.03		0.2665	1	0.02152	0.01962		0.006347		0	0	0	0.2059
+hct116	HCT116	real	FRAG	bound	2	8	0.09176	0.08866	0.09353	0.03	0.1	0	1	0.02006	0.01933	0.02047	0.006073	0.02199	0	0	0	0.3694
+hct116	HCT116	real	FRAG	model	1	16	0.0907	0.08248	0.09742	0.03	0.1	0.0025	1	0.01992	0.01805	0.02144	0.006347	0.02203	0.0625	1	0.001581	0.3023
+hct116	HCT116	real	FRAG	model	2	8	0.06694	0.03	0.08182	0.01	0.1	0	1	0.01432	0.006073	0.01774	0.001891	0.02199	0.125	1	0.00316	0.5265
+hct116	HCT116	real	LLR_binom	bound	1	16				0.1		1	1				0.02203		0.125	2	0.01551	0.3835
+hct116	HCT116	real	LLR_binom	bound	2	8		0.09386		0.03		0.9385	1		0.02055		0.006073		0	0	0	0.3694
+hct116	HCT116	real	UXM	bound	1	16	0.09115	0.08309	0.09771	0.03	0.1	0.0015	1	0.02002	0.01819	0.02151	0.006347	0.02203	0.125	2	0.01551	0.3835
+hct116	HCT116	real	UXM	bound	2	8	0.07401	0.03	0.08517	0.01	0.1	0	1	0.01594	0.006073	0.01852	0.001891	0.02199	0.125	1	0.00316	0.5265
+hct116	HCT116	real	WZ	bound	1	16		0.09176		0.03		0.789	1		0.02016		0.006347		0.125	2	0.01551	0.3835
+hct116	HCT116	real	WZ	bound	2	8	0.09176	0.08748	0.09353	0.03	0.1	0	1	0.02006	0.01906	0.02047	0.006073	0.02199	0	0	0	0.3694
+patient	SRR24725513	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725513	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725513	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725513	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725514	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725514	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725514	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725514	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725515	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725515	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725515	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725515	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725516	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725516	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725516	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725516	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725517	real	FRAG	bound	1	16				0.1		1	0.5988				0.02576		0	0	0	0.2059
+patient	SRR24725517	real	FRAG	bound	2	8				0.1		1	0.5988				0.02521		0	0	0	0.3694
+patient	SRR24725517	real	FRAG	model	1	16				0.1		1	0.5988				0.02576		0.0625	1	0.001581	0.3023
+patient	SRR24725517	real	FRAG	model	2	8				0.1		0.9995	0.5988				0.02521		0.125	1	0.00316	0.5265
+patient	SRR24725518	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725518	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725518	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725518	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725519	real	FRAG	bound	1	16				0.1		0.999	0.409				0.01921		0	0	0	0.2059
+patient	SRR24725519	real	FRAG	bound	2	8	0.09688	0.0937		0.03		0.076	0.409	0.01814	0.01751		0.005246		0	0	0	0.3694
+patient	SRR24725519	real	FRAG	model	1	16	0.09329	0.08892	0.09795	0.03	0.1	0.0015	0.409	0.01788	0.01701	0.0188	0.00553	0.01921	0.0625	1	0.001581	0.3023
+patient	SRR24725519	real	FRAG	model	2	8	0.08679	0.06694	0.09203	0.03	0.1	0	0.409	0.01614	0.01226	0.01718	0.005246	0.01875	0.125	1	0.00316	0.5265
+patient	SRR24725520	real	FRAG	bound	1	16				0.1		1	0.09878				0.004727		0	0	0	0.2059
+patient	SRR24725520	real	FRAG	bound	2	8				0.1		1	0.09878				0.004709		0	0	0	0.3694
+patient	SRR24725520	real	FRAG	model	1	16				0.1		1	0.09878				0.004727		0.0625	1	0.001581	0.3023
+patient	SRR24725520	real	FRAG	model	2	8				0.1		1	0.09878				0.004709		0.125	1	0.00316	0.5265
+patient	SRR24725563	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725563	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725563	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725563	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725564	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725564	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725564	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725564	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725565	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725565	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725565	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725565	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
+patient	SRR24725566	real	FRAG	bound	1	16				0.1		1	0				0		0	0	0	0.2059
+patient	SRR24725566	real	FRAG	bound	2	8				0.1		1	0				0		0	0	0	0.3694
+patient	SRR24725566	real	FRAG	model	1	16				0.1		1	0				0		0.0625	1	0.001581	0.3023
+patient	SRR24725566	real	FRAG	model	2	8				0.1		1	0				0		0.125	1	0.00316	0.5265
