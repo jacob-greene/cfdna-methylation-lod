@@ -65,7 +65,7 @@ marker coverage. Each condition has 5 random seeds per background pool.
 
 ![Fig. 7d of Moss et al. 2018, reproduced](../figures/phase1_fig7d.png)
 
-Figure 1. Fig. 7d of Moss et al. 2018, reproduced from the public arrays. Left: NNLS colon
+Figure S1. Fig. 7d of Moss et al. 2018, reproduced from the public arrays. Left: NNLS colon
 fraction against the share of cancer plasma in the mix. Right: observed against expected
 colon fraction. All 8 points match the published figure within 0.15 percentage points.
 
@@ -77,7 +77,7 @@ colon fraction. All 8 points match the published figure within 0.15 percentage p
 
 ![LoD against sequencing depth, by score and marker count](../figures/phase3_depth_lod.png)
 
-Figure 2. LoD against simulated depth D. Top row: blank HI1 included. Bottom row: HI1
+Figure S2. LoD against simulated depth D. Top row: blank HI1 included. Bottom row: HI1
 removed. Left: plasma spike. Middle: colon-cell spike. Right: LLR on all markers with an
 input cap, under an earlier pooled threshold rule. Open circles: FPR above 5 %, so that LoD
 is not valid. Dotted "control" lines: no between-person variation. Without between-person
@@ -99,7 +99,7 @@ gain on tumour features is colon-tissue signal: TCGA normal-colon spikes are cal
 
 ![Sensitivity against tumour fraction per model, feature set and track](../figures/phase3b_classifiers.png)
 
-Figure 3. Sensitivity against f, HI1 excluded. Top row: atlas features. Bottom row: tumour
+Figure S3. Sensitivity against f, HI1 excluded. Top row: atlas features. Bottom row: tumour
 features selected inside each training fold. Columns: array betas, then simulated reads at
 D = 30, 100 and 300. Bands: 95 % bootstrap interval over people. Dashed lines with open
 markers: held-out FPR above 5 %. Dotted line: 95 %.
@@ -111,12 +111,15 @@ tumour marker set (`results/phase5/lod.tsv`, `results/phase6/lod.tsv`).
 
 ![Detection rate against spike fraction, HCT116 spike](../figures/phase6_hct116_detection.png)
 
-Figure 4. Share of tests detected against spike fraction f, tumour marker set, k = 1 and 2
-donors per background. Solid lines: real reads. Dashed line: the same tests with reads
-redrawn as ideal binomial calls (LLR_binom only). Dotted line: 95 %. UXM, WZ and LLR_binom
-exceed the 5 % FPR target at k = 1 (2 of 16 spike-free tests), and UXM at k = 2 (1 of 8).
-Their curves therefore start above 0. The ideal-binomial rung also exceeds it at k = 1
-(4 of 16). At k = 2, the WZ (squares) and FRAG curves coincide.
+Figure S4. Share of tests detected against tumour DNA at the markers (the pre-registered
+effective share), tumour marker set, k = 1 and 2 donors per background. Solid lines: real
+reads. Dashed line: the same tests with reads redrawn as ideal binomial calls (LLR only).
+Bands: 95 % donor-bootstrap intervals (`scripts/bootstrap_lod.py`). Left of the axis break:
+the false-positive rate at f = 0 with its 95 % Clopper-Pearson interval. Dash-dot lines: the
+LoD; shaded: the grid points around it. Grey curves fail the 5 % FPR target and get no LoD:
+UXM, WZ and LLR at k = 1 (2 of 16 spike-free tests), the ideal-binomial LLR at k = 1 (4 of
+16), and UXM at k = 2 (1 of 8). At k = 2, the WZ (squares) and FRAG curves coincide. Dotted
+line: 95 %.
 
 | Score | k | LoD, nominal f | LoD, effective share | Eval FPR |
 |---|---|---|---|---|
@@ -148,24 +151,43 @@ Their curves therefore start above 0. The ideal-binomial rung also exceeds it at
 - The 10 breast cancers are not separated from healthy donors (AUC 0.36–0.45). The markers
   come from colorectal tumours, so this check has little power. It is not a positive control.
 
+#### Donor-bootstrap intervals
+
+The 5 seeds of a test redraw only the spike fragments, so the independent unit is the eval
+pool: 16 donors at k = 1, 8 disjoint donor pairs at k = 2. `scripts/bootstrap_lod.py`
+resamples pools with replacement (2,000 replicates), keeps each pool's seeds together, and
+holds the thresholds fixed. The grid interval does not interpolate: it brackets the grid
+points around the LoD over 95 % of replicates. The interpolated interval assumes a straight
+line on log f across the 3–10 % gap, so it shows donor sampling only. Quote the grid
+interval. Values: tumour DNA at the markers (`results/bootstrap/lod.tsv`).
+
+| Spike, score | k | LoD | 95 % grid interval | 95 % interpolated interval | Replicates censored |
+|---|---|---|---|---|---|
+| HCT116, FRAG | 1 | 2.15 % | 0.63 % to above the grid top | 1.96 % to above the grid top | 27 % |
+| HCT116, FRAG | 2 | 2.01 % | 0.61–2.20 % | 1.93–2.05 % | 0 % |
+| Patient B, FRAG | 2 | 1.81 % | 0.52 % to above the grid top | 1.75 % to above the grid top | 7.6 % |
+
 ### Phase 6: real reads, patient-plasma spike
 
 Each GSE186007 run is spiked into the same pools as HCT116. TF comes from arm-level copy
 number in 1 Mb read-depth bins (`scripts/phase6_tf.py`).
 
-| Run | Group | TF | Altered chromosome arms |
-|---|---|---|---|
-| SRR24725517 | CRC | 0.60 | 18 |
-| SRR24725519 | CRC | 0.41 | 22 |
-| SRR24725520 | CRC | 0.10 (95 % interval includes 0) | 1 |
-| 5 other CRC runs | CRC | 0 | 0 |
-| 4 runs | HEA | 0 | 0 |
+| Name in figures | Run | Group | TF | Altered chromosome arms |
+|---|---|---|---|---|
+| Patient A | SRR24725517 | CRC | 0.60 | 18 |
+| Patient B | SRR24725519 | CRC | 0.41 | 22 |
+| Patient C | SRR24725520 | CRC | 0.10 (95 % interval includes 0) | 1 |
+| – | 5 other CRC runs | CRC | 0 | 0 |
+| – | 4 runs | HEA | 0 | 0 |
 
 ![Detection rate against spike fraction per GSE186007 run](../figures/phase6_gse_detection.png)
 
-Figure 5. Share of tests detected against f for each GSE186007 run used as the spike. FRAG
-score, tumour marker set, bound threshold rule, k = 1 and 2. Coloured: CRC runs with TF above
-0. Grey: CRC runs with TF 0. Dashed: healthy runs. Dotted line: 95 %.
+Figure S5. Share of tests detected against tumour DNA at the markers (the run's effective
+share times its TF) for each GSE186007 run used as the spike. FRAG score, tumour marker set,
+bound threshold rule, k = 1 and 2. Coloured: patients A, B and C (the CRC runs with TF above
+0), with 95 % donor-bootstrap bands, the FPR at f = 0 and, for patient B at k = 2, the LoD
+and its grid bracket. Grey: CRC runs with TF 0, drawn at the spike's effective share (an
+upper bound). Dashed: healthy runs. Dotted line: 95 %.
 
 Primary endpoint: FRAG, tumour set, the 3 CRC runs with TF above 0
 (`results/phase6_gse/lod_run.tsv`, `lod_summary.tsv`).
@@ -175,8 +197,8 @@ Primary endpoint: FRAG, tumour set, the 3 CRC runs with TF above 0
 | 1 | 0 of 3 | above 10 % (censored) | at least 4.09 % (all 3 censored) | 2.15 % |
 | 2 | 1 of 3 | between 3 % and 10 % | at least 1.2 % (2 of 3 censored; 3.96 % with the interpolated LoD) | 2.01 % |
 
-- At k = 2, SRR24725519 jumps from 1 of 40 tests detected at f = 3 % to 39 of 40 at f = 10 %
-  (95 % interval 0.87–1.00). The LoD can lie anywhere between those grid points. The value
+- At k = 2, patient B (SRR24725519) jumps from 1 of 40 tests detected at f = 3 % to 39 of 40 at f = 10 %
+  (donor-bootstrap 95 % interval 0.925–1.00, over 8 donor pairs). The LoD can lie anywhere between those grid points. The value
   interpolated on log f is 9.7 % (LoD_tumour 3.96 %). Only the grid bracket is
   certain, so the median over the 3 runs is bounded below by 0.03 × TF 0.409 = 1.2 %. Its effective
   share at the LoD is at most 1.88 %. So the patient run and HCT116 cannot be told apart.

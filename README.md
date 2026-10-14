@@ -17,36 +17,60 @@ colon-cancer cell line (HCT116) and cancer-patient plasma. The backgrounds are r
 of 30 healthy donors: 14 donors set every threshold and the other 16 serve only as test
 backgrounds. Array data and simulated reads give the idealised reference.
 
-![LoD at each step from idealised to real data, and detection curves at k = 2](figures/key_findings.png)
+| Term | Meaning |
+|---|---|
+| LoD | Limit of detection: the lowest spike level detected in at least 95 % of tests |
+| Tumour DNA at the markers | The share of informative fragments at the marker blocks that come from tumour DNA (the pre-registered effective share; times the tumour fraction for patient plasma). All figures use this scale. Nominal f, the share of all fragments, is about 4.6 times higher for HCT116 |
+| k | Pool size: the number of healthy donors whose reads form one background. k = 1 is one person's plasma, the clinical case |
+| Censored | An LoD not reached at the top of the tested grid, so it is known only to lie above it |
 
-**Figure 1.** (a) LoD at each step, from idealised to real data. Each dot is one score,
-marker set or donor-pool size (k). Open dots: FPR above 5 %. Purple bar: the one patient
-run whose LoD lies between the grid points 3 % and 10 %. Arrows: censored LoDs, not reached
-at the top of the tested f grid, so each is only known to lie above it. The grid top is 3 %
-for the simulation (blue arrows) and 10 % for real reads (purple arrows, dashed line). In the
-simulation row, 7 more cells fail the FPR target and are left out. Grey band:
-0.01–0.1 %, the level that minimal residual disease (MRD) monitoring needs. f is the share
-of DNA (arrays, simulation) or of fragments (real reads). (b) Share of tests detected
-against f, k = 2 donors per background, tumour marker set. Dotted line: 95 %.
-Script: `scripts/key_findings_figure.py`.
+![LoD on one scale, measured and idealised; detection at k = 1; tumour fragments per test](figures/key_findings.png)
 
-| Data | Spike | LoD (f at 95 % detection) | Spike-free tests above threshold |
+**Figure 1.** (a) LoD at each step, on one scale: tumour DNA at the markers. Top: measured on
+real reads. Bottom: idealised references. Bars: 95 % donor-bootstrap interval of the grid
+points around the LoD; an arrow means the interval reaches above the grid top. Arrows alone:
+censored LoDs, drawn from the grid top mapped to the markers. Diamonds: the WZ and UXM scores
+(HCT116). Open or grey: false-positive rate above 5 %. In the simulation row, 7 more cells
+fail the FPR target and are left out. Grey band: 0.01–0.1 %, the level that minimal residual
+disease (MRD) monitoring needs. (b) Share of tests detected at k = 1, tumour marker set, with
+95 % donor-bootstrap bands. Left of the axis break: the FPR at f = 0 with its 95 % interval.
+Dash-dot line: the LoD; shaded: the grid points around it. Grey: fails the FPR target.
+(c) Tumour-like spike fragments per test (mean over 80 tests from 16 donors, HCT116, k = 1).
+Dashed line: the count at the LoD. Scripts: `scripts/bootstrap_lod.py`,
+`scripts/key_findings_figure.py`.
+
+**Measured on real reads** (FRAG score, tumour marker set; intervals: 95 % donor bootstrap)
+
+| Spike | k | LoD, tumour DNA at the markers | 95 % interval | LoD, nominal f | Spike-free tests called positive (95 % upper bound) |
+|---|---|---|---|---|---|
+| HCT116 cell line | 1 | 2.15 % | 0.63 % to above the grid top (2.2 %) | 9.8 % | 0 of 16 (21 %) |
+| HCT116 cell line | 2 | 2.01 % | 0.61–2.20 % | 9.2 % | 0 of 8 (37 %) |
+| Plasma of 3 patients with measurable tumour DNA (A, B, C) | 1 | censored for all 3: above 2.6 %, 1.9 % and 0.47 % | – | above 10 % | 0 of 16 (21 %) |
+| The same 3 patients | 2 | B: 1.81 %; A and C censored (above 2.5 % and 0.47 %) | B: 0.52 % to above the grid top | B: 9.7 %; A and C above 10 % | 0 of 8 (37 %) |
+
+**Idealised references**
+
+| Data | Spike | LoD, tumour DNA at the markers | Spike-free tests above threshold (95 % upper bound) |
 |---|---|---|---|
-| Arrays, best trained classifier | TCGA colorectal tumours | 0.9–1.7 % (7 random seeds) | 0 of 11 people |
+| Real reads, ideal binomial model, k = 2 | HCT116 | 0.089 % (nominal f 0.45 %) | 0 of 8 (37 %) |
 | Simulated reads, 100 or more reads per CpG | Colon-cancer plasma or colon cells | 1.2–3.0 %; 3 of 41 cells not reached by the 3 % top of the simulation grid | within the 5 % target (7 more cells fail it and are left out) |
-| Real reads, ideal binomial model, k = 2 | HCT116 | 0.45 % | 0 of 8 |
-| Real reads, FRAG score, k = 1 and 2 | HCT116 | 9.8 % and 9.2 % (effective share 2.15 % and 2.01 %) | 0 of 16 and 0 of 8 |
-| Real reads, FRAG score, k = 1 | Plasma of 3 patients with measurable tumour DNA | above 10 % for all 3 runs; median tumour-DNA scale at least 4.09 % | – |
-| Real reads, FRAG score, k = 2 | The same 3 patients | 1 run between 3 % and 10 %, 2 above 10 %; median tumour-DNA scale at least 1.2 % (3.96 % if interpolated) | – |
+| Arrays, best trained classifier | TCGA colorectal tumours | 0.9–1.7 % (7 random seeds) | 0 of 11 people (28 %) |
 
-The test detects a few per cent of tumour DNA, not the 0.01–0.1 % that MRD monitoring
-needs. On real reads, every finite LoD lies between the grid points 3 % and 10 %, so its
-exact value is not known. An LoD above the top of the grid (10 %) is censored and given as a
-lower bound.
+The spike-free tests of the patient arm are the same tests as for HCT116, with the same
+thresholds. In arrays and simulated reads, f is the tumour DNA share of every CpG, so it needs
+no mapping.
 
-**How the LoD could improve.** Deeper sequencing alone will not help: in simulation the LoD
-is flat from 100 reads per CpG up, and real reads lose more than tenfold against an ideal
-binomial model with the same calls (9.2 % against 0.45 %). To improve the LoD, model gains must
+With HCT116 cell-line DNA, 95 % detection needs at most about 2 % of marker fragments from
+the tumour (between 0.6 % and 2.2 %). On real reads, every finite LoD lies between the
+nominal grid points 3 % and 10 % (about 0.6 % and 2.2 % at the markers), so its exact value is
+not known. The donor-bootstrap interval spans that whole gap, and at k = 1 it reaches above
+the grid top. An LoD above the top of the grid is censored and given as a lower bound.
+
+**How the LoD could improve.** Each one-person test holds about 1,600 informative fragments
+at the tumour markers. At the LoD, about 20 are tumour-like spike fragments (Figure 1c).
+Background differences between people dominate the score's noise at this depth. At MRD levels
+a test would hold about one tumour fragment or fewer, so MRD needs many more informative
+fragments, not only a better score. To improve the LoD, model gains must
 come from more healthy donors to set thresholds. This data can be used to derive a score that
 models co-methylation within fragments and variation between people. This can also be used to discover markers that are consistent across tumor types for panel design.
 
@@ -150,7 +174,8 @@ the patient-plasma spike).
 | 5. Thresholds, detection, LoD and FPR | `uv run python scripts/phase6_summary.py` | `results/phase6/lod.tsv`, `detection.tsv`, `fpr.tsv` |
 | 6. Tumour fraction of each patient run, from copy number | `uv run python scripts/phase6_tf.py tf <runs.tsv> <bins_dir> <gc.tsv> <out_dir>` | `tf.tsv` (committed as `results/phase6_gse/tf.tsv`) |
 | 7. Patient-plasma spike: score and summarise | `uv run python scripts/phase6_gse_score.py && uv run python scripts/phase6_gse_summary.py` | `results/phase6_gse/lod_run.tsv`, `lod_summary.tsv` |
-| 8. Figures | `uv run python scripts/key_findings_figure.py && uv run python scripts/phase6_figures.py` | `figures/` |
+| 8. Donor bootstrap: intervals for detection, FPR and LoD | `uv run python scripts/bootstrap_lod.py` | `results/bootstrap/detection.tsv`, `lod.tsv`, `spike_fragments.tsv` |
+| 9. Figures | `uv run python scripts/key_findings_figure.py && uv run python scripts/phase6_figures.py` | `figures/` |
 
 The rules for Phase 6 were fixed before scoring in `pipeline/PREREGISTERED_PHASE6.md`. The
 scoring script refuses to run if these rules or the scoring code are uncommitted or changed.
