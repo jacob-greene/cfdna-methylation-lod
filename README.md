@@ -46,9 +46,10 @@ lower bound.
 
 **How the LoD could improve.** Deeper sequencing alone will not help: in simulation the LoD
 is flat from 100 reads per CpG up, and real reads lose more than tenfold against an ideal
-binomial model with the same calls (9.2 % against 0.45 %). The gains must come from more
-healthy donors to set thresholds, a score that models co-methylation within fragments and
-variation between people, and markers matched to the patient's tumour.
+binomial model with the same calls (9.2 % against 0.45 %). To improve the LoD, model gains must
+come from more healthy donors to set thresholds. This data can be used to derive a score that
+models co-methylation within fragments and variation between people, and markers matched to
+the patient's tumour.
 
 ### The data, how they were selected, and how they could be better
 
