@@ -7,9 +7,9 @@ patients.
 
 ## Key findings
 
-**Question.** What is the lowest share of tumour DNA in plasma that a 500-CpG colorectal
-methylation panel detects in at least 95 % of tests, at a false-positive rate (FPR) of 5 %
-or less?
+**Question.** What is the lowest share of tumour DNA in plasma that a colorectal methylation
+panel of 500 CpG sites (a cytosine followed by a guanine: the site of DNA methylation) detects
+in at least 95 % of tests, at a false-positive rate (FPR) of 5 % or less?
 
 **Design.** We mix a known spike fraction f of tumour signal into healthy cfDNA, then find
 the lowest f that scores above a threshold set on healthy samples only. The spikes are a
@@ -17,47 +17,34 @@ colon-cancer cell line (HCT116) and cancer-patient plasma. The backgrounds are r
 of 30 healthy donors: 14 donors set every threshold and the other 16 serve only as test
 backgrounds. Array data and simulated reads give the idealised reference.
 
+Terms used in the figure and tables below (more in [`docs/RESULTS.md`](docs/RESULTS.md#terms)):
+
 | Term | Meaning |
 |---|---|
-| LoD | Limit of detection: the lowest spike level detected in at least 95 % of tests |
 | Tumour DNA at the markers | The share of informative fragments at the marker blocks that come from tumour DNA (the pre-registered effective share; times the tumour fraction for patient plasma). All figures use this scale. Nominal f, the share of all fragments, is about 4.6 times higher for HCT116 |
-| k | Pool size: the number of healthy donors whose reads form one background. k = 1 is one person's plasma, the clinical case |
+| FRAG | The main score: the count of fragments with 3 or more CpG calls that all match the tumour direction, in blocks that are quiet in healthy plasma, as a Z score |
+| Ideal binomial model | The same tests, with reads redrawn as independent binomial calls. It shows the LoD without real-read effects |
 | Censored | An LoD not reached at the top of the tested grid, so it is known only to lie above it |
 
-![LoD on one scale, measured and idealised; detection at k = 1; tumour fragments per test in one HCT116 spike](figures/key_findings.png)
+![LoD on one scale, measured and idealised; detection at k = 1](figures/key_findings.png)
 
 **Figure 1.** (a) LoD at each step, on one scale: tumour DNA at the markers. Top: measured on
 real reads. Bottom: idealised references. Bars: 95 % donor-bootstrap interval of the grid
 points around the LoD; an arrow means the interval reaches above the grid top. Arrows alone:
-censored LoDs, drawn from the grid top mapped to the markers. Diamonds: the WZ and UXM scores
-(HCT116), on the same FRAG effective-share mapping. Open or grey: FPR above 5 %. In the simulation row, 7 more cells
-fail the FPR target and are left out. Grey band: 0.01–0.1 %, the MRD target. (b) Share of
-tests detected at k = 1, tumour marker set, with 95 % donor-bootstrap bands. Left of the axis
-break: the FPR at f = 0 with its 95 % interval. Dash-dot line: the LoD; shaded: the grid
-points around it. Grey: fails the FPR target. Patient B is the only patient run with a finite
-LoD (at k = 2); patients A and C stay censored (Figure S5). (c) Tumour-like spike fragments
-per test. One HCT116 spike, mixed into the reads of each of the 16 test donors at k = 1, with
-5 random seeds per donor: 80 tests per f. Points: mean; bars: standard deviation (SD) over the
-80 tests; bars that reach the bottom of the axis extend to 0. Dashed line: the count at the
-LoD. Scripts: `scripts/bootstrap_lod.py`, `scripts/key_findings_figure.py`.
-
-Abbreviations in Figure 1:
-
-| Abbreviation | Meaning |
-|---|---|
-| LoD | Limit of detection: the lowest spike level detected in at least 95 % of tests |
-| FPR | False-positive rate: the share of spike-free tests scored above the threshold (target 5 % or less) |
-| MRD | Minimal residual disease: tumour left after treatment. Monitoring it needs detection at 0.01–0.1 % tumour DNA |
-| TF | Tumour fraction: the share of a patient's plasma cfDNA that comes from the tumour |
-| k | Pool size: the number of healthy donors whose reads form one background |
-| f | Spike fraction: the share of all fragments that come from the spike; f = 0 is a spike-free test |
-| HCT116 | A colorectal-cancer cell line; its DNA is the cell-line spike |
-| FRAG | Fragment-count score: fragments with 3 or more CpG calls that all match the tumour direction, as a Z score |
-| WZ | Weighted Z score of block methylation |
-| UXM | Share of fragments in a tumour block that are fully methylated |
-| LLR | Log-likelihood ratio of "tumour at fraction f" against "background only" |
-| CpG | A cytosine followed by a guanine: the site of DNA methylation |
-| SD | Standard deviation |
+censored LoDs, drawn from the grid top mapped to the markers. Diamonds: two other scores for
+HCT116, on the same mapping as FRAG: a weighted Z score of block methylation (WZ) and the
+share of fully methylated fragments. Open or grey: FPR above 5 %. In the simulation row, 7
+more cells fail the FPR target and are left out. Grey band: 0.01–0.1 %, the target for
+monitoring minimal residual disease (MRD), the tumour left after treatment. (b) Share of tests
+detected at k = 1, tumour marker set, with 95 % donor-bootstrap bands. Left of the axis break:
+the FPR at f = 0 with its 95 % interval. Dash-dot line: the LoD; shaded: the grid points
+around it. Grey: fails the FPR target. Patient B is the only patient run with a finite LoD
+(at k = 2); patients A and C stay censored (Figure S5). Scripts: `scripts/bootstrap_lod.py`,
+`scripts/key_findings_figure.py`. Variables: f, the spike fraction, is the share of all
+fragments that come from the spike (f = 0 is a spike-free test). k, the pool size, is the
+number of healthy donors whose reads form one background (k = 1 is one person's plasma, the
+clinical case). TF, the tumour fraction, is the share of a patient's plasma cfDNA that comes
+from the tumour.
 
 **Measured on real reads** (FRAG score, tumour marker set; intervals: 95 % donor bootstrap)
 
@@ -77,8 +64,8 @@ Abbreviations in Figure 1:
 | Arrays, best trained classifier | TCGA colorectal tumours | 0.9–1.7 % (7 random seeds) | 0 of 11 people (28 %) |
 
 For patient plasma, this scale is the pre-registered tumour effective share (effective
-share × TF). The pre-registered primary patient endpoint, LoD_tumour = nominal-f LoD × TF,
-is in [`docs/RESULTS.md`](docs/RESULTS.md) (patient B, k = 2: 3.96 %). The spike-free tests
+share × tumour fraction). The pre-registered primary patient endpoint, LoD_tumour =
+nominal-f LoD × tumour fraction, is in [`docs/RESULTS.md`](docs/RESULTS.md) (patient B, k = 2: 3.96 %). The spike-free tests
 of the patient arm are the same tests as for HCT116, with the same
 thresholds. In arrays and simulated reads, f is the tumour DNA share of every CpG, so it needs
 no mapping.
@@ -90,7 +77,8 @@ not known. The donor-bootstrap interval spans that whole gap, and at k = 1 it re
 the grid top. An LoD above the top of the grid is censored and given as a lower bound.
 
 **How the LoD could improve.** Each one-person test holds about 1,600 informative fragments
-at the tumour markers. At the LoD, about 20 are tumour-like spike fragments (Figure 1c).
+at the tumour markers. At the LoD, about 20 are tumour-like spike fragments
+(`results/bootstrap/spike_fragments.tsv`).
 Background differences between people dominate the score's noise at this depth. At MRD levels
 a test would hold about one tumour fragment or fewer, so MRD needs many more informative
 fragments, not only a better score. To improve the LoD, model gains must
@@ -120,23 +108,6 @@ A better data set for this model would have:
 | More than one cell line | One CIMP-high line may overstate detection of typical tumours |
 
 Full results per phase, all controls and the limitations: [`docs/RESULTS.md`](docs/RESULTS.md).
-
-## Terms
-
-| Term | Meaning |
-|---|---|
-| cfDNA | Cell-free DNA: short DNA fragments that circulate in blood plasma |
-| f | Spike fraction: the share of DNA (array phases) or of fragments (read phases) that comes from the spike |
-| LoD | Limit of detection: the lowest f detected in at least 95 % of tests, interpolated on log f |
-| FPR | False-positive rate: the share of spike-free tests scored above the threshold. The target is 5 % or less |
-| k | Pool size: the number of healthy donors whose reads form one background |
-| Effective share | The share of fragments at the marker blocks that comes from the spike. It is lower than f, because the spike covers the markers less well |
-| Tumour-DNA scale | LoD × tumour fraction: the LoD expressed as a share of tumour DNA, for a patient-plasma spike |
-| FRAG | Count of fragments with 3 or more CpG calls that all match the tumour direction, in blocks that are quiet in healthy plasma, as a Z score |
-| Ideal binomial model | The same tests, with reads redrawn as independent binomial calls. It shows the LoD without real-read effects |
-| Censored | An LoD known only to lie above the top of the tested f range |
-
-More terms: [`docs/RESULTS.md`](docs/RESULTS.md#terms).
 
 ## Pipeline and how to run
 
