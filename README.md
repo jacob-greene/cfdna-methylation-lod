@@ -26,7 +26,7 @@ Terms used in the figure and tables below (more in [`docs/RESULTS.md`](docs/RESU
 | Ideal binomial model | The same tests, with reads redrawn as independent binomial calls. It shows the LoD without real-read effects |
 | Censored | An LoD not reached at the top of the tested grid, so it is known only to lie above it |
 
-![LoD on one scale, measured and idealised; detection at k = 1](figures/key_findings.png)
+![LoD on one scale, measured and idealised; detection at k = 1; tumour fragments per test in one HCT116 spike](figures/key_findings.png)
 
 **Figure 1.** (a) LoD at each step, on one scale: tumour DNA at the markers. Top: measured on
 real reads. Bottom: idealised references. Bars: 95 % donor-bootstrap interval of the grid
@@ -39,8 +39,11 @@ monitoring minimal residual disease (MRD), the tumour left after treatment. (b) 
 detected at k = 1, tumour marker set, with 95 % donor-bootstrap bands. Left of the axis break:
 the FPR at f = 0 with its 95 % interval. Dash-dot line: the LoD; shaded: the grid points
 around it. Grey: fails the FPR target. Patient B is the only patient run with a finite LoD
-(at k = 2); patients A and C stay censored (Figure S5). Scripts: `scripts/bootstrap_lod.py`,
-`scripts/key_findings_figure.py`. Variables: f, the spike fraction, is the share of all
+(at k = 2); patients A and C stay censored (Figure S5). (c) Tumour-like spike fragments per
+test. One HCT116 spike, mixed into the reads of each of the 16 test donors at k = 1, with 5
+random seeds per donor: 80 tests per f. Points: mean; bars: standard deviation (SD) over the
+80 tests; bars that reach the bottom of the axis extend to 0. Dashed line: the count at the
+LoD. Scripts: `scripts/bootstrap_lod.py`, `scripts/key_findings_figure.py`. Variables: f, the spike fraction, is the share of all
 fragments that come from the spike (f = 0 is a spike-free test). k, the pool size, is the
 number of healthy donors whose reads form one background (k = 1 is one person's plasma, the
 clinical case). TF, the tumour fraction, is the share of a patient's plasma cfDNA that comes
@@ -77,8 +80,7 @@ not known. The donor-bootstrap interval spans that whole gap, and at k = 1 it re
 the grid top. An LoD above the top of the grid is censored and given as a lower bound.
 
 **How the LoD could improve.** Each one-person test holds about 1,600 informative fragments
-at the tumour markers. At the LoD, about 20 are tumour-like spike fragments
-(`results/bootstrap/spike_fragments.tsv`).
+at the tumour markers. At the LoD, about 20 are tumour-like spike fragments (Figure 1c).
 Background differences between people dominate the score's noise at this depth. At MRD levels
 a test would hold about one tumour fragment or fewer, so MRD needs many more informative
 fragments, not only a better score. To improve the LoD, model gains must
