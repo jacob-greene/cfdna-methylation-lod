@@ -192,7 +192,7 @@ def curves(ax):
          ("hct116", "HCT116", "real", "FRAG"), PAIRED[5], "-"),
         ("Patient B plasma (TF 0.41), FRAG",
          ("patient", "SRR24725519", "real", "FRAG"), PAIRED[9], "-"),
-        ("Ideal binomial model (LLR)",
+        ("Ideal binomial model, likelihood-ratio score",
          ("hct116", "HCT116", "binom_real", "LLR_binom"), PAIRED[7], "--"),
     ]
     for i, (label, key, col, ls) in enumerate(lines):
@@ -229,7 +229,8 @@ def curves(ax):
     ax.set_xlabel(X_LABEL)
     ax.set_ylabel("Share of tests detected")
     ax.set_title(f"b   Detection at k = {k} donor per background", loc="left", fontsize=10)
-    ax.legend(frameon=False, fontsize=7, loc="center", bbox_to_anchor=(0.5, 0.58))
+    # Below the axes, so that the legend cannot cover a curve or a band.
+    ax.legend(frameon=False, fontsize=7.5, loc="upper center", bbox_to_anchor=(0.5, -0.15))
 
 
 def fragments(ax):
