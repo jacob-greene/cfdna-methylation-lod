@@ -1,21 +1,20 @@
 # cfdna-methylation-lod
 
 How little tumour DNA can a cell-free DNA (cfDNA) methylation test detect in blood plasma?
-This repository measures the limit of detection (LoD) of a colorectal-cancer methylation
-marker panel, from public array data to real sequencing reads of healthy donors and cancer
+This project measures the limit of detection (LoD) of a colorectal-cancer methylation
+marker panel from public DNA methylation array data and plasma sequencing reads of healthy donors and cancer
 patients.
 
 ## Key findings
 
 **Question.** What is the lowest share of tumour DNA in plasma that a colorectal methylation
-panel of 500 CpG sites (a cytosine followed by a guanine: the site of DNA methylation) detects
-in at least 95 % of tests, at a false-positive rate (FPR) of 5 % or less?
+panel of 500 CpG sites detects in at least 95 % of tests, at a false-positive rate (FPR) of 5% or less?
 
-**Design.** We mix a known spike fraction f of tumour signal into healthy cfDNA, then find
-the lowest f that scores above a threshold set on healthy samples only. The spikes are a
-colon-cancer cell line (HCT116) and cancer-patient plasma. The backgrounds are real reads
+**Design.** To determine LoD, I spiked-in a fraction (f) of tumour DNA into healthy cfDNA, then quantified
+the lowest amount that scores below a detection threshold set on healthy samples only. The spike-ins are from a
+colon-cancer cell line (HCT116) and cancer-patient plasma. The genomic backgrounds are plasma reads
 of 30 healthy donors: 14 donors set every threshold and the other 16 serve only as test
-backgrounds. Array data and simulated reads give the idealised reference.
+backgrounds.
 
 Terms used in the figure and tables below (more in [`docs/RESULTS.md`](docs/RESULTS.md#terms)):
 
@@ -39,19 +38,19 @@ monitoring minimal residual disease (MRD), the tumour left after treatment. (b) 
 detected at k = 1, tumour marker set, with 95 % donor-bootstrap bands. Left of the axis break:
 the FPR at f = 0 with its 95 % interval. Dash-dot line: the LoD; shaded: the grid points
 around it. Grey: fails the FPR target. Patient B is the only patient run with a finite LoD
-(at k = 2); patients A and C stay censored (Figure S5). (c) Tumour-like spike fragments per
+(at k = 2); patients A and C stay censored (Figure S5). (c) Tumour-like spike-in fragments per
 test. One HCT116 spike, mixed into the reads of each of the 16 test donors at k = 1, with 5
 random seeds per donor: 80 tests per f. Points: mean; bars: standard deviation (SD) over the
 80 tests; bars that reach the bottom of the axis extend to 0. Dashed line: the count at the
-LoD. Scripts: `scripts/bootstrap_lod.py`, `scripts/key_findings_figure.py`. Variables: f, the spike fraction, is the share of all
-fragments that come from the spike (f = 0 is a spike-free test). k, the pool size, is the
+LoD. Scripts: `scripts/bootstrap_lod.py`, `scripts/key_findings_figure.py`. Variables: f, the spike-in fraction, is the share of all
+fragments that come from the spike-in (f = 0 is a spike-free test). k, the pool size, is the
 number of healthy donors whose reads form one background (k = 1 is one person's plasma, the
 clinical case). TF, the tumour fraction, is the share of a patient's plasma cfDNA that comes
 from the tumour.
 
 **Measured on real reads** (FRAG score, tumour marker set; intervals: 95 % donor bootstrap)
 
-| Spike | k | LoD, tumour DNA at the markers | 95 % interval | LoD, nominal f | Spike-free tests called positive (95 % upper bound) |
+| Spike-in | k | LoD, tumour DNA at the markers | 95 % interval | LoD, nominal f | Spike-free tests called positive (95 % upper bound) |
 |---|---|---|---|---|---|
 | HCT116 cell line | 1 | 2.15 % | 0.63 % to above the grid top (2.2 %) | 9.8 % | 0 of 16 (21 %) |
 | HCT116 cell line | 2 | 2.01 % | 0.61–2.20 % | 9.2 % | 0 of 8 (37 %) |
@@ -60,7 +59,7 @@ from the tumour.
 
 **Idealised references**
 
-| Data | Spike | LoD, tumour DNA at the markers | Spike-free tests above threshold (95 % upper bound) |
+| Data | Spike-in | LoD, tumour DNA at the markers | Spike-free tests above threshold (95 % upper bound) |
 |---|---|---|---|
 | Real reads, ideal binomial model, k = 2 | HCT116 | 0.089 % (nominal f 0.45 %) | 0 of 8 (37 %) |
 | Simulated reads, 100 or more reads per CpG | Colon-cancer plasma or colon cells | 1.2–3.0 %; 3 of 41 cells not reached by the 3 % top of the simulation grid | within the 5 % target (7 more cells fail it and are left out) |
@@ -79,11 +78,11 @@ nominal grid points 3 % and 10 % (about 0.6 % and 2.2 % at the markers), so its 
 not known. The donor-bootstrap interval spans that whole gap, and at k = 1 it reaches above
 the grid top. An LoD above the top of the grid is censored and given as a lower bound.
 
-**How the LoD could improve.** At low spike levels, the number of tumour-like spike fragments
-in a test varies widely from test to test (Figure 1c, error bars). For one HCT116 spike in the
+**How the LoD could improve.** At low spike-in levels, the number of tumour-like spike-in fragments
+in a test varies widely from test to test (Figure 1c, error bars). For one HCT116 spike-in in the
 16 test donors at k = 1, with 80 tests per level:
 
-| Tumour DNA at the markers | Mean tumour-like spike fragments per test | SD | Tests with none |
+| Tumour DNA at the markers | Mean tumour-like spike-in fragments per test | SD | Tests with none |
 |---|---|---|---|
 | 0.01 % | 0.09 | 0.28 | 91 % |
 | 0.07 % | 0.53 | 0.95 | 65 % |
@@ -92,7 +91,7 @@ in a test varies widely from test to test (Figure 1c, error bars). For one HCT11
 | 2.2 % | 20.2 | 7.8 | 0 % |
 
 Each one-person test holds about 1,600 informative fragments at the tumour markers. At the
-LoD, about 20 are tumour-like spike fragments. Background differences between people dominate
+LoD, about 20 are tumour-like spike-in fragments. Background differences between people dominate
 the score's noise at this depth. At MRD levels a test would hold about one tumour fragment or
 fewer, and most tests hold none, so MRD needs many more informative fragments, not only a
 better score. To improve the LoD, model gains must
@@ -106,8 +105,8 @@ All data are public. Each source fills one role in the spike-in design.
 | Source | Role | Why this source | Limit for the model |
 |---|---|---|---|
 | SPOT-MAS cfDNA (SRA PRJNA929650) | Healthy backgrounds | 30 healthy donors with whole-genome bisulfite reads: enough to keep threshold donors (14) apart from test donors (16) | About 15 million read pairs per donor (median; range 8–26 million). Only 16 spike-free tests at k = 1 and 8 at k = 2: an FPR of 0 of 16 has a 95 % upper bound of 21 % |
-| HCT116 cell line (GSM8156741) | Tumour spike | A colon-cancer genome with whole-genome bisulfite reads and no normal-cell DNA | One cell line. HCT116 is CIMP-high, so it is more methylated at the markers than a typical tumour |
-| Colorectal-cancer plasma (GSE186007) | Patient spike | Real patient cfDNA, with healthy runs from the same protocol as a control | 8 cancer runs; only 3 have tumour DNA measurable by copy number. A different library protocol from the backgrounds |
+| HCT116 cell line (GSM8156741) | Tumour spike-in | A colon-cancer genome with whole-genome bisulfite reads and no normal-cell DNA | One cell line. HCT116 is CIMP-high, so it is more methylated at the markers than a typical tumour |
+| Colorectal-cancer plasma (GSE186007) | Patient spike-in | Real patient cfDNA, with healthy runs from the same protocol as a control | 8 cancer runs; only 3 have tumour DNA measurable by copy number. A different library protocol from the backgrounds |
 | TCGA-COAD arrays (GDC) | Marker selection | 276 tumours with purity of 0.6 or more | Markers come from tumour tissue. The patient run with the highest tumour fraction is rarely detected |
 | Moss et al. 2018 arrays and atlas (GSE122126) | Idealised reference | A published plasma-dilution series to reproduce | 12 healthy blanks; array, not sequencing, data |
 
@@ -176,9 +175,9 @@ the patient-plasma spike).
 | Step | Command | Output |
 |---|---|---|
 | 1. Train the transfer classifiers (needs the Phase 3b inputs, see below) | `uv run python scripts/phase5_transfer_train.py --features atlas` | transfer models |
-| 2. Mix the HCT116 spike into donor pools, score, set thresholds on the 14 threshold donors | `uv run python scripts/phase5_score.py && uv run python scripts/phase5_summary.py` | `results/phase5/scores.tsv.gz`, `lod.tsv`, `detection.tsv` |
+| 2. Mix the HCT116 spike-in into donor pools, score, set thresholds on the 14 threshold donors | `uv run python scripts/phase5_score.py && uv run python scripts/phase5_summary.py` | `results/phase5/scores.tsv.gz`, `lod.tsv`, `detection.tsv` |
 | 3. Fit the FRAG and WZ null model on the threshold donors and score their pools | `uv run python scripts/phase6_score.py --stage threshold` | `results/phase6/threshold_scores.tsv` |
-| 4. Score the 16 test donors with the HCT116 spike | `uv run python scripts/phase6_score.py --stage eval` | `results/phase6/eval_scores.tsv.gz` |
+| 4. Score the 16 test donors with the HCT116 spike-in | `uv run python scripts/phase6_score.py --stage eval` | `results/phase6/eval_scores.tsv.gz` |
 | 5. Thresholds, detection, LoD and FPR | `uv run python scripts/phase6_summary.py` | `results/phase6/lod.tsv`, `detection.tsv`, `fpr.tsv` |
 | 6. Tumour fraction of each patient run, from copy number | `uv run python scripts/phase6_tf.py tf <runs.tsv> <bins_dir> <gc.tsv> <out_dir>` | `tf.tsv` (committed as `results/phase6_gse/tf.tsv`) |
 | 7. Patient-plasma spike: score and summarise | `uv run python scripts/phase6_gse_score.py && uv run python scripts/phase6_gse_summary.py` | `results/phase6_gse/lod_run.tsv`, `lod_summary.tsv` |
