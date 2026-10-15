@@ -98,7 +98,7 @@ better score. To improve the LoD, model gains must
 come from more healthy donors to set thresholds. This data can be used to derive a score that
 models co-methylation within fragments and variation between people. This can also be used to discover markers that are consistent across tumor types for panel design.
 
-### The dataset , how it was selected, and recommended changes to improve LoD
+### Dataset selection and possible changes to improve LoD
 
 All data are public. Each source fills one role in the spike-in design.
 
