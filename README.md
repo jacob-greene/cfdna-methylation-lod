@@ -21,7 +21,7 @@ Terms used in the figure and tables below (more in [`docs/RESULTS.md`](docs/RESU
 | Term | Meaning |
 |---|---|
 | Tumour DNA at the markers | The share of informative fragments at the marker blocks that come from tumour DNA (the pre-registered effective share; times the tumour fraction for patient plasma). All figures use this scale. Nominal f, the share of all fragments, is about 4.6 times higher for HCT116 |
-| FRAG | The main score: the count of fragments with 3 or more CpG calls that all match the tumour direction, in blocks that are quiet in healthy plasma, as a Z score |
+| FRAG | The main score: the count of fragments with 3 or more CpG calls that all match the tumour direction, in blocks that are negative in healthy plasma (Z-scored) |
 | Ideal binomial model | The same tests, with reads redrawn as independent binomial calls. It shows the LoD without real-read effects |
 | Censored | An LoD not reached at the top of the tested grid, so it is known only to lie above it |
 
