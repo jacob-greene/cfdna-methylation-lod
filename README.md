@@ -79,11 +79,23 @@ nominal grid points 3 % and 10 % (about 0.6 % and 2.2 % at the markers), so its 
 not known. The donor-bootstrap interval spans that whole gap, and at k = 1 it reaches above
 the grid top. An LoD above the top of the grid is censored and given as a lower bound.
 
-**How the LoD could improve.** Each one-person test holds about 1,600 informative fragments
-at the tumour markers. At the LoD, about 20 are tumour-like spike fragments (Figure 1c).
-Background differences between people dominate the score's noise at this depth. At MRD levels
-a test would hold about one tumour fragment or fewer, so MRD needs many more informative
-fragments, not only a better score. To improve the LoD, model gains must
+**How the LoD could improve.** At low spike levels, the number of tumour-like spike fragments
+in a test varies widely from test to test (Figure 1c, error bars). For one HCT116 spike in the
+16 test donors at k = 1, with 80 tests per level:
+
+| Tumour DNA at the markers | Mean tumour-like spike fragments per test | SD | Tests with none |
+|---|---|---|---|
+| 0.01 % | 0.09 | 0.28 | 91 % |
+| 0.07 % | 0.53 | 0.95 | 65 % |
+| 0.21 % | 1.85 | 1.30 | 12.5 % |
+| 0.63 % | 5.6 | 3.1 | 2.5 % |
+| 2.2 % | 20.2 | 7.8 | 0 % |
+
+Each one-person test holds about 1,600 informative fragments at the tumour markers. At the
+LoD, about 20 are tumour-like spike fragments. Background differences between people dominate
+the score's noise at this depth. At MRD levels a test would hold about one tumour fragment or
+fewer, and most tests hold none, so MRD needs many more informative fragments, not only a
+better score. To improve the LoD, model gains must
 come from more healthy donors to set thresholds. This data can be used to derive a score that
 models co-methylation within fragments and variation between people. This can also be used to discover markers that are consistent across tumor types for panel design.
 
