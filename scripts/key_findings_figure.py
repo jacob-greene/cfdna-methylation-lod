@@ -14,8 +14,12 @@ figures/key_findings.png
         (scripts/bootstrap_lod.py).
     (b) Detection rate at k = 1 donor per background, tumour marker set, with donor-bootstrap
         bands, the LoD and its grid bracket, and the false-positive rate (FPR) at f = 0.
-    (c) Tumour-like spike fragments per test against tumour DNA at the markers (HCT116,
-        k = 1), with the count at the LoD.
+    (c) Tumour-like spike fragments per test against tumour DNA at the markers: one HCT116
+        spike mixed into the reads of each of the 16 test donors (k = 1, 5 seeds per donor,
+        80 tests per f). Points: mean; bars: SD over the 80 tests. Dashed line: the count at
+        the LoD.
+
+The three panels sit in one row.
 
 Usage: uv run python scripts/bootstrap_lod.py && uv run python scripts/key_findings_figure.py
 """
@@ -125,7 +129,7 @@ def _measured(ax, y, r, col, valid=True, label=True):
 def ladder(ax):
     lod, _ = boot()
     ax.axvspan(1e-4, 1e-3, color="0.92", zorder=0)
-    ax.text(3.2e-4, 7.55, "MRD needs", ha="center", va="bottom", fontsize=7, color="0.35")
+    ax.text(3.2e-4, 7.55, "MRD target", ha="center", va="bottom", fontsize=7, color="0.35")
     labels = []
     # Measured on real reads: HCT116 (FRAG with intervals; UXM and WZ as points only).
     y = 7
@@ -231,6 +235,14 @@ def curves(ax):
 def fragments(ax):
     sf = pd.read_csv(RES / "bootstrap/spike_fragments.tsv", sep="\t")
     sf = sf[sf.k == 1]
+    # SD of the count over all tests at each f: 16 test donors x 5 seeds (k = 1).
+    e6 = pd.read_csv(RES / "phase6/effective_share.tsv", sep="\t")
+    e6 = e6[(e6.rung == "real") & (e6.set == "tumour") & (e6.k == 1) & (e6.f > 0)]
+    per_f = e6.groupby("f").agg(sd=("spike_tumour_like_selected", "std"),
+                                n=("spike_tumour_like_selected", "size"),
+                                donors=("pool", "nunique"))
+    sf = sf.merge(per_f, left_on="f", right_index=True)
+    n_tests, n_donors = int(per_f.n.iloc[0]), int(per_f.donors.iloc[0])
     lod, _ = boot()
     r = lod[(lod.arm == "hct116") & (lod.rung == "real") & (lod.score == "FRAG")
             & (lod.k == 1)].iloc[0]
@@ -238,33 +250,38 @@ def fragments(ax):
     at_lod = 10 ** np.interp(np.log10(r.lod_marker), x, y)
     slope = float(np.exp(np.mean(np.log(sf["mean"] / sf.x_marker))))  # fragments per share
     ax.axvspan(1e-4, 1e-3, color="0.92", zorder=0)
-    ax.plot(sf.x_marker, sf["mean"], "-o", color=PAIRED[5], ms=4, lw=1.5,
-            label="Mean over 80 tests (16 donors)")
+    y_bot = 0.005
+    lo = np.minimum(sf.sd, sf["mean"] - y_bot / 1.01)  # bars below the axis stop at its bottom
+    ax.errorbar(sf.x_marker, sf["mean"], yerr=[lo, sf.sd], fmt="-o", color=PAIRED[5], ms=4,
+                lw=1.5, elinewidth=1, capsize=2.5,
+                label=f"Mean ± SD over {n_tests} tests\n({n_donors} donors × "
+                      f"{n_tests // n_donors} seeds)")
     ax.axhline(at_lod, color="0.4", lw=0.8, ls="--")
     ax.text(X_MIN * 1.2, at_lod * 1.15, f"about {at_lod:.0f} at the LoD", fontsize=7,
             color="0.3")
-    ax.text(3.2e-4, 60, "MRD", ha="center", fontsize=7, color="0.35")
+    ax.text(3.2e-4, 60, "MRD target", ha="center", fontsize=7, color="0.35")
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.set_xlim(X_MIN, 0.05)
-    ax.set_ylim(0.005, 100)
+    ax.set_ylim(y_bot, 100)
     ax.set_xticks(X_TICKS[:-1], X_LABELS[:-1], fontsize=8)
     ax.set_yticks([0.01, 0.1, 1, 10, 100], ["0.01", "0.1", "1", "10", "100"], fontsize=8)
     ax.minorticks_off()
     ax.set_xlabel(X_LABEL)
     ax.set_ylabel("Tumour-like spike fragments\nper test")
-    ax.set_title("c   Tumour fragments per test, k = 1", loc="left", fontsize=10)
+    ax.set_title(f"c   One HCT116 spike in {n_donors} donors' plasma, k = 1", loc="left",
+                 fontsize=10)
     ax.legend(frameon=False, fontsize=7, loc="lower right")
     print(f"tumour-like spike fragments at the LoD (k = 1): {at_lod:.1f}; at 0.01 % and "
           f"0.1 % (proportional fit): {slope * 1e-4:.3f} and {slope * 1e-3:.2f}")
 
 
 def main():
-    fig = plt.figure(figsize=(10, 8.6))
-    gs = fig.add_gridspec(2, 2, height_ratios=[1.45, 1], hspace=0.3, wspace=0.3)
-    ladder(fig.add_subplot(gs[0, :]))
-    curves(fig.add_subplot(gs[1, 0]))
-    fragments(fig.add_subplot(gs[1, 1]))
+    fig = plt.figure(figsize=(17, 5.6))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.3, 1, 1], wspace=0.32)
+    ladder(fig.add_subplot(gs[0, 0]))
+    curves(fig.add_subplot(gs[0, 1]))
+    fragments(fig.add_subplot(gs[0, 2]))
     fig.savefig(FIG / "key_findings.png", bbox_inches="tight")
     plt.close(fig)
 
