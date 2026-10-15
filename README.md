@@ -24,20 +24,40 @@ backgrounds. Array data and simulated reads give the idealised reference.
 | k | Pool size: the number of healthy donors whose reads form one background. k = 1 is one person's plasma, the clinical case |
 | Censored | An LoD not reached at the top of the tested grid, so it is known only to lie above it |
 
-![LoD on one scale, measured and idealised; detection at k = 1; tumour fragments per test](figures/key_findings.png)
+![LoD on one scale, measured and idealised; detection at k = 1; tumour fragments per test in one HCT116 spike](figures/key_findings.png)
 
 **Figure 1.** (a) LoD at each step, on one scale: tumour DNA at the markers. Top: measured on
 real reads. Bottom: idealised references. Bars: 95 % donor-bootstrap interval of the grid
 points around the LoD; an arrow means the interval reaches above the grid top. Arrows alone:
 censored LoDs, drawn from the grid top mapped to the markers. Diamonds: the WZ and UXM scores
-(HCT116), on the same FRAG effective-share mapping. Open or grey: false-positive rate above 5 %. In the simulation row, 7 more cells
-fail the FPR target and are left out. Grey band: 0.01–0.1 %, the level that minimal residual
-disease (MRD) monitoring needs. (b) Share of tests detected at k = 1, tumour marker set, with
-95 % donor-bootstrap bands. Left of the axis break: the FPR at f = 0 with its 95 % interval.
-Dash-dot line: the LoD; shaded: the grid points around it. Grey: fails the FPR target.
-(c) Tumour-like spike fragments per test (mean over 80 tests from 16 donors, HCT116, k = 1).
-Dashed line: the count at the LoD. Scripts: `scripts/bootstrap_lod.py`,
-`scripts/key_findings_figure.py`.
+(HCT116), on the same FRAG effective-share mapping. Open or grey: FPR above 5 %. In the simulation row, 7 more cells
+fail the FPR target and are left out. Grey band: 0.01–0.1 %, the MRD target. (b) Share of
+tests detected at k = 1, tumour marker set, with 95 % donor-bootstrap bands. Left of the axis
+break: the FPR at f = 0 with its 95 % interval. Dash-dot line: the LoD; shaded: the grid
+points around it. Grey: fails the FPR target. Patient B is the only patient run with a finite
+LoD (at k = 2); patients A and C stay censored (Figure S5). (c) Tumour-like spike fragments
+per test. One HCT116 spike, mixed into the reads of each of the 16 test donors at k = 1, with
+5 random seeds per donor: 80 tests per f. Points: mean; bars: standard deviation (SD) over the
+80 tests; bars that reach the bottom of the axis extend to 0. Dashed line: the count at the
+LoD. Scripts: `scripts/bootstrap_lod.py`, `scripts/key_findings_figure.py`.
+
+Abbreviations in Figure 1:
+
+| Abbreviation | Meaning |
+|---|---|
+| LoD | Limit of detection: the lowest spike level detected in at least 95 % of tests |
+| FPR | False-positive rate: the share of spike-free tests scored above the threshold (target 5 % or less) |
+| MRD | Minimal residual disease: tumour left after treatment. Monitoring it needs detection at 0.01–0.1 % tumour DNA |
+| TF | Tumour fraction: the share of a patient's plasma cfDNA that comes from the tumour |
+| k | Pool size: the number of healthy donors whose reads form one background |
+| f | Spike fraction: the share of all fragments that come from the spike; f = 0 is a spike-free test |
+| HCT116 | A colorectal-cancer cell line; its DNA is the cell-line spike |
+| FRAG | Fragment-count score: fragments with 3 or more CpG calls that all match the tumour direction, as a Z score |
+| WZ | Weighted Z score of block methylation |
+| UXM | Share of fragments in a tumour block that are fully methylated |
+| LLR | Log-likelihood ratio of "tumour at fraction f" against "background only" |
+| CpG | A cytosine followed by a guanine: the site of DNA methylation |
+| SD | Standard deviation |
 
 **Measured on real reads** (FRAG score, tumour marker set; intervals: 95 % donor bootstrap)
 
