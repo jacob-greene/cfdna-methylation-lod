@@ -1,0 +1,27 @@
+// Pipeline graphic for the README. Render: dot -Tpng -Gdpi=150 figures/pipeline.dot -o figures/pipeline.png
+digraph pipeline {
+  rankdir=LR; nodesep=0.25; ranksep=0.45;
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#555555", fillcolor="#f2f2f2"];
+  edge [color="#777777", arrowsize=0.7];
+
+  subgraph cluster_in { label="Public data"; fontname="Helvetica-Bold"; fontsize=12; color="#bbbbbb";
+    hd  [label="30 healthy donors\nplasma WGBS (SPOT-MAS)", fillcolor="#e3eef9"];
+    hct [label="HCT116 cell line\nWGBS", fillcolor="#e3eef9"];
+    crc [label="Colorectal-cancer and\nhealthy plasma (GSE186007)", fillcolor="#e3eef9"];
+  }
+  subgraph cluster_reads { label="Reads (per run)"; fontname="Helvetica-Bold"; fontsize=12; color="#bbbbbb";
+    reads [label="Trim (fastp)\nAlign hg38 (bwa-meth)\nMethylation calls (MethylDackel)\nFragment patterns (wgbstools)\nQC"];
+  }
+  subgraph cluster_an { label="Analysis"; fontname="Helvetica-Bold"; fontsize=12; color="#bbbbbb";
+    mix  [label="In-silico mixing\nspike fraction f × pool size k × seed"];
+    sc   [label="Scores (FRAG, WZ, others)\nthresholds on 14 donors"];
+    tf   [label="Tumour fraction\nfrom copy number"];
+    lod  [label="LoD and FPR\non 16 test donors"];
+    boot [label="Donor bootstrap\nintervals"];
+  }
+  out [label="results/  tables\nfigures/  plots", fillcolor="#e6f4e6"];
+
+  hd -> reads; hct -> reads; crc -> reads;
+  reads -> mix -> sc -> lod -> boot -> out;
+  reads -> tf -> lod;
+}

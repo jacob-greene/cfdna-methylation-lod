@@ -1,8 +1,16 @@
-# Phase 5 pipeline: real-read validation
+# Pipeline
 
-This Nextflow pipeline turns FASTQ files into fragment-level methylation patterns at the
-marker blocks. Every source goes through the same steps: the SPOT-MAS cfDNA runs and the
-spike source (HCT116 WGBS). The processing rules are fixed in `PREREGISTERED.md`.
+This Nextflow pipeline runs the whole real-read analysis in one run:
+
+1. `READS_COHORT` turns the SPOT-MAS cfDNA runs and the spike source (HCT116 WGBS) into
+   fragment-level methylation patterns at the marker blocks (`<data>/phase5`).
+2. `READS_PLASMA` does the same for the GSE186007 colorectal-cancer and healthy plasma runs
+   (`samples/phase6_gse_runs.tsv`; `<data>/phase6_gse`).
+3. `ANALYSIS` runs the scoring, LoD, tumour-fraction, bootstrap and figure scripts. They write
+   `results/` and `figures/` in the repository.
+
+Both read steps use the same processes (`modules/reads.nf`). The processing rules are fixed in
+`PREREGISTERED.md`, the scoring rules in `PREREGISTERED_PHASE6.md`.
 
 ## Terms
 
@@ -28,6 +36,37 @@ spike source (HCT116 WGBS). The processing rules are fixed in `PREREGISTERED.md`
 | `BLOCK_INDEX` | Block coordinates to CpG index ranges |
 | `QC_TABLE` | One QC row per run |
 
+Analysis (`modules/analysis.nf`; each process runs one or two scripts of `scripts/`):
+
+| Process | Script | Output |
+|---|---|---|
+| `TRANSFER_TRAIN` | `phase5_transfer_train.py` | Classifiers trained on the array simulation (`<data>/phase5/transfer`) |
+| `PHASE5_SCORE` | `phase5_score.py`, `phase5_summary.py` | `results/phase5/` |
+| `LENMATCH` | `phase6_lenmatch.sbatch` | Length-matched HCT116 spike (`<data>/phase5/pat`) |
+| `PHASE6_SCORE` | `phase6_score.py` (threshold, eval), `phase6_summary.py` | `results/phase6/` |
+| `TF_GC`, `TF_BINS`, `TF_CALL` | `phase6_tf.py` | Tumour fraction per patient run (`<data>/phase6_gse/tf`) |
+| `PLASMA_SCORE` | `phase6_gse_score.py`, `phase6_gse_summary.py` | `results/phase6_gse/` |
+| `BOOTSTRAP` | `bootstrap_lod.py` | `results/bootstrap/` |
+| `FIGURES` | `key_findings_figure.py`, `phase6_figures.py` | `figures/` |
+
+The analysis processes are not cached, so a rerun recomputes every table. The scoring scripts
+refuse to run if the pre-registration or the scoring code are uncommitted or changed.
+
+## Inputs
+
+All inputs live in the data directory `$CFDNA_DATA` (default `../cfdna-methylation-lod-data`
+next to the repository):
+
+| Path in `$CFDNA_DATA` | Contents | Source |
+|---|---|---|
+| `sra/PRJNA929650_ena_filereport.tsv` | SPOT-MAS FASTQ URLs and MD5 sums | `data/download_sra_metadata.sh` |
+| `sra/PRJNA771691_ena_filereport.tsv` | GSE186007 FASTQ URLs and MD5 sums | ENA file report of PRJNA771691 (same fields) |
+| `ref/hg38/genome.fa` (+ `.fai`) | hg38 FASTA; the bwa-meth index is built on the first run | UCSC hg38 |
+| `ref/annot/hg38.cytoBand.txt.gz` | Centromere positions for the tumour fraction | UCSC hg38 `cytoBand.txt.gz` |
+| `tools/wgbs_tools-0.3.0` | wgbstools 0.3.0 with an initialised `hg38` genome | as in `containers/wgbstools/Dockerfile` |
+| `tools/p5env` | Tool environment (`conda` profile) | `envs/phase5.explicit.txt` |
+| `phase3b/` | Array simulation inputs for `TRANSFER_TRAIN` | `scripts/phase3b.sbatch` with `STEP=prepare` |
+
 ## Profiles
 
 | Profile | Use |
@@ -40,7 +79,7 @@ spike source (HCT116 WGBS). The processing rules are fixed in `PREREGISTERED.md`
 | `test` | Smoke test on a small bundled BAM (`tests/data/`) |
 | `test_fastq` | FASTQ-deletion test: FASTQ made from the bundled BAM, aligned, then deleted (run by `tests/fastq_cleanup_test.sh`) |
 
-The HPC run used `slurm,conda`. Apptainer could not start containers in the sandboxed
+The HPC run used `slurm,conda`. Apptainer could not start containers in the restricted
 environment of that cluster, also not in Slurm jobs (no setuid starter, no mount propagation). The
 `conda` environment pins the same tool versions as the containers:
 
@@ -56,10 +95,14 @@ environment of that cluster, also not in Slurm jobs (no setuid starter, no mount
 ## Run
 
 ```bash
-export CFDNA_DATA=/path/to/cfdna-methylation-lod-data NXF_SLURM_QUEUE=campus-new
-cd $CFDNA_DATA/phase5/nxf
-nextflow run /path/to/cfdna-methylation-lod/pipeline/main.nf -profile slurm,conda -resume
+sbatch -p campus-new --export=ALL,REPO_DIR=$PWD,CFDNA_DATA=/path/to/data scripts/run_pipeline.sbatch
 ```
+
+The script runs `nextflow run pipeline/main.nf -profile slurm,conda -resume` in
+`$CFDNA_DATA/nxf`.
+
+- `--gse false --analysis false` processes the cohort reads only.
+- `--analysis false` stops after the reads.
 
 - `--only_runs SRR1,SRR2` restricts the SPOT-MAS runs (tests).
 - `--spike_run false` (or `''`) skips the spike source.
@@ -75,9 +118,8 @@ nextflow run /path/to/cfdna-methylation-lod/pipeline/main.nf -profile slurm,cond
   These input files may be the only copy, so the pipeline keeps them and deletes only the
   trimmed FASTQ. `--delete_input_fastq` deletes them too.
 - Run the Nextflow head process inside a Slurm job; it runs for hours.
-  `scripts/phase5_nextflow.sbatch` does this. Pass `REPO_DIR` and `CFDNA_DATA` with
-  `sbatch --export=ALL,REPO_DIR=...,CFDNA_DATA=...`; a sandboxed shell does not forward
-  them otherwise.
+  `scripts/run_pipeline.sbatch` does this. Pass `REPO_DIR` and `CFDNA_DATA` with
+  `sbatch --export=ALL,REPO_DIR=...,CFDNA_DATA=...`.
 
 Smoke test (Docker, as in CI):
 
@@ -86,14 +128,3 @@ docker build -t cfdna-wgbstools:0.3.0 pipeline/containers/wgbstools
 nextflow run pipeline/main.nf -profile test,docker
 pipeline/tests/fastq_cleanup_test.sh docker   # needs samtools on PATH (or SAMTOOLS=...)
 ```
-
-## After the pipeline
-
-The scoring scripts read the pipeline outputs under `$CFDNA_DATA/phase5`:
-
-| Script | Does |
-|---|---|
-| `scripts/phase5_transfer_train.py` | Trains the Phase 3b models once on the D = 30 simulation |
-| `scripts/phase5_score.py` | Read-level mixing, all scores, the binomial gap ladder, external check |
-| `scripts/phase5_summary.py` | Thresholds, detection rates, LoD, held-out FPR, AUC |
-| `scripts/phase5_batch.py` | Batch control on off-marker features |

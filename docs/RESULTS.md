@@ -27,6 +27,33 @@ All values come from the tables under `results/`.
 | FRAG | Count of fragments with 3 or more calls that all match the tumour direction, in blocks that are quiet in healthy plasma, minus the expected count, as a Z score |
 | WZ | Weighted Z score of block methylation, with block weights from the variance between healthy donors |
 | Censored | An LoD known only to lie above the top of the tested f range |
+| Tumour DNA at the markers | The share of informative fragments at the marker blocks that come from tumour DNA (the pre-registered effective share; times the tumour fraction for patient plasma). All figures use this scale. Nominal f, the share of all fragments, is about 4.6 times higher for HCT116 |
+| Ideal binomial model | The same tests, with reads redrawn as independent binomial calls. It shows the LoD without real-read effects |
+
+## Figure 1
+
+![LoD on one scale, detection at k = 1, tumour fragments per test](../figures/key_findings.png)
+
+(a) LoD at each step, on one scale: tumour DNA at the markers. Top: measured on
+real reads. Bottom: idealised references. Bars: 95 % donor-bootstrap interval of the grid
+points around the LoD; an arrow means the interval reaches above the grid top. Arrows alone:
+censored LoDs, drawn from the grid top mapped to the markers. Diamonds: two other scores for
+HCT116, on the same mapping as FRAG: a weighted Z score of block methylation (WZ) and the
+share of fully methylated fragments. Open or grey: FPR above 5 %. In the simulation row, 7
+more cells fail the FPR target and are left out. Grey band: 0.01–0.1 %, the target for
+monitoring minimal residual disease (MRD), the tumour left after treatment. (b) Share of tests
+detected at k = 1, tumour marker set, with 95 % donor-bootstrap bands. Left of the axis break:
+the FPR at f = 0 with its 95 % interval. Dash-dot line: the LoD; shaded: the grid points
+around it. Grey: fails the FPR target. Patient B is the only patient run with a finite LoD
+(at k = 2); patients A and C stay censored (Figure S5). (c) Tumour-like spike-in fragments per
+test. One HCT116 spike, mixed into the reads of each of the 16 test donors at k = 1, with 5
+random seeds per donor: 80 tests per f. Points: mean; bars: standard deviation (SD) over the
+80 tests; bars that reach the bottom of the axis extend to 0. Dashed line: the count at the
+LoD. Scripts: `scripts/bootstrap_lod.py`, `scripts/key_findings_figure.py`. Variables: f, the spike-in fraction, is the share of all
+fragments that come from the spike-in (f = 0 is a spike-free test). k, the pool size, is the
+number of healthy donors whose reads form one background (k = 1 is one person's plasma, the
+clinical case). TF, the tumour fraction, is the share of a patient's plasma cfDNA that comes
+from the tumour.
 
 ## Spike-in titration
 
