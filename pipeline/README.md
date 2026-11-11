@@ -104,7 +104,8 @@ The script runs `nextflow run pipeline/main.nf -profile slurm,conda -resume` in
 - `--gse false --analysis false` processes the cohort reads only.
 - `--analysis false` stops after the reads.
 
-- `--only_runs SRR1,SRR2` restricts the SPOT-MAS runs (tests).
+- `--only_runs SRR1,SRR2` restricts the SPOT-MAS runs (tests). Add `--analysis false`: the
+  analysis needs every run.
 - `--spike_run false` (or `''`) skips the spike source.
 - FASTQ deletion is the default. After a run's BAM passes `BAM_CHECK` (`samtools quickcheck`
   and more than 0 mapped reads in `samtools idxstats`), and the published copy in

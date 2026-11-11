@@ -269,6 +269,18 @@ REPO_DIR=$PWD CFDNA_DATA=<data dir> sbatch --array=0-15 scripts/phase3b.sbatch
 uv run python scripts/phase3b_summary.py               # trained classifiers
 ```
 
+The Phase 5 controls run after the pipeline, from its outputs. They are not part of the
+pipeline:
+
+```bash
+uv run python scripts/phase5_batch.py            # results/phase5/batch_control.tsv
+uv run python scripts/phase5_symmetric.py        # symmetric_*, effective_share.tsv
+uv run python scripts/phase5_dosing_compare.py   # dosing_comparison.tsv, gap_attribution.tsv
+```
+
+`results/phase5/original_dosing/` keeps the scores of the first, under-dosed run for that
+comparison. No script rewrites it.
+
 Every simulation and model uses a fixed seed (the `SEED` constant of each script).
 
 ## Limitations

@@ -50,8 +50,12 @@ Details: [`docs/IMPROVING_LOD.md`](docs/IMPROVING_LOD.md).
 
 ![Pipeline: public reads to fragment patterns, scores, LoD and figures](figures/pipeline.png)
 
-One Nextflow run does every step: download, alignment, methylation calls, scoring, LoD, the
-donor bootstrap, and the tables and figures in `results/` and `figures/`.
+One Nextflow run does every real-read step: download, alignment, methylation calls, scoring,
+LoD, tumour fraction and the donor bootstrap. It writes the score, LoD and bootstrap tables in
+`results/phase5`, `results/phase6`, `results/phase6_gse` and `results/bootstrap`, and three
+figures: `figures/key_findings.png` and `figures/phase6_*_detection.png`. It does not write the
+other files in `results/` and `figures/`. Most of them come from standalone scripts (see
+below), for example the batch, symmetric and dosing controls in `results/phase5`.
 
 ```bash
 uv sync                          # Python 3.11, pinned by uv.lock
@@ -61,6 +65,10 @@ export CFDNA_DATA=/path/to/data  # inputs, downloads and BAMs live here, outside
 sbatch -p <partition> --export=ALL,REPO_DIR=$PWD,CFDNA_DATA=$CFDNA_DATA scripts/run_pipeline.sbatch
 ```
 
+`scripts/run_pipeline.sbatch` loads Nextflow with Lmod (`module load Nextflow/24.10.2`). It sends
+the pipeline tasks to the queue `campus-new`. On another cluster, set `NXF_SLURM_QUEUE` to your
+partition, and edit the two Lmod lines in the script or remove them if `nextflow` is on `PATH`.
+
 The data directory must first hold the reference genome, the tool environment and the
 array-phase inputs. The list is in [`pipeline/README.md`](pipeline/README.md#inputs).
 
@@ -68,12 +76,14 @@ Tests:
 
 ```bash
 uv run pytest -q && uv run ruff check .
+docker build -t cfdna-wgbstools:0.3.0 pipeline/containers/wgbstools   # image for the docker profile
 nextflow run pipeline/main.nf -profile test,docker   # smoke test on a small bundled BAM
 ```
 
 Profiles, options and tool versions: [`pipeline/README.md`](pipeline/README.md). The scoring
 rules were fixed before scoring in `pipeline/PREREGISTERED_PHASE6.md`. Every simulation uses
-a fixed seed. The earlier array and simulation phases have their own scripts:
+a fixed seed. The earlier array and simulation phases and the extra Phase 5 controls have
+their own scripts:
 [`docs/RESULTS.md`](docs/RESULTS.md#earlier-phases-how-to-run).
 
 ## Repository layout
