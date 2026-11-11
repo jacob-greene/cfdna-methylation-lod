@@ -1,6 +1,6 @@
 // Analysis: fragment patterns -> scores, thresholds, LoD and FPR -> donor bootstrap -> figures.
 // Each process runs one script of scripts/ inside the repository. The scripts read the read
-// outputs under params.data ($CFDNA_DATA) and write their tables to results/ and figures/.
+// outputs under params.data_dir ($CFDNA_DATA) and write their tables to results/ and figures/.
 // The processes are not cached: a rerun recomputes every table from the current code.
 // Scoring rules are fixed in pipeline/PREREGISTERED_PHASE6.md; the scoring scripts refuse to
 // run if those rules or the scoring code are uncommitted or changed.
@@ -10,7 +10,7 @@ nextflow.enable.dsl = 2
 def py(cmd) {
     """
     cd ${params.repo}
-    export CFDNA_DATA=${params.data}
+    export CFDNA_DATA=${params.data_dir}
     uv run --offline python ${cmd}
     """
 }
@@ -35,7 +35,7 @@ process LENMATCH {
     script:
     """
     cd ${params.repo}
-    REPO_DIR=${params.repo} CFDNA_DATA=${params.data} bash scripts/phase6_lenmatch.sbatch
+    REPO_DIR=${params.repo} CFDNA_DATA=${params.data_dir} bash scripts/phase6_lenmatch.sbatch
     """
 }
 
@@ -162,7 +162,7 @@ workflow ANALYSIS {
     cohort_qc   // QC table of the cohort read run: all cohort outputs are written
     plasma_qc   // QC table of the patient-plasma read run
     main:
-    def p5 = "${params.data}/phase5"
+    def p5 = "${params.data_dir}/phase5"
     def g = params.gse_outdir
     def cohort = file(params.samples).splitCsv(header: true, sep: '\t').collect { it.run } + [params.spike_run]
     def plasma = file(params.gse_runs).splitCsv(header: true, sep: '\t').collect { it.run }
