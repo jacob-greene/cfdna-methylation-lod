@@ -55,6 +55,21 @@ number of healthy donors whose reads form one background (k = 1 is one person's 
 clinical case). TF, the tumour fraction, is the share of a patient's plasma cfDNA that comes
 from the tumour.
 
+Idealised references, on the same scale as Figure 1a:
+
+| Data | Spike-in | LoD, tumour DNA at the markers | Spike-free tests above threshold (95 % upper bound) |
+|---|---|---|---|
+| Real reads, ideal binomial model, k = 2 | HCT116 | 0.089 % (nominal f 0.45 %) | 0 of 8 (37 %) |
+| Simulated reads, 100 or more reads per CpG | Colon-cancer plasma or colon cells | 1.2–3.0 %; 3 of 41 cells not reached by the 3 % top of the simulation grid | within the 5 % target (7 more cells fail it and are left out) |
+| Arrays, best trained classifier | TCGA colorectal tumours | 0.9–1.7 % (7 random seeds) | 0 of 11 people (28 %) |
+
+For patient plasma, this scale is the pre-registered tumour effective share (effective
+share × tumour fraction). The pre-registered primary patient endpoint, LoD_tumour =
+nominal-f LoD × tumour fraction, is in the patient-plasma section below (patient B, k = 2: 3.96 %). The spike-free tests
+of the patient arm are the same tests as for HCT116, with the same
+thresholds. In arrays and simulated reads, f is the tumour DNA share of every CpG, so it needs
+no mapping.
+
 ## Spike-in titration
 
 Every phase uses the same idea: mix a known share f of tumour signal into healthy
