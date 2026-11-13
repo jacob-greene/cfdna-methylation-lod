@@ -2,7 +2,7 @@
 
 How little tumour DNA can a cell-free DNA (cfDNA) methylation test detect in blood plasma?
 In this project, I measure the limit of detection (LoD) of a 500-CpG colorectal-cancer marker panel.
-It uses only previously published plasma sequencing reads of healthy donors and cancer patients and
+I use previously published plasma sequencing reads of healthy donors and cancer patients and
 DNA methylation array data.
 
 ## Key findings
@@ -36,7 +36,7 @@ models (simulated reads, arrays) reach about 0.1–3 %.
 
 ## How the LoD could improve
 
-The main limit is the variation between people, not the score or the sequencing depth.
+The main limit I found is the variation between people, not the score from the binomial model nor the sequencing depth.
 Details: [`docs/IMPROVING_LOD.md`](docs/IMPROVING_LOD.md).
 
 - More healthy donors to set thresholds, not more depth per donor.
