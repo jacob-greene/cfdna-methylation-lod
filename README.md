@@ -7,10 +7,10 @@ DNA methylation array data.
 
 ## Key findings
 
-**Design.** Tumour DNA is mixed in silico into the plasma reads of healthy donors at a
-fraction f. The LoD is the lowest f detected in at least 95 % of tests, at a false-positive
-rate (FPR) of 5 % or less. I tested tumour DNA comes from a colon-cancer cell line (HCT116) or from
-cancer-patient plasma. Of 30 healthy donors, 14 set the detection thresholds and 16 serve as
+**Design.** To determine LoD, I mixed Tumour DNA in silico into the plasma reads of healthy donors at a
+fraction f. I called LoD as the lowest f detected in at least 95 % of tests, at a false-positive
+rate (FPR) of 5 % or less. The tumour DNA I tested comes from a colon-cancer cell line (HCT116) or from
+cancer-patient plasma. Of 30 healthy donors, 14 were used to set the detection threshold and 16 served as
 test backgrounds.
 
 ![LoD per step, detection at k = 1, and tumour fragments per test](figures/key_findings.png)
